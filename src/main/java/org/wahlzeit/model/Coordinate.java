@@ -22,7 +22,7 @@ public class Coordinate
 
     double getDistance(Coordinate other)
     {
-        return Math.sqrt(x * other.x + y * other.y + z * other.z);
+        return Math.sqrt((x - other.x) * (x - other.x) + (y - other.y) * (y - other.y) + (z - other.z) * (z - other.z));
     }
 
     boolean isEqual(Coordinate other)
