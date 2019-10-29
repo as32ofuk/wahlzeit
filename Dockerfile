@@ -36,7 +36,7 @@ COPY --from=builder /builder/build /app/build
 COPY --from=builder /root/.gradle/appengine-sdk/appengine-java-sdk-1.9.76/ /root/.gradle/appengine-sdk/appengine-java-sdk-1.9.76/
 
 # Expose port
-EXPOSE 8080
+EXPOSE 80
 
 # Do the same as ./gradlew appengineRun for starting the dev server
-ENTRYPOINT ["/opt/java/openjdk/bin/java", "-Xdebug", "-Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=8000", "-Dfile.encoding=UTF-8", "-classpath", "/root/.gradle/wrapper/dists/gradle-4.10-bin/bg6py687nqv2mbe6e1hdtk57h/gradle-4.10/lib/gradle-launcher-4.10.jar:/root/.gradle/appengine-sdk/appengine-java-sdk-1.9.76/lib/appengine-tools-api.jar", "com.google.appengine.tools.development.DevAppServerMain", "--property=kickstart.user.dir=/app", "--no_java_agent", "--port=8080", "--address=localhost", "--allow_remote_shutdown", "/app/build/exploded-app"]
+ENTRYPOINT ["/opt/java/openjdk/bin/java", "-Xdebug", "-Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=8000", "-Dfile.encoding=UTF-8", "-classpath", "/root/.gradle/wrapper/dists/gradle-4.10-bin/bg6py687nqv2mbe6e1hdtk57h/gradle-4.10/lib/gradle-launcher-4.10.jar:/root/.gradle/appengine-sdk/appengine-java-sdk-1.9.76/lib/appengine-tools-api.jar", "com.google.appengine.tools.development.DevAppServerMain", "--property=kickstart.user.dir=/app", "--no_java_agent", "--port=80", "--address=0.0.0.0", "--allow_remote_shutdown", "/app/build/exploded-app"]
