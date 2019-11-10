@@ -38,9 +38,10 @@ public class PhotoUtil {
 
 	/**
 	 * @methodtype creation
+	 * https://youtu.be/-FRm3VPhseI
 	 */
 	public static Photo createPhoto(String filename, PhotoId id, Image uploadedImage) throws Exception {
-		Photo result = PhotoFactory.getInstance().createPhoto(id);
+		Photo result = ScreenshotPhotoFactory.getInstance().createPhoto(id);
 		result.setEnding(filename.substring(filename.lastIndexOf(".") + 1));
 
 		createImageFiles(uploadedImage, result);

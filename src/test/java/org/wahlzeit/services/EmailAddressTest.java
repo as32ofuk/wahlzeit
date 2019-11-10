@@ -68,16 +68,16 @@ public class EmailAddressTest extends TestCase
 
     public void testAsString()
     {
-    	String value;
-    	EmailAddress address;
+        String value;
+        EmailAddress address;
 
-		value = "bingo@bongo.com";
-		address = EmailAddress.getFromString(value);
-		assertEquals(value, address.asString());
+        value = "bingo@bongo.com";
+        address = EmailAddress.getFromString(value);
+        assertEquals(value, address.asString());
 
-		value = "bingo.bongo@bongo.com";
-		address = EmailAddress.getFromString(value);
-		assertEquals(value, address.asString());
+        value = "bingo.bongo@bongo.com";
+        address = EmailAddress.getFromString(value);
+        assertEquals(value, address.asString());
     }
 
     /**
