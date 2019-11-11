@@ -37,16 +37,11 @@ import java.util.logging.Logger;
  */
 public class FlagPhotoFormHandler extends AbstractWebFormHandler
 {
-
     private static final Logger log = Logger.getLogger(FlagPhotoFormHandler.class.getName());
 
-
-    /**
-     *
-     */
-    public FlagPhotoFormHandler()
+    public FlagPhotoFormHandler(PhotoManager photoManager)
     {
-        initialize(PartUtil.FLAG_PHOTO_FORM_FILE, AccessRights.GUEST);
+        super(photoManager, PartUtil.FLAG_PHOTO_FORM_FILE, AccessRights.GUEST);
     }
 
     /**

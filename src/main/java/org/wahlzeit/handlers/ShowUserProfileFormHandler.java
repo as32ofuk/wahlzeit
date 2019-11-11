@@ -31,13 +31,9 @@ import java.util.Map;
  */
 public class ShowUserProfileFormHandler extends AbstractWebFormHandler
 {
-
-    /**
-     *
-     */
-    public ShowUserProfileFormHandler()
+    public ShowUserProfileFormHandler(PhotoManager photoManager)
     {
-        initialize(PartUtil.SHOW_USER_PROFILE_FORM_FILE, AccessRights.USER);
+        super(photoManager, PartUtil.SHOW_USER_PROFILE_FORM_FILE, AccessRights.USER);
     }
 
     /**

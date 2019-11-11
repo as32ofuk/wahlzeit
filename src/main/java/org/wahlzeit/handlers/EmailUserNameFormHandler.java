@@ -36,16 +36,11 @@ import java.util.logging.Logger;
  */
 public class EmailUserNameFormHandler extends AbstractWebFormHandler
 {
-
     private static final Logger log = Logger.getLogger(EmailUserNameFormHandler.class.getName());
 
-
-    /**
-     *
-     */
-    public EmailUserNameFormHandler()
+    public EmailUserNameFormHandler(PhotoManager photoManager)
     {
-        initialize(PartUtil.EMAIL_USER_NAME_FORM_FILE, AccessRights.GUEST);
+        super(photoManager, PartUtil.EMAIL_USER_NAME_FORM_FILE, AccessRights.GUEST);
     }
 
     /**

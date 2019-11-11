@@ -35,15 +35,11 @@ import java.util.logging.Logger;
  */
 public class AdminUserProfileFormHandler extends AbstractWebFormHandler
 {
-
     private static final Logger log = Logger.getLogger(AdminUserProfileFormHandler.class.getName());
 
-    /**
-     *
-     */
-    public AdminUserProfileFormHandler()
+    public AdminUserProfileFormHandler(PhotoManager photoManager)
     {
-        initialize(PartUtil.ADMIN_USER_PROFILE_FORM_FILE, AccessRights.ADMINISTRATOR);
+        super(photoManager, PartUtil.ADMIN_USER_PROFILE_FORM_FILE, AccessRights.ADMINISTRATOR);
     }
 
     /**

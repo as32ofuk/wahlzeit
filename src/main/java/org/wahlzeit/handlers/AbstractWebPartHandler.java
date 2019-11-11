@@ -52,14 +52,11 @@ public abstract class AbstractWebPartHandler implements WebPartHandler
      */
     protected AccessRights neededRights;
 
-    /**
-     *
-     */
-    protected void initialize(PhotoManager photoManager, String tmplName, AccessRights rights)
+    public AbstractWebPartHandler(PhotoManager photoManager, String tmplName, AccessRights neededRights)
     {
         this.photoManager = photoManager;
         this.tmplName = tmplName;
-        this.neededRights = rights;
+        this.neededRights = neededRights;
     }
 
     /**

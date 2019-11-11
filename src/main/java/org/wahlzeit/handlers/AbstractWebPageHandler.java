@@ -20,9 +20,7 @@
 
 package org.wahlzeit.handlers;
 
-import org.wahlzeit.model.Client;
-import org.wahlzeit.model.ModelConfig;
-import org.wahlzeit.model.UserSession;
+import org.wahlzeit.model.*;
 import org.wahlzeit.services.ConfigDir;
 import org.wahlzeit.services.Language;
 import org.wahlzeit.services.SysConfig;
@@ -34,6 +32,10 @@ import org.wahlzeit.webparts.WebPart;
  */
 public abstract class AbstractWebPageHandler extends AbstractWebPartHandler implements WebPageHandler
 {
+    public AbstractWebPageHandler(PhotoManager photoManager, String tmplName, AccessRights neededRights)
+    {
+        super(photoManager, tmplName, neededRights);
+    }
 
     /**
      *

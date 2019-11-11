@@ -36,15 +36,9 @@ public class PraisePhotoFormHandler extends AbstractWebFormHandler
 {
     private static final Logger log = Logger.getLogger(PraisePhotoFormHandler.class.getName());
 
-    protected PhotoManager photoManager;
-
-    /**
-     *
-     */
     public PraisePhotoFormHandler(PhotoManager photoManager)
     {
-        initialize(PartUtil.PRAISE_PHOTO_FORM_FILE, AccessRights.GUEST);
-        this.photoManager = photoManager;
+        super(photoManager, PartUtil.PRAISE_PHOTO_FORM_FILE, AccessRights.GUEST);
     }
 
     /**
@@ -60,7 +54,7 @@ public class PraisePhotoFormHandler extends AbstractWebFormHandler
     }
 
     /**
-     * https://youtu.be/-FRm3VPhseI
+     *
      */
     protected boolean isWellFormedPost(UserSession us, Map args)
     {

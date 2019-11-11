@@ -32,13 +32,9 @@ import java.util.Map;
  */
 public class SetPhotoSizePageHandler extends AbstractWebPageHandler
 {
-
-    /**
-     *
-     */
-    public SetPhotoSizePageHandler()
+    public SetPhotoSizePageHandler(PhotoManager photoManager)
     {
-        initialize(PartUtil.SHOW_NOTE_PAGE_FILE, AccessRights.GUEST);
+        super(photoManager, PartUtil.SHOW_NOTE_PAGE_FILE, AccessRights.GUEST);
     }
 
     /**

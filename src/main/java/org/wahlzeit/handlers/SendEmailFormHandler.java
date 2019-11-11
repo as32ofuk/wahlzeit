@@ -45,12 +45,9 @@ public class SendEmailFormHandler extends AbstractWebFormHandler
 
     private static final Logger log = Logger.getLogger(SendEmailFormHandler.class.getName());
 
-    /**
-     *
-     */
-    public SendEmailFormHandler()
+    public SendEmailFormHandler(PhotoManager photoManager)
     {
-        initialize(PartUtil.SEND_EMAIL_FORM_FILE, AccessRights.GUEST);
+        super(photoManager, PartUtil.SEND_EMAIL_FORM_FILE, AccessRights.GUEST);
     }
 
     /**

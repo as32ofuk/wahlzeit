@@ -34,16 +34,11 @@ import java.util.logging.Logger;
  */
 public class EditUserPhotoFormHandler extends AbstractWebFormHandler
 {
-
     private static final Logger log = Logger.getLogger(EditUserPhotoFormHandler.class.getName());
 
-
-    /**
-     *
-     */
-    public EditUserPhotoFormHandler()
+    public EditUserPhotoFormHandler(PhotoManager photoManager)
     {
-        initialize(PartUtil.EDIT_USER_PHOTO_FORM_FILE, AccessRights.USER);
+        super(photoManager, PartUtil.EDIT_USER_PHOTO_FORM_FILE, AccessRights.USER);
     }
 
     /**

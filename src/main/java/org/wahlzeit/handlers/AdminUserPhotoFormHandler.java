@@ -35,12 +35,9 @@ public class AdminUserPhotoFormHandler extends AbstractWebFormHandler
 {
     private static final Logger log = Logger.getLogger(AdminUserPhotoFormHandler.class.getName());
 
-    /**
-     *
-     */
-    public AdminUserPhotoFormHandler()
+    public AdminUserPhotoFormHandler(PhotoManager photoManager)
     {
-        initialize(PartUtil.ADMIN_USER_PHOTO_FORM_FILE, AccessRights.ADMINISTRATOR);
+        super(photoManager, PartUtil.ADMIN_USER_PHOTO_FORM_FILE, AccessRights.ADMINISTRATOR);
     }
 
     /**

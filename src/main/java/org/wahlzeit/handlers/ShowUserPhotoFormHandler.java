@@ -34,16 +34,11 @@ import java.util.logging.Logger;
  */
 public class ShowUserPhotoFormHandler extends AbstractWebFormHandler
 {
-
     private static final Logger log = Logger.getLogger(ShowUserPhotoFormHandler.class.getName());
 
-
-    /**
-     *
-     */
-    public ShowUserPhotoFormHandler()
+    public ShowUserPhotoFormHandler(PhotoManager photoManager)
     {
-        initialize(PartUtil.SHOW_USER_PHOTO_FORM_FILE, AccessRights.USER);
+        super(photoManager, PartUtil.SHOW_USER_PHOTO_FORM_FILE, AccessRights.USER);
     }
 
     /**

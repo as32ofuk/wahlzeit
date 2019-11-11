@@ -372,7 +372,7 @@ public class PhotoManager extends ObjectManager
     public Photo createPhoto(String filename, Image uploadedImage) throws Exception
     {
         PhotoId id = PhotoId.getNextId();
-        Photo result = PhotoUtil.createPhoto(filename, id, uploadedImage);
+        Photo result = PhotoUtil.createPhoto(photoFactory, filename, id, uploadedImage);
         addPhoto(result);
         return result;
     }
@@ -398,6 +398,15 @@ public class PhotoManager extends ObjectManager
         {
             throw new IllegalStateException("Photo already exists!");
         }
+    }
+
+
+    /**
+     *
+     */
+    public PhotoFilter createPhotoFilter()
+    {
+        return new PhotoFilter(this);
     }
 
 }

@@ -20,10 +20,7 @@
 
 package org.wahlzeit.handlers;
 
-import org.wahlzeit.model.AccessRights;
-import org.wahlzeit.model.PhotoFilter;
-import org.wahlzeit.model.Tags;
-import org.wahlzeit.model.UserSession;
+import org.wahlzeit.model.*;
 import org.wahlzeit.services.LogBuilder;
 import org.wahlzeit.utils.StringUtil;
 import org.wahlzeit.webparts.WebPart;
@@ -36,16 +33,11 @@ import java.util.logging.Logger;
  */
 public class FilterPhotosFormHandler extends AbstractWebFormHandler
 {
-
     private static final Logger log = Logger.getLogger(FilterPhotosFormHandler.class.getName());
 
-
-    /**
-     *
-     */
-    public FilterPhotosFormHandler()
+    public FilterPhotosFormHandler(PhotoManager photoManager)
     {
-        initialize(PartUtil.FILTER_PHOTOS_FORM_FILE, AccessRights.GUEST);
+        super(photoManager, PartUtil.FILTER_PHOTOS_FORM_FILE, AccessRights.GUEST);
     }
 
     /**

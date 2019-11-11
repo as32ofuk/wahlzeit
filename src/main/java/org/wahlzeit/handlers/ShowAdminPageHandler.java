@@ -35,15 +35,11 @@ import java.util.logging.Logger;
  */
 public class ShowAdminPageHandler extends AbstractWebPageHandler implements WebFormHandler
 {
-
     private static Logger log = Logger.getLogger(ShowAdminPageHandler.class.getName());
 
-    /**
-     *
-     */
-    public ShowAdminPageHandler()
+    public ShowAdminPageHandler(PhotoManager photoManager)
     {
-        initialize(photoManager, PartUtil.SHOW_ADMIN_PAGE_FILE, AccessRights.ADMINISTRATOR);
+        super(photoManager, PartUtil.SHOW_ADMIN_PAGE_FILE, AccessRights.ADMINISTRATOR);
     }
 
     /**

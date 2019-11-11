@@ -20,10 +20,7 @@
 
 package org.wahlzeit.handlers;
 
-import org.wahlzeit.model.AccessRights;
-import org.wahlzeit.model.ModelConfig;
-import org.wahlzeit.model.Photo;
-import org.wahlzeit.model.UserSession;
+import org.wahlzeit.model.*;
 import org.wahlzeit.services.EmailAddress;
 import org.wahlzeit.services.LogBuilder;
 import org.wahlzeit.services.mailing.EmailService;
@@ -50,12 +47,9 @@ public class TellFriendFormHandler extends AbstractWebFormHandler
 
     private static final Logger log = Logger.getLogger(TellFriendFormHandler.class.getName());
 
-    /**
-     *
-     */
-    public TellFriendFormHandler()
+    public TellFriendFormHandler(PhotoManager photoManager)
     {
-        initialize(PartUtil.TELL_FRIEND_FORM_FILE, AccessRights.GUEST);
+        super(photoManager, PartUtil.TELL_FRIEND_FORM_FILE, AccessRights.GUEST);
     }
 
     /**

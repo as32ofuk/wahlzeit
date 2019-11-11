@@ -20,10 +20,7 @@
 
 package org.wahlzeit.handlers;
 
-import org.wahlzeit.model.AccessRights;
-import org.wahlzeit.model.PhotoCase;
-import org.wahlzeit.model.PhotoCaseManager;
-import org.wahlzeit.model.UserSession;
+import org.wahlzeit.model.*;
 import org.wahlzeit.utils.HtmlUtil;
 import org.wahlzeit.webparts.WebPart;
 import org.wahlzeit.webparts.Writable;
@@ -37,13 +34,9 @@ import java.util.Map;
  */
 public class ShowPhotoCasesPageHandler extends AbstractWebPageHandler
 {
-
-    /**
-     *
-     */
-    public ShowPhotoCasesPageHandler()
+    public ShowPhotoCasesPageHandler(PhotoManager photoManager)
     {
-        initialize(PartUtil.SHOW_PHOTO_CASES_PAGE_FILE, AccessRights.MODERATOR);
+        super(photoManager, PartUtil.SHOW_PHOTO_CASES_PAGE_FILE, AccessRights.MODERATOR);
     }
 
     /**

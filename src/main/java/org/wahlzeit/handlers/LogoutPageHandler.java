@@ -32,13 +32,9 @@ import java.util.Map;
  */
 public class LogoutPageHandler extends AbstractWebPageHandler
 {
-
-    /**
-     *
-     */
-    public LogoutPageHandler()
+    public LogoutPageHandler(PhotoManager photoManager)
     {
-        initialize(PartUtil.SHOW_NOTE_PAGE_FILE, AccessRights.USER);
+        super(photoManager, PartUtil.SHOW_NOTE_PAGE_FILE, AccessRights.USER);
     }
 
     /**

@@ -66,14 +66,6 @@ public class PhotoFactory
     /**
      *
      */
-    public PhotoFilter createPhotoFilter()
-    {
-        return new PhotoFilter();
-    }
-
-    /**
-     *
-     */
     public PhotoTagCollector createPhotoTagCollector()
     {
         return new PhotoTagCollector();

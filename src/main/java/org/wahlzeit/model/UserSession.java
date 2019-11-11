@@ -63,14 +63,14 @@ public class UserSession extends Session implements Serializable
     /**
      * https://youtu.be/-FRm3VPhseI
      */
-    public UserSession(String myName, String mySiteUrl, HttpSession myHttpSession, String myLanguage)
+    public UserSession(PhotoManager photoManager, String myName, String mySiteUrl, HttpSession myHttpSession, String myLanguage)
     {
         httpSession = myHttpSession;
         initialize(myName);
         if(httpSession.getAttribute(INITIALIZED) == null)
         {
             httpSession.setAttribute(SITE_URL, mySiteUrl);
-            httpSession.setAttribute(PHOTO_FILTER, ScreenshotPhotoFactory.getInstance().createPhotoFilter());
+            httpSession.setAttribute(PHOTO_FILTER, photoManager.createPhotoFilter());
 
             setClient(new Guest());
             try

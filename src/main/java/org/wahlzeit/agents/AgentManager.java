@@ -20,6 +20,7 @@
 
 package org.wahlzeit.agents;
 
+import org.wahlzeit.model.PhotoManager;
 import org.wahlzeit.services.LogBuilder;
 
 import java.util.HashMap;
@@ -31,46 +32,20 @@ import java.util.logging.Logger;
  */
 public class AgentManager
 {
-
     private static Logger log = Logger.getLogger(AgentManager.class.getName());
 
-    /**
-     *
-     */
-    protected static AgentManager instance = null;
-
-    /**
-     * @methodtype initialization
-     */
-    protected static void initInstance()
-    {
-        getInstance().addAgent(new NotifyUsersAboutPraiseAgent());
-    }
-
-    /**
-     * @methodtype get
-     */
-    public static synchronized AgentManager getInstance()
-    {
-        if(instance == null)
-        {
-            instance = new AgentManager();
-            initInstance();
-        }
-        return instance;
-    }
+    protected PhotoManager photoManager;
 
     /**
      *
      */
-    protected Map<String, Agent> agents = new HashMap<String, Agent>();
+    protected Map<String, Agent> agents;
 
-    /**
-     *
-     */
-    protected AgentManager()
+    public AgentManager(PhotoManager photoManager)
     {
-        // do nothing
+        this.photoManager = photoManager;
+        this.agents = new HashMap<>();
+        addAgent(new NotifyUsersAboutPraiseAgent(photoManager));
     }
 
     /**

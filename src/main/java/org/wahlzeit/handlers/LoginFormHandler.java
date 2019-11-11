@@ -15,13 +15,11 @@ import java.util.logging.Logger;
  */
 public class LoginFormHandler extends AbstractWebFormHandler
 {
-
     private static final Logger log = Logger.getLogger(LoginFormHandler.class.getName());
 
-
-    public LoginFormHandler()
+    public LoginFormHandler(PhotoManager photoManager)
     {
-        initialize(PartUtil.LOGIN_FORM_FILE, AccessRights.GUEST);
+        super(photoManager, PartUtil.LOGIN_FORM_FILE, AccessRights.GUEST);
     }
 
     @Override

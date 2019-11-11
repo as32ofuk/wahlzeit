@@ -33,13 +33,9 @@ import java.util.Map;
  */
 public class FilterPhotosPageHandler extends AbstractWebPageHandler
 {
-
-    /**
-     *
-     */
-    public FilterPhotosPageHandler()
+    public FilterPhotosPageHandler(PhotoManager photoManager)
     {
-        initialize(PartUtil.SHOW_NOTE_PAGE_FILE, AccessRights.GUEST);
+        super(photoManager, PartUtil.SHOW_NOTE_PAGE_FILE, AccessRights.GUEST);
     }
 
     /**

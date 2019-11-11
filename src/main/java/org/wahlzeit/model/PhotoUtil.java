@@ -35,16 +35,15 @@ import java.util.logging.Logger;
  */
 public class PhotoUtil
 {
-
     private static final Logger log = Logger.getLogger(PhotoUtil.class.getName());
 
     /**
      * @methodtype creation
      * https://youtu.be/-FRm3VPhseI
      */
-    public static Photo createPhoto(String filename, PhotoId id, Image uploadedImage) throws Exception
+    public static Photo createPhoto(PhotoFactory photoFactory, String filename, PhotoId id, Image uploadedImage) throws Exception
     {
-        Photo result = ScreenshotPhotoFactory.getInstance().createPhoto(id);
+        Photo result = photoFactory.createPhoto(id);
         result.setEnding(filename.substring(filename.lastIndexOf(".") + 1));
 
         createImageFiles(uploadedImage, result);

@@ -42,12 +42,9 @@ public class SetOptionsFormHandler extends AbstractWebFormHandler
 
     private static final Logger log = Logger.getLogger(SetOptionsFormHandler.class.getName());
 
-    /**
-     *
-     */
-    public SetOptionsFormHandler()
+    public SetOptionsFormHandler(PhotoManager photoManager)
     {
-        initialize(PartUtil.SET_OPTIONS_FORM_FILE, AccessRights.GUEST);
+        super(photoManager, PartUtil.SET_OPTIONS_FORM_FILE, AccessRights.GUEST);
     }
 
     /**

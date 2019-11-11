@@ -35,15 +35,11 @@ import java.util.logging.Logger;
  */
 public class UploadPhotoFormHandler extends AbstractWebFormHandler
 {
-
     private static Logger log = Logger.getLogger(UploadPhotoFormHandler.class.getName());
 
-    /**
-     *
-     */
-    public UploadPhotoFormHandler()
+    public UploadPhotoFormHandler(PhotoManager photoManager)
     {
-        initialize(PartUtil.UPLOAD_PHOTO_FORM_FILE, AccessRights.USER);
+        super(photoManager, PartUtil.UPLOAD_PHOTO_FORM_FILE, AccessRights.USER);
     }
 
     /**
