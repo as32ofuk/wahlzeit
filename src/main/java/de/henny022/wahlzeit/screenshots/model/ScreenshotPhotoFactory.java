@@ -14,23 +14,6 @@ public class ScreenshotPhotoFactory extends PhotoFactory
      */
     private static final Logger log = Logger.getLogger(ScreenshotPhotoFactory.class.getName());
 
-
-    /**
-     * Public singleton access method.
-     */
-    public static synchronized PhotoFactory getInstance()
-    {
-        if(instance == null)
-        {
-            log.config(LogBuilder.createSystemMessage().addAction("setting generic PhotoFactory").toString());
-            setInstance(new ScreenshotPhotoFactory());
-        }
-
-        return instance;
-    }
-
-    protected ScreenshotPhotoFactory(){}
-
     /**
      * @methodtype factory
      */

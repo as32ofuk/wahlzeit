@@ -45,12 +45,9 @@ import java.util.logging.Logger;
  */
 public class PhotoManager extends ObjectManager
 {
-    /**
-     *
-     */
-    protected static final PhotoManager instance = new PhotoManager();
-
     private static final Logger log = Logger.getLogger(PhotoManager.class.getName());
+
+    protected PhotoFactory photoFactory;
 
     /**
      * In-memory cache for photos
@@ -65,17 +62,10 @@ public class PhotoManager extends ObjectManager
     /**
      *
      */
-    public PhotoManager()
+    public PhotoManager(PhotoFactory photoFactory)
     {
-        photoTagCollector = PhotoFactory.getInstance().createPhotoTagCollector();
-    }
-
-    /**
-     *
-     */
-    public static final PhotoManager getInstance()
-    {
-        return instance;
+        this.photoFactory = photoFactory;
+        photoTagCollector = photoFactory.createPhotoTagCollector();
     }
 
     /**
@@ -99,7 +89,7 @@ public class PhotoManager extends ObjectManager
      */
     public final Photo getPhoto(PhotoId id)
     {
-        return instance.getPhotoFromId(id);
+        return getPhotoFromId(id);
     }
 
     /**
@@ -116,7 +106,7 @@ public class PhotoManager extends ObjectManager
 
         if(result == null)
         {
-            result = PhotoFactory.getInstance().loadPhoto(id);
+            result = photoFactory.loadPhoto(id);
             if(result != null)
             {
                 doAddPhoto(result);
@@ -227,7 +217,7 @@ public class PhotoManager extends ObjectManager
                 try
                 {
                     Serializable rawImage = imageStorage.readImage(photoIdAsString, photoSize.asInt());
-                    if(rawImage != null && rawImage instanceof Image)
+                    if(rawImage instanceof Image)
                     {
                         photo.setImage(photoSize, (Image) rawImage);
                     }
