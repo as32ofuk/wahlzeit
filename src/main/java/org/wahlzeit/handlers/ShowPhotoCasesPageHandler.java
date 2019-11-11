@@ -34,9 +34,9 @@ import java.util.Map;
  */
 public class ShowPhotoCasesPageHandler extends AbstractWebPageHandler
 {
-    public ShowPhotoCasesPageHandler(PhotoManager photoManager)
+    public ShowPhotoCasesPageHandler(PhotoManager photoManager, UserManager userManager)
     {
-        super(photoManager, PartUtil.SHOW_PHOTO_CASES_PAGE_FILE, AccessRights.MODERATOR);
+        super(photoManager, userManager, PartUtil.SHOW_PHOTO_CASES_PAGE_FILE, AccessRights.MODERATOR);
     }
 
     /**

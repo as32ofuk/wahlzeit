@@ -39,9 +39,9 @@ public class FlagPhotoFormHandler extends AbstractWebFormHandler
 {
     private static final Logger log = Logger.getLogger(FlagPhotoFormHandler.class.getName());
 
-    public FlagPhotoFormHandler(PhotoManager photoManager)
+    public FlagPhotoFormHandler(PhotoManager photoManager, UserManager userManager)
     {
-        super(photoManager, PartUtil.FLAG_PHOTO_FORM_FILE, AccessRights.GUEST);
+        super(photoManager, userManager, PartUtil.FLAG_PHOTO_FORM_FILE, AccessRights.GUEST);
     }
 
     /**

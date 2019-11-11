@@ -1,6 +1,8 @@
 package org.wahlzeit.services;
 
+import org.wahlzeit.main.SingletonProvider;
 import org.wahlzeit.model.Client;
+import org.wahlzeit.model.ClientManager;
 import org.wahlzeit.model.UserManager;
 import org.wahlzeit.model.UserSession;
 
@@ -19,7 +21,6 @@ import java.io.StringWriter;
  */
 public class LogBuilder
 {
-
     protected static final String LEVEL = "level";
     protected static final String USER_LEVEL = "ul";
     protected static final String SYSTEM_LEVEL = "sl";
@@ -34,12 +35,10 @@ public class LogBuilder
 
     protected StringBuilder logMessage;
 
-
     protected LogBuilder()
     {
         logMessage = new StringBuilder();
     }
-
 
     // create-methods --------------------------------------------------------------------------------------------------
 
@@ -69,7 +68,7 @@ public class LogBuilder
         if(session != null)
         {
             sessionName = session.getName();
-            Client client = UserManager.getInstance().getClientById(session.getClientId());
+            Client client = SingletonProvider.getInstance(UserManager.class).getClientById(session.getClientId());
             if(client != null)
             {
                 clientName = client.getNickName();

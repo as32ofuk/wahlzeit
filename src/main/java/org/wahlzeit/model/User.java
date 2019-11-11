@@ -39,7 +39,6 @@ import java.util.logging.Logger;
 @Subclass(index = true)
 public class User extends Client
 {
-
     /**
      *
      */
@@ -79,52 +78,32 @@ public class User extends Client
     protected long creationTime = System.currentTimeMillis();
 
 
+
     /**
      *
      */
-    public User(String id, String myName, String myEmailAddress)
+    public User(PhotoManager photoManager, UserManager userManager, String id, String myName, String myEmailAddress)
     {
-        this(id, myName, EmailAddress.getFromString(myEmailAddress), null);
+        this(photoManager, userManager, id, myName, EmailAddress.getFromString(myEmailAddress), null);
     }
 
     /**
      *
      */
-    public User(String id, String myName, String myEmailAddress, Client previousClient)
+    public User(PhotoManager photoManager, UserManager userManager, String id, String myName, String myEmailAddress, Client previousClient)
     {
-        this(id, myName, EmailAddress.getFromString(myEmailAddress), previousClient);
+        this(photoManager, userManager, id, myName, EmailAddress.getFromString(myEmailAddress), previousClient);
     }
 
-    /**
-     *
-     */
-    public User(String id, String nickname, EmailAddress emailAddress, Client previousClient)
+    public User(PhotoManager photoManager, UserManager userManager, String id, String nickname, EmailAddress emailAddress, Client previousClient)
     {
-        initialize(id, nickname, emailAddress, AccessRights.USER, previousClient);
-    }
-
-    /**
-     * @methodtype initialization
-     */
-    protected void initialize(String id, String nickName, EmailAddress emailAddress, AccessRights accessRights,
-                              Client previousClient)
-    {
-        super.initialize(id, nickName, emailAddress, accessRights, previousClient);
-
+        super(photoManager, userManager, id, nickname, emailAddress, AccessRights.USER, previousClient);
         log.config(LogBuilder.createSystemMessage().
                 addAction("initialize user").
                 addParameter("id", id).
                 addParameter("name", nickName).
                 addParameter("E-Mail", emailAddress.asString()).toString());
         incWriteCount();
-    }
-
-    /**
-     *
-     */
-    protected User()
-    {
-        // do nothing
     }
 
     @Override

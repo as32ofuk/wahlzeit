@@ -18,17 +18,18 @@ import java.util.logging.Logger;
  */
 public class NotifyUsersAboutPraiseAgent extends Agent
 {
-
     public static final String NAME = "notifyUsersAboutPraise";
 
     private static final Logger log = Logger.getLogger(NotifyUsersAboutPraiseAgent.class.getName());
 
     protected PhotoManager photoManager;
+    protected UserManager userManager;
 
-    public NotifyUsersAboutPraiseAgent(PhotoManager photoManager)
+    public NotifyUsersAboutPraiseAgent(PhotoManager photoManager, UserManager userManager)
     {
-        initialize(NAME);
         this.photoManager = photoManager;
+        this.userManager = userManager;
+        initialize(NAME);
     }
 
     /**
@@ -86,7 +87,7 @@ public class NotifyUsersAboutPraiseAgent extends Agent
      */
     protected void notifyOwner(String ownerId, Collection<Photo> allPhotosOfUser)
     {
-        User owner = UserManager.getInstance().getUserById(ownerId);
+        User owner = userManager.getUserById(ownerId);
         ModelConfig cfg = LanguageConfigs.get(owner.getLanguage());
 
         EmailAddress from = cfg.getAdministratorEmailAddress();

@@ -40,7 +40,6 @@ import java.util.Map;
 @Entity
 public class Photo extends DataObject
 {
-
     /**
      *
      */
@@ -68,7 +67,7 @@ public class Photo extends DataObject
     public static final int MAX_THUMB_PHOTO_WIDTH = 105;
     public static final int MAX_THUMB_PHOTO_HEIGHT = 150;
 
-    protected PhotoId id = null;
+    protected PhotoId id;
 
     /**
      *
@@ -134,22 +133,23 @@ public class Photo extends DataObject
 
     public Location location;
 
+    protected UserManager userManager;
+
     /**
      *
      */
-    public Photo()
+    public Photo(UserManager userManager)
     {
-        id = PhotoId.getNextId();
-        incWriteCount();
+        this(userManager, PhotoId.getNextId());
     }
 
     /**
      * @methodtype constructor
      */
-    public Photo(PhotoId myId)
+    public Photo(UserManager userManager, PhotoId myId)
     {
+        this.userManager = userManager;
         id = myId;
-
         incWriteCount();
     }
 
@@ -215,7 +215,7 @@ public class Photo extends DataObject
      */
     public String getCaption(ModelConfig cfg)
     {
-        String ownerName = UserManager.getInstance().getUserById(ownerId).getNickName();
+        String ownerName = userManager.getUserById(ownerId).getNickName();
         return cfg.asPhotoCaption(ownerName);
     }
 

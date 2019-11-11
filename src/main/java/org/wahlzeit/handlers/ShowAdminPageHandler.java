@@ -37,9 +37,9 @@ public class ShowAdminPageHandler extends AbstractWebPageHandler implements WebF
 {
     private static Logger log = Logger.getLogger(ShowAdminPageHandler.class.getName());
 
-    public ShowAdminPageHandler(PhotoManager photoManager)
+    public ShowAdminPageHandler(PhotoManager photoManager, UserManager userManager)
     {
-        super(photoManager, PartUtil.SHOW_ADMIN_PAGE_FILE, AccessRights.ADMINISTRATOR);
+        super(photoManager, userManager, PartUtil.SHOW_ADMIN_PAGE_FILE, AccessRights.ADMINISTRATOR);
     }
 
     /**
@@ -73,7 +73,7 @@ public class ShowAdminPageHandler extends AbstractWebPageHandler implements WebF
         WebFormHandler handler = getFormHandler(PartUtil.NULL_FORM_NAME);
 
         String userId = us.getSavedArg("userId").toString();
-        User user = UserManager.getInstance().getUserById(userId);
+        User user = userManager.getUserById(userId);
         log.config("UserId: " + userId);
         if(user != null)
         {
@@ -142,7 +142,7 @@ public class ShowAdminPageHandler extends AbstractWebPageHandler implements WebF
     {
         String userId = us.getAndSaveAsString(args, "userId");
         log.config("UserId: " + userId);
-        User user = UserManager.getInstance().getUserById(userId);
+        User user = userManager.getUserById(userId);
         if(user == null)
         {
             log.config("User = null");

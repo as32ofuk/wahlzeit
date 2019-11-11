@@ -33,9 +33,9 @@ import java.util.Map;
  */
 public class SetLanguagePageHandler extends AbstractWebPageHandler
 {
-    public SetLanguagePageHandler(PhotoManager photoManager)
+    public SetLanguagePageHandler(PhotoManager photoManager, UserManager userManager)
     {
-        super(photoManager, PartUtil.SHOW_NOTE_PAGE_FILE, AccessRights.GUEST);
+        super(photoManager, userManager, PartUtil.SHOW_NOTE_PAGE_FILE, AccessRights.GUEST);
     }
 
     /**

@@ -17,9 +17,9 @@ public class LoginFormHandler extends AbstractWebFormHandler
 {
     private static final Logger log = Logger.getLogger(LoginFormHandler.class.getName());
 
-    public LoginFormHandler(PhotoManager photoManager)
+    public LoginFormHandler(PhotoManager photoManager, UserManager userManager)
     {
-        super(photoManager, PartUtil.LOGIN_FORM_FILE, AccessRights.GUEST);
+        super(photoManager, userManager, PartUtil.LOGIN_FORM_FILE, AccessRights.GUEST);
     }
 
     @Override
@@ -47,7 +47,6 @@ public class LoginFormHandler extends AbstractWebFormHandler
                     addMessage("Google user exists").
                     addParameter("E-Mail", googleUser.getEmail()).toString());
             String userId = googleUser.getUserId();
-            UserManager userManager = UserManager.getInstance();
             User user = userManager.getUserById(userId);
             if(user != null)
             {
@@ -66,11 +65,11 @@ public class LoginFormHandler extends AbstractWebFormHandler
                 Client previousClient = us.getClient();
                 if(userService.isUserAdmin())
                 {
-                    user = new Administrator(userId, nickName, emailAddress, previousClient);
+                    user = new Administrator(photoManager, userManager, userId, nickName, emailAddress, previousClient);
                 }
                 else
                 {
-                    user = new User(userId, nickName, emailAddress, previousClient);
+                    user = new User(photoManager, userManager, userId, nickName, emailAddress, previousClient);
                 }
                 userManager.emailWelcomeMessage(us, user);
                 us.setClient(user);

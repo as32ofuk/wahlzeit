@@ -42,6 +42,7 @@ public abstract class AbstractWebPartHandler implements WebPartHandler
     private static final Logger log = Logger.getLogger(AbstractWebPartHandler.class.getName());
 
     protected PhotoManager photoManager;
+    protected UserManager userManager;
 
     /**
      *
@@ -52,9 +53,10 @@ public abstract class AbstractWebPartHandler implements WebPartHandler
      */
     protected AccessRights neededRights;
 
-    public AbstractWebPartHandler(PhotoManager photoManager, String tmplName, AccessRights neededRights)
+    public AbstractWebPartHandler(PhotoManager photoManager, UserManager userManager, String tmplName, AccessRights neededRights)
     {
         this.photoManager = photoManager;
+        this.userManager = userManager;
         this.tmplName = tmplName;
         this.neededRights = neededRights;
     }

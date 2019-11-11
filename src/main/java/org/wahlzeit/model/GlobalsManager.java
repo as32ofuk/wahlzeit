@@ -25,6 +25,13 @@ public class GlobalsManager extends ObjectManager
      */
     private static GlobalsManager instance = new GlobalsManager();
 
+    protected UserManager userManager;
+
+    public GlobalsManager(UserManager userManager)
+    {
+        this.userManager = userManager;
+    }
+
     /**
      * @methodtype command Loads all global variables and stores them in their corresponding classes.
      */
@@ -41,7 +48,7 @@ public class GlobalsManager extends ObjectManager
         });
         log.info(globals.asString());
 
-        UserManager.getInstance().setLastClientId(globals.getLastUserId());
+        userManager.setLastClientId(globals.getLastUserId());
         PhotoId.setCurrentIdFromInt(globals.getLastPhotoId());
         Case.setLastCaseId(new CaseId(globals.getLastCaseId()));
         AbstractServlet.setLastSessionId(globals.getLastSessionId());
@@ -108,7 +115,7 @@ public class GlobalsManager extends ObjectManager
     public synchronized void saveGlobals()
     {
         final Globals globals = new Globals();
-        globals.setLastUserId(UserManager.getInstance().getLastClientId());
+        globals.setLastUserId(userManager.getLastClientId());
         globals.setLastPhotoId(PhotoId.getCurrentIdAsInt());
         globals.setLastCaseId(Case.getLastCaseId().asInt());
         globals.setLastSessionId(AbstractServlet.getLastSessionId());

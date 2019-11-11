@@ -2,12 +2,14 @@ package org.wahlzeit.servlets;
 
 import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.datastore.Key;
+import org.wahlzeit.main.SingletonProvider;
 import org.wahlzeit.model.Client;
 import org.wahlzeit.model.Guest;
 import org.wahlzeit.model.UserManager;
 import org.wahlzeit.services.LogBuilder;
 import org.wahlzeit.services.OfyService;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -20,11 +22,18 @@ import java.util.logging.Logger;
  */
 public class SessionCleanupServlet extends HttpServlet
 {
-
     private static final String SESSION_ENTITY_TYPE = "_ah_SESSION";
     private static final String EXPIRES_PROP = "_expires";
 
     private static final Logger log = Logger.getLogger(SessionCleanupServlet.class.getName());
+
+    protected UserManager userManager;
+
+    @Override
+    public void init() throws ServletException
+    {
+        userManager = SingletonProvider.getInstance(UserManager.class);
+    }
 
     @Override
     public void service(HttpServletRequest request, HttpServletResponse response)
@@ -60,10 +69,10 @@ public class SessionCleanupServlet extends HttpServlet
                 log.config(LogBuilder.createSystemMessage().
                         addAction("delete session").
                         addParameter("session id", sessionId).toString());
-                Client client = UserManager.getInstance().getClientByHttpSessionId(sessionId);
-                if(client != null && client instanceof Guest)
+                Client client = userManager.getClientByHttpSessionId(sessionId);
+                if(client instanceof Guest)
                 {
-                    UserManager.getInstance().deleteClient(client);
+                    userManager.deleteClient(client);
                 }
                 OfyService.ofy().delete().entity(httpSessionEntity).now();
             }

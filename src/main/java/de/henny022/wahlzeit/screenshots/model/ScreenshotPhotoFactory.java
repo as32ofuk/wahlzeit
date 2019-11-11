@@ -3,6 +3,7 @@ package de.henny022.wahlzeit.screenshots.model;
 import org.wahlzeit.model.Photo;
 import org.wahlzeit.model.PhotoFactory;
 import org.wahlzeit.model.PhotoId;
+import org.wahlzeit.model.UserManager;
 
 import java.util.logging.Logger;
 
@@ -13,12 +14,17 @@ public class ScreenshotPhotoFactory extends PhotoFactory
      */
     private static final Logger log = Logger.getLogger(ScreenshotPhotoFactory.class.getName());
 
+    public ScreenshotPhotoFactory(UserManager userManager)
+    {
+        super(userManager);
+    }
+
     /**
      * @methodtype factory
      */
     public Photo createPhoto()
     {
-        return new ScreenshotPhoto();
+        return new ScreenshotPhoto(userManager);
     }
 
     /**
@@ -26,7 +32,7 @@ public class ScreenshotPhotoFactory extends PhotoFactory
      */
     public Photo createPhoto(PhotoId id)
     {
-        return new ScreenshotPhoto(id);
+        return new ScreenshotPhoto(userManager, id);
     }
 
 }

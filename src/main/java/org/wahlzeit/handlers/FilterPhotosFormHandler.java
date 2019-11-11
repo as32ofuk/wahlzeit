@@ -35,9 +35,9 @@ public class FilterPhotosFormHandler extends AbstractWebFormHandler
 {
     private static final Logger log = Logger.getLogger(FilterPhotosFormHandler.class.getName());
 
-    public FilterPhotosFormHandler(PhotoManager photoManager)
+    public FilterPhotosFormHandler(PhotoManager photoManager, UserManager userManager)
     {
-        super(photoManager, PartUtil.FILTER_PHOTOS_FORM_FILE, AccessRights.GUEST);
+        super(photoManager, userManager, PartUtil.FILTER_PHOTOS_FORM_FILE, AccessRights.GUEST);
     }
 
     /**

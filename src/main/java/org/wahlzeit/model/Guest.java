@@ -29,7 +29,6 @@ import org.wahlzeit.services.EmailAddress;
 @Subclass(index = true)
 public class Guest extends Client
 {
-
     /**
      * The name of each client starts with this prefix
      */
@@ -38,19 +37,17 @@ public class Guest extends Client
     /**
      *
      */
-    public Guest()
+    public Guest(PhotoManager photoManager, UserManager userManager)
     {
-        String userId = GUEST_PREFIX + UserManager.getInstance().getNextClientId();
-        initialize(userId, userId, EmailAddress.EMPTY, AccessRights.GUEST, null);
+        this(photoManager, userManager, null);
     }
 
     /**
      * For logging out a user, some settings like the language or the photo size should not change, therefore the
      * previousClient is used so set these basic settings in the new <@link>Guest</@link>.
      */
-    public Guest(Client previousClient)
+    public Guest(PhotoManager photoManager, UserManager userManager, Client previousClient)
     {
-        String userId = GUEST_PREFIX + UserManager.getInstance().getNextClientId();
-        initialize(userId, userId, EmailAddress.EMPTY, AccessRights.GUEST, previousClient);
+        super(photoManager, userManager, GUEST_PREFIX + userManager.getNextClientId(), GUEST_PREFIX + userManager.getLastClientId(), EmailAddress.EMPTY, AccessRights.GUEST, previousClient);
     }
 }

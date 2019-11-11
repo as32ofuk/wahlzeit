@@ -39,8 +39,8 @@ import java.util.logging.Logger;
  */
 public class UserManager extends ClientManager
 {
-
     private static final Logger log = Logger.getLogger(UserManager.class.getName());
+
     /**
      * Reserved names that cannot be registered by regular users
      *
@@ -53,32 +53,7 @@ public class UserManager extends ClientManager
             "guest#"
     );
 
-
-    /**
-     *
-     */
-    protected static UserManager instance;
-
-    /**
-     *
-     */
-    private UserManager()
-    {
-    }
-
-    /**
-     *
-     */
-    public static UserManager getInstance()
-    {
-        if(instance == null)
-        {
-            instance = new UserManager();
-        }
-        return instance;
-    }
-
-    public void init()
+    public UserManager()
     {
         loadExistingUsers();
     }

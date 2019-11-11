@@ -27,15 +27,21 @@ import java.util.logging.Logger;
  */
 public class PhotoFactory
 {
-
     private static final Logger log = Logger.getLogger(PhotoFactory.class.getName());
+
+    protected UserManager userManager;
+
+    public PhotoFactory(UserManager userManager)
+    {
+        this.userManager = userManager;
+    }
 
     /**
      * @methodtype factory
      */
     public Photo createPhoto()
     {
-        return new Photo();
+        return new Photo(userManager);
     }
 
     /**
@@ -43,7 +49,7 @@ public class PhotoFactory
      */
     public Photo createPhoto(PhotoId id)
     {
-        return new Photo(id);
+        return new Photo(userManager, id);
     }
 
     /**

@@ -33,9 +33,9 @@ import java.util.Map;
  */
 public class ShowPhotoPageHandler extends AbstractWebPageHandler implements WebFormHandler
 {
-    public ShowPhotoPageHandler(PhotoManager photoManager)
+    public ShowPhotoPageHandler(PhotoManager photoManager, UserManager userManager)
     {
-        super(photoManager, PartUtil.SHOW_PHOTO_PAGE_FILE, AccessRights.GUEST);
+        super(photoManager, userManager, PartUtil.SHOW_PHOTO_PAGE_FILE, AccessRights.GUEST);
     }
 
     /**

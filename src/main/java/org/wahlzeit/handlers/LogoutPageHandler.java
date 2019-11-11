@@ -32,9 +32,9 @@ import java.util.Map;
  */
 public class LogoutPageHandler extends AbstractWebPageHandler
 {
-    public LogoutPageHandler(PhotoManager photoManager)
+    public LogoutPageHandler(PhotoManager photoManager, UserManager userManager)
     {
-        super(photoManager, PartUtil.SHOW_NOTE_PAGE_FILE, AccessRights.USER);
+        super(photoManager, userManager, PartUtil.SHOW_NOTE_PAGE_FILE, AccessRights.USER);
     }
 
     /**
@@ -43,7 +43,7 @@ public class LogoutPageHandler extends AbstractWebPageHandler
     protected String doHandleGet(UserSession us, String link, Map args)
     {
         Client previousClient = us.getClient();
-        us.setClient(new Guest(previousClient));
+        us.setClient(new Guest(photoManager, userManager, previousClient));
         us.clearSavedArgs();
         return link;
     }

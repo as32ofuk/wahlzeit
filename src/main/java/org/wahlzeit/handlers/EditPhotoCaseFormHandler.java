@@ -37,9 +37,9 @@ public class EditPhotoCaseFormHandler extends AbstractWebFormHandler
 {
     private static final Logger log = Logger.getLogger(EditPhotoCaseFormHandler.class.getName());
 
-    public EditPhotoCaseFormHandler(PhotoManager photoManager)
+    public EditPhotoCaseFormHandler(PhotoManager photoManager, UserManager userManager)
     {
-        super(photoManager, PartUtil.EDIT_PHOTO_CASE_FORM_FILE, AccessRights.MODERATOR);
+        super(photoManager, userManager, PartUtil.EDIT_PHOTO_CASE_FORM_FILE, AccessRights.MODERATOR);
     }
 
     /**

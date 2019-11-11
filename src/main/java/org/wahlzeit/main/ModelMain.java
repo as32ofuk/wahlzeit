@@ -43,6 +43,7 @@ public abstract class ModelMain extends AbstractMain
     private static final Logger log = Logger.getLogger(ModelMain.class.getName());
 
     protected PhotoManager photoManager;
+    protected UserManager userManager;
 
     /**
      *
@@ -60,16 +61,16 @@ public abstract class ModelMain extends AbstractMain
         GlobalsManager.getInstance().loadGlobals();
 
         log.config(LogBuilder.createSystemMessage().addAction("load user").toString());
-        UserManager.getInstance().init();
+        userManager = new UserManager();
 
         log.config(LogBuilder.createSystemMessage().addAction("init PhotoFactory").toString());
-        PhotoFactory photoFactory = new ScreenshotPhotoFactory();
+        PhotoFactory photoFactory = new ScreenshotPhotoFactory(userManager);
 
         log.config(LogBuilder.createSystemMessage().addAction("load Photos").toString());
-        photoManager = new PhotoManager(photoFactory);
+        photoManager = new PhotoManager(photoFactory, userManager);
         photoManager.init();
 
-        SingletonProvider.init(photoManager);
+        SingletonProvider.init(photoManager, userManager);
     }
 
 
@@ -90,7 +91,7 @@ public abstract class ModelMain extends AbstractMain
     {
         PhotoCaseManager.getInstance().savePhotoCases();
         photoManager.savePhotos();
-        UserManager.getInstance().saveClients();
+        userManager.saveClients();
         GlobalsManager.getInstance().saveGlobals();
     }
 
@@ -99,8 +100,7 @@ public abstract class ModelMain extends AbstractMain
      */
     protected void createUser(String userId, String nickName, String emailAddress, String photoDir)
     {
-        UserManager userManager = UserManager.getInstance();
-        User user = new User(userId, nickName, emailAddress);
+        User user = new User(photoManager, userManager, userId, nickName, emailAddress);
 
         File photoDirFile = new File(photoDir);
         FileFilter photoFileFilter = file -> file.getName().endsWith(".jpg");

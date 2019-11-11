@@ -20,10 +20,7 @@
 
 package org.wahlzeit.handlers;
 
-import org.wahlzeit.model.AccessRights;
-import org.wahlzeit.model.ModelConfig;
-import org.wahlzeit.model.PhotoManager;
-import org.wahlzeit.model.UserSession;
+import org.wahlzeit.model.*;
 import org.wahlzeit.utils.HtmlUtil;
 import org.wahlzeit.webparts.WebPart;
 
@@ -34,9 +31,9 @@ import java.util.Map;
  */
 public class ResetSessionPageHandler extends AbstractWebPageHandler
 {
-    public ResetSessionPageHandler(PhotoManager photoManager)
+    public ResetSessionPageHandler(PhotoManager photoManager, UserManager userManager)
     {
-        super(photoManager, PartUtil.SHOW_NOTE_PAGE_FILE, AccessRights.GUEST);
+        super(photoManager, userManager, PartUtil.SHOW_NOTE_PAGE_FILE, AccessRights.GUEST);
     }
 
     /**

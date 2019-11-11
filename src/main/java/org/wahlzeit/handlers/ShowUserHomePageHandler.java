@@ -31,9 +31,9 @@ import org.wahlzeit.webparts.WritableList;
  */
 public class ShowUserHomePageHandler extends AbstractWebPageHandler
 {
-    public ShowUserHomePageHandler(PhotoManager photoManager)
+    public ShowUserHomePageHandler(PhotoManager photoManager, UserManager userManager)
     {
-        super(photoManager, PartUtil.SHOW_USER_HOME_PAGE_FILE, AccessRights.USER);
+        super(photoManager, userManager, PartUtil.SHOW_USER_HOME_PAGE_FILE, AccessRights.USER);
     }
 
     /**

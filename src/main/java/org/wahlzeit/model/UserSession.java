@@ -40,7 +40,6 @@ import java.util.logging.Logger;
  */
 public class UserSession extends Session implements Serializable
 {
-
     /**
      * Keys to store the according properties in the <code>HttpSession</code>
      */
@@ -60,11 +59,15 @@ public class UserSession extends Session implements Serializable
 
     protected HttpSession httpSession;
 
+    protected UserManager userManager;
+
     /**
      * https://youtu.be/-FRm3VPhseI
      */
-    public UserSession(PhotoManager photoManager, String myName, String mySiteUrl, HttpSession myHttpSession, String myLanguage)
+    public UserSession(PhotoManager photoManager, UserManager userManager, String myName, String mySiteUrl, HttpSession myHttpSession, String myLanguage)
     {
+        this.userManager = userManager;
+
         httpSession = myHttpSession;
         initialize(myName);
         if(httpSession.getAttribute(INITIALIZED) == null)
@@ -72,7 +75,7 @@ public class UserSession extends Session implements Serializable
             httpSession.setAttribute(SITE_URL, mySiteUrl);
             httpSession.setAttribute(PHOTO_FILTER, photoManager.createPhotoFilter());
 
-            setClient(new Guest());
+            setClient(new Guest(photoManager, userManager));
             try
             {
                 Language language = Language.getFromIsoCode(myLanguage);
@@ -87,7 +90,6 @@ public class UserSession extends Session implements Serializable
             clearPraisedPhotos();
             clearSavedArgs();
             httpSession.setAttribute(INITIALIZED, INITIALIZED);
-
         }
     }
 
@@ -167,7 +169,7 @@ public class UserSession extends Session implements Serializable
     public Client getClient()
     {
         String clientName = (String) httpSession.getAttribute(CLIENT_ID);
-        return UserManager.getInstance().getClientById(clientName);
+        return userManager.getClientById(clientName);
     }
 
     /**
@@ -178,15 +180,15 @@ public class UserSession extends Session implements Serializable
         String previousClientId = (String) httpSession.getAttribute(CLIENT_ID);
         if(previousClientId != null)
         {
-            Client previousClient = UserManager.getInstance().getClientById(previousClientId);
+            Client previousClient = userManager.getClientById(previousClientId);
             if(previousClient instanceof Guest)
             {
-                UserManager.getInstance().deleteClient(previousClient);
+                userManager.deleteClient(previousClient);
             }
         }
 
         httpSession.setAttribute(CLIENT_ID, newClient.getId());
-        UserManager.getInstance().addHttpSessionIdToClientMapping(httpSession.getId(), newClient);
+        userManager.addHttpSessionIdToClientMapping(httpSession.getId(), newClient);
     }
 
     /**

@@ -41,6 +41,7 @@ public class PhotoManager extends ObjectManager
     private static final Logger log = Logger.getLogger(PhotoManager.class.getName());
 
     protected PhotoFactory photoFactory;
+    protected UserManager userManager;
 
     /**
      * In-memory cache for photos
@@ -55,9 +56,10 @@ public class PhotoManager extends ObjectManager
     /**
      *
      */
-    public PhotoManager(PhotoFactory photoFactory)
+    public PhotoManager(PhotoFactory photoFactory, UserManager userManager)
     {
         this.photoFactory = photoFactory;
+        this.userManager = userManager;
         photoTagCollector = photoFactory.createPhotoTagCollector();
     }
 
@@ -247,7 +249,6 @@ public class PhotoManager extends ObjectManager
             Photo photo = (Photo) obj;
             saveScaledImages(photo);
             updateTags(photo);
-            UserManager userManager = UserManager.getInstance();
             Client owner = userManager.getClientById(photo.getOwnerId());
             userManager.saveClient(owner);
         }

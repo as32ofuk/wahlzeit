@@ -37,9 +37,9 @@ public class EditUserProfileFormHandler extends AbstractWebFormHandler
 {
     private static final Logger log = Logger.getLogger(EditUserProfileFormHandler.class.getName());
 
-    public EditUserProfileFormHandler(PhotoManager photoManager)
+    public EditUserProfileFormHandler(PhotoManager photoManager, UserManager userManager)
     {
-        super(photoManager, PartUtil.EDIT_USER_PROFILE_FORM_FILE, AccessRights.USER);
+        super(photoManager, userManager, PartUtil.EDIT_USER_PROFILE_FORM_FILE, AccessRights.USER);
     }
 
     /**

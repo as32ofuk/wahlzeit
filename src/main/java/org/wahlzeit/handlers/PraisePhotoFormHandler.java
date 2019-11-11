@@ -36,9 +36,9 @@ public class PraisePhotoFormHandler extends AbstractWebFormHandler
 {
     private static final Logger log = Logger.getLogger(PraisePhotoFormHandler.class.getName());
 
-    public PraisePhotoFormHandler(PhotoManager photoManager)
+    public PraisePhotoFormHandler(PhotoManager photoManager, UserManager userManager)
     {
-        super(photoManager, PartUtil.PRAISE_PHOTO_FORM_FILE, AccessRights.GUEST);
+        super(photoManager, userManager, PartUtil.PRAISE_PHOTO_FORM_FILE, AccessRights.GUEST);
     }
 
     /**

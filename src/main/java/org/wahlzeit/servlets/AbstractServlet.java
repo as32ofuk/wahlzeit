@@ -23,6 +23,7 @@ package org.wahlzeit.servlets;
 import org.wahlzeit.main.ServiceMain;
 import org.wahlzeit.main.SingletonProvider;
 import org.wahlzeit.model.PhotoManager;
+import org.wahlzeit.model.UserManager;
 import org.wahlzeit.model.UserSession;
 import org.wahlzeit.services.LogBuilder;
 import org.wahlzeit.services.Session;
@@ -80,11 +81,13 @@ public abstract class AbstractServlet extends HttpServlet
     }
 
     protected PhotoManager photoManager;
+    protected UserManager userManager;
 
     @Override
     public void init() throws ServletException
     {
         photoManager = SingletonProvider.getInstance(PhotoManager.class);
+        userManager = SingletonProvider.getInstance(UserManager.class);
     }
 
     /**
@@ -152,7 +155,7 @@ public abstract class AbstractServlet extends HttpServlet
         String sessionName = httpSession.getId();
         String siteUrl = getSiteUrl(request); // @TODO Application
 
-        UserSession result = new UserSession(photoManager, sessionName, siteUrl, httpSession, request.getLocale().getLanguage());
+        UserSession result = new UserSession(photoManager, userManager, sessionName, siteUrl, httpSession, request.getLocale().getLanguage());
 
         return result;
     }

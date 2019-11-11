@@ -32,9 +32,9 @@ import org.wahlzeit.webparts.WebPart;
  */
 public abstract class AbstractWebPageHandler extends AbstractWebPartHandler implements WebPageHandler
 {
-    public AbstractWebPageHandler(PhotoManager photoManager, String tmplName, AccessRights neededRights)
+    public AbstractWebPageHandler(PhotoManager photoManager, UserManager userManager, String tmplName, AccessRights neededRights)
     {
-        super(photoManager, tmplName, neededRights);
+        super(photoManager, userManager, tmplName, neededRights);
     }
 
     /**

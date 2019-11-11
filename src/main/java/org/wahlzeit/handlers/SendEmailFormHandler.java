@@ -34,7 +34,6 @@ import java.util.logging.Logger;
  */
 public class SendEmailFormHandler extends AbstractWebFormHandler
 {
-
     /**
      *
      */
@@ -45,9 +44,9 @@ public class SendEmailFormHandler extends AbstractWebFormHandler
 
     private static final Logger log = Logger.getLogger(SendEmailFormHandler.class.getName());
 
-    public SendEmailFormHandler(PhotoManager photoManager)
+    public SendEmailFormHandler(PhotoManager photoManager, UserManager userManager)
     {
-        super(photoManager, PartUtil.SEND_EMAIL_FORM_FILE, AccessRights.GUEST);
+        super(photoManager, userManager, PartUtil.SEND_EMAIL_FORM_FILE, AccessRights.GUEST);
     }
 
     /**
@@ -120,7 +119,6 @@ public class SendEmailFormHandler extends AbstractWebFormHandler
             return PartUtil.SEND_EMAIL_PAGE_NAME;
         }
 
-        UserManager userManager = UserManager.getInstance();
         User toUser = userManager.getUserById(photo.getOwnerId());
 
         emailSubject = config.getSendEmailSubjectPrefix() + emailSubject;

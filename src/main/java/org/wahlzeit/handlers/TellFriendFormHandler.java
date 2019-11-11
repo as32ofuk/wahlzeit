@@ -47,9 +47,9 @@ public class TellFriendFormHandler extends AbstractWebFormHandler
 
     private static final Logger log = Logger.getLogger(TellFriendFormHandler.class.getName());
 
-    public TellFriendFormHandler(PhotoManager photoManager)
+    public TellFriendFormHandler(PhotoManager photoManager, UserManager userManager)
     {
-        super(photoManager, PartUtil.TELL_FRIEND_FORM_FILE, AccessRights.GUEST);
+        super(photoManager, userManager, PartUtil.TELL_FRIEND_FORM_FILE, AccessRights.GUEST);
     }
 
     /**

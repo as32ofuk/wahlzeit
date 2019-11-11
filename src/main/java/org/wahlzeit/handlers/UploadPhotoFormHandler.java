@@ -37,9 +37,9 @@ public class UploadPhotoFormHandler extends AbstractWebFormHandler
 {
     private static Logger log = Logger.getLogger(UploadPhotoFormHandler.class.getName());
 
-    public UploadPhotoFormHandler(PhotoManager photoManager)
+    public UploadPhotoFormHandler(PhotoManager photoManager, UserManager userManager)
     {
-        super(photoManager, PartUtil.UPLOAD_PHOTO_FORM_FILE, AccessRights.USER);
+        super(photoManager, userManager, PartUtil.UPLOAD_PHOTO_FORM_FILE, AccessRights.USER);
     }
 
     /**

@@ -37,9 +37,9 @@ public class AdminUserProfileFormHandler extends AbstractWebFormHandler
 {
     private static final Logger log = Logger.getLogger(AdminUserProfileFormHandler.class.getName());
 
-    public AdminUserProfileFormHandler(PhotoManager photoManager)
+    public AdminUserProfileFormHandler(PhotoManager photoManager, UserManager userManager)
     {
-        super(photoManager, PartUtil.ADMIN_USER_PROFILE_FORM_FILE, AccessRights.ADMINISTRATOR);
+        super(photoManager, userManager, PartUtil.ADMIN_USER_PROFILE_FORM_FILE, AccessRights.ADMINISTRATOR);
     }
 
     /**
@@ -50,7 +50,7 @@ public class AdminUserProfileFormHandler extends AbstractWebFormHandler
         Map<String, Object> args = us.getSavedArgs();
 
         String userId = us.getAndSaveAsString(args, "userId");
-        User user = UserManager.getInstance().getUserById(userId);
+        User user = userManager.getUserById(userId);
 
         Photo photo = user.getUserPhoto();
         part.addString(Photo.THUMB, getPhotoThumb(us, photo));
@@ -74,9 +74,8 @@ public class AdminUserProfileFormHandler extends AbstractWebFormHandler
      */
     protected String doHandlePost(UserSession us, Map args)
     {
-        UserManager um = UserManager.getInstance();
         String userId = us.getAndSaveAsString(args, "userId");
-        User user = um.getUserById(userId);
+        User user = userManager.getUserById(userId);
 
         String status = us.getAndSaveAsString(args, User.STATUS);
         String rights = us.getAndSaveAsString(args, User.RIGHTS);
@@ -98,8 +97,8 @@ public class AdminUserProfileFormHandler extends AbstractWebFormHandler
         // TODO user.setEmailAddress(EmailAddress.getFromString(emailAddress));
         user.setNotifyAboutPraise((notifyAboutPraise != null) && notifyAboutPraise.equals("on"));
 
-        um.removeClient(user);
-        user = um.getUserById(userId);
+        userManager.removeClient(user);
+        user = userManager.getUserById(userId);
         us.setSavedArg("userId", userId);
 
         log.info(LogBuilder.createUserMessage().

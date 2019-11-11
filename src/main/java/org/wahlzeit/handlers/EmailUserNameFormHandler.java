@@ -38,9 +38,9 @@ public class EmailUserNameFormHandler extends AbstractWebFormHandler
 {
     private static final Logger log = Logger.getLogger(EmailUserNameFormHandler.class.getName());
 
-    public EmailUserNameFormHandler(PhotoManager photoManager)
+    public EmailUserNameFormHandler(PhotoManager photoManager, UserManager userManager)
     {
-        super(photoManager, PartUtil.EMAIL_USER_NAME_FORM_FILE, AccessRights.GUEST);
+        super(photoManager, userManager, PartUtil.EMAIL_USER_NAME_FORM_FILE, AccessRights.GUEST);
     }
 
     /**
@@ -71,7 +71,6 @@ public class EmailUserNameFormHandler extends AbstractWebFormHandler
             return PartUtil.EMAIL_PASSWORD_PAGE_NAME;
         }
 
-        UserManager userManager = UserManager.getInstance();
         User user = userManager.getUserByEmailAddress(emailAddress);
         if(user == null)
         {

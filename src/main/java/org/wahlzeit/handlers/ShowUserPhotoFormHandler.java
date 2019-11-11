@@ -36,9 +36,9 @@ public class ShowUserPhotoFormHandler extends AbstractWebFormHandler
 {
     private static final Logger log = Logger.getLogger(ShowUserPhotoFormHandler.class.getName());
 
-    public ShowUserPhotoFormHandler(PhotoManager photoManager)
+    public ShowUserPhotoFormHandler(PhotoManager photoManager, UserManager userManager)
     {
-        super(photoManager, PartUtil.SHOW_USER_PHOTO_FORM_FILE, AccessRights.USER);
+        super(photoManager, userManager, PartUtil.SHOW_USER_PHOTO_FORM_FILE, AccessRights.USER);
     }
 
     /**
@@ -86,7 +86,6 @@ public class ShowUserPhotoFormHandler extends AbstractWebFormHandler
         String id = us.getAndSaveAsString(args, Photo.ID);
         Photo photo = photoManager.getPhoto(id);
 
-        UserManager userManager = UserManager.getInstance();
         User user = userManager.getUserById(photo.getOwnerId());
         if(us.isFormType(args, "edit"))
         {

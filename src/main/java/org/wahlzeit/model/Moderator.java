@@ -29,29 +29,13 @@ import org.wahlzeit.services.EmailAddress;
 @Subclass(index = true)
 public class Moderator extends User
 {
-
-    /**
-     *
-     */
-    public Moderator(String id, String myName, String myEmailAddress, Client previousClient)
+    public Moderator(PhotoManager photoManager, UserManager userManager, String userId, String emailAddress, String nickname, Client previousClient)
     {
-        this(id, myName, EmailAddress.getFromString(myEmailAddress), previousClient);
+        this(photoManager, userManager, userId, nickname, EmailAddress.getFromString(emailAddress), previousClient);
     }
 
-    /**
-     *
-     */
-    public Moderator(String userId, String nickname, EmailAddress emailAddress, Client previousClient)
+    public Moderator(PhotoManager photoManager, UserManager userManager, String userId, String nickname, EmailAddress emailAddress, Client previousClient)
     {
-        initialize(userId, nickname, emailAddress, AccessRights.MODERATOR, previousClient);
+        super(photoManager, userManager, userId, nickname, emailAddress, previousClient);
     }
-
-    /**
-     *
-     */
-    protected Moderator()
-    {
-        // do nothing
-    }
-
 }

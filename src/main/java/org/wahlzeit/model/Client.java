@@ -25,7 +25,6 @@ import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
 import com.googlecode.objectify.annotation.Ignore;
 import com.googlecode.objectify.annotation.Parent;
-import org.wahlzeit.main.SingletonProvider;
 import org.wahlzeit.services.EmailAddress;
 import org.wahlzeit.services.Language;
 import org.wahlzeit.services.ObjectManager;
@@ -48,6 +47,7 @@ public abstract class Client implements Serializable, Persistent
     public static final String LANGUAGE = "language";
 
     protected PhotoManager photoManager;
+    protected UserManager userManager;
 
     @Id
     protected String id;
@@ -60,59 +60,56 @@ public abstract class Client implements Serializable, Persistent
     /**
      *
      */
-    protected EmailAddress emailAddress = EmailAddress.EMPTY;
+    protected EmailAddress emailAddress;
 
     /**
      *
      */
-    protected AccessRights accessRights = AccessRights.NONE;
+    protected AccessRights accessRights;
 
     @Ignore
     protected int writeCount = 0;
 
     private String httpSessionId;
 
-    protected Language language = Language.ENGLISH;
+    protected Language language;
 
-    protected PhotoSize photoSize = PhotoSize.MEDIUM;
+    protected PhotoSize photoSize;
 
-    protected List<PhotoId> praisedPhotoIds = new ArrayList<PhotoId>();
+    protected List<PhotoId> praisedPhotoIds;
 
-    protected List<PhotoId> skippedPhotoIds = new ArrayList<PhotoId>();
+    protected List<PhotoId> skippedPhotoIds;
 
 
-    /**
-     *
-     */
-    Client()
+    public Client(PhotoManager photoManager, UserManager userManager, String id, String nickName, Client previousClient)
     {
-        // do nothing
+        this(photoManager, userManager, id, nickName, EmailAddress.EMPTY, AccessRights.NONE, previousClient);
     }
 
-    /**
-     * @methodtype initialization
-     */
-    protected void initialize(String id, String nickName, EmailAddress emailAddress, AccessRights accessRights,
-                              Client previousClient)
+    public Client(PhotoManager photoManager, UserManager userManager, String id, String nickName, EmailAddress emailAddress, AccessRights accessRights, Client previousClient)
     {
-        this.photoManager = SingletonProvider.getInstance(PhotoManager.class);
-
+        this.photoManager = photoManager;
+        this.userManager = userManager;
         this.id = id;
         this.nickName = nickName;
-        this.accessRights = accessRights;
         this.emailAddress = emailAddress;
+        this.accessRights = accessRights;
+        
+        skippedPhotoIds = new ArrayList<>();
+        praisedPhotoIds = new ArrayList<>();
+        photoSize = PhotoSize.MEDIUM;
+        language = Language.ENGLISH;
 
         // use some of the existing properties for the new user
         if(previousClient != null)
         {
-            this.setLanguage(previousClient.getLanguage());
-            this.setPraisedPhotoIds(previousClient.getPraisedPhotoIds());
-            this.setPhotoSize(previousClient.getPhotoSize());
+            setLanguage(previousClient.getLanguage());
+            setPraisedPhotoIds(previousClient.getPraisedPhotoIds());
+            setPhotoSize(previousClient.getPhotoSize());
         }
-
         incWriteCount();
 
-        UserManager.getInstance().addClient(this);
+        userManager.addClient(this);
     }
 
     /**
@@ -153,7 +150,7 @@ public abstract class Client implements Serializable, Persistent
      */
     public void setNickName(String nickName) throws IllegalArgumentException
     {
-        UserManager.getInstance().changeNickname(this.nickName, nickName);
+        userManager.changeNickname(this.nickName, nickName);
         this.nickName = nickName;
         incWriteCount();
     }

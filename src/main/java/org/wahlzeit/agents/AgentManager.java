@@ -21,6 +21,7 @@
 package org.wahlzeit.agents;
 
 import org.wahlzeit.model.PhotoManager;
+import org.wahlzeit.model.UserManager;
 import org.wahlzeit.services.LogBuilder;
 
 import java.util.HashMap;
@@ -41,11 +42,11 @@ public class AgentManager
      */
     protected Map<String, Agent> agents;
 
-    public AgentManager(PhotoManager photoManager)
+    public AgentManager(PhotoManager photoManager, UserManager userManager)
     {
         this.photoManager = photoManager;
         this.agents = new HashMap<>();
-        addAgent(new NotifyUsersAboutPraiseAgent(photoManager));
+        addAgent(new NotifyUsersAboutPraiseAgent(photoManager, userManager));
     }
 
     /**
