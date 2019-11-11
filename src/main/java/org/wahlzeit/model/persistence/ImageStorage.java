@@ -15,35 +15,14 @@ import java.util.logging.Logger;
  */
 public abstract class ImageStorage
 {
-
     private static final Logger log = Logger.getLogger(ImageStorage.class.getName());
-    private static ImageStorage instance = null;
 
-    /**
-     * @methodtype get
-     */
-    public static ImageStorage getInstance()
-            throws NullPointerException
-    {
-
-        if(instance == null)
-        {
-            throw new NullPointerException("Image storage instance is null, call setInstance() first!");
-        }
-        return instance;
-    }
-
-    /**
-     * @methodtype set
-     */
-    public static void setInstance(ImageStorage newInstance)
+    public ImageStorage()
     {
         log.config(LogBuilder.createSystemMessage().
                 addAction("set ImageStorage instance").
-                addParameter("instance", newInstance).toString());
-        instance = newInstance;
+                addParameter("instance", this).toString());
     }
-
 
     // write-methods ---------------------------------------------------------------------------------------------------
 

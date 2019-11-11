@@ -28,12 +28,13 @@ public class StaticDataServlet extends AbstractServlet
 {
     Logger log = Logger.getLogger(StaticDataServlet.class.getName());
 
-    protected PhotoManager photoManager;
+    protected ImageStorage imageStorage;
 
     @Override
     public void init() throws ServletException
     {
-        photoManager = SingletonProvider.getInstance(PhotoManager.class);
+        super.init();
+        imageStorage = SingletonProvider.getInstance(ImageStorage.class);
     }
 
     @Override
@@ -101,7 +102,7 @@ public class StaticDataServlet extends AbstractServlet
             Serializable rawImage = null;
             try
             {
-                rawImage = ImageStorage.getInstance().readImage(photoId, size);
+                rawImage = imageStorage.readImage(photoId, size);
             }
             catch(IOException e)
             {

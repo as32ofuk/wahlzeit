@@ -57,7 +57,7 @@ public abstract class ModelMain extends AbstractMain
 
         log.config(LogBuilder.createSystemMessage().addAction("load image storage").toString());
         //GcsAdapter.Builder gcsAdapterBuilder = new GcsAdapter.Builder();
-        ImageStorage.setInstance(new DatastoreAdapter());
+        ImageStorage imageStorage = new DatastoreAdapter();
 
         log.config(LogBuilder.createSystemMessage().addAction("load user").toString());
         userManager = new UserManager();
@@ -70,10 +70,10 @@ public abstract class ModelMain extends AbstractMain
         PhotoFactory photoFactory = new ScreenshotPhotoFactory(userManager);
 
         log.config(LogBuilder.createSystemMessage().addAction("load Photos").toString());
-        photoManager = new PhotoManager(photoFactory, userManager, globalsManager);
+        photoManager = new PhotoManager(photoFactory, userManager, globalsManager, imageStorage);
         photoManager.init();
 
-        SingletonProvider.init(photoManager, userManager);
+        SingletonProvider.init(photoManager, userManager, imageStorage);
     }
 
 

@@ -44,6 +44,7 @@ public class PhotoManager extends ObjectManager
     protected PhotoFactory photoFactory;
     protected UserManager userManager;
     protected GlobalsManager globalsManager;
+    protected ImageStorage imageStorage;
 
     /**
      * In-memory cache for photos
@@ -58,11 +59,12 @@ public class PhotoManager extends ObjectManager
     /**
      *
      */
-    public PhotoManager(PhotoFactory photoFactory, UserManager userManager, GlobalsManager globalsManager)
+    public PhotoManager(PhotoFactory photoFactory, UserManager userManager, GlobalsManager globalsManager, ImageStorage imageStorage)
     {
         this.photoFactory = photoFactory;
         this.userManager = userManager;
         this.globalsManager = globalsManager;
+        this.imageStorage = imageStorage;
         photoTagCollector = photoFactory.createPhotoTagCollector();
     }
 
@@ -202,7 +204,6 @@ public class PhotoManager extends ObjectManager
     protected void loadScaledImages(Photo photo)
     {
         String photoIdAsString = photo.getId().asString();
-        ImageStorage imageStorage = ImageStorage.getInstance();
 
         for(PhotoSize photoSize : PhotoSize.values())
         {
@@ -275,7 +276,6 @@ public class PhotoManager extends ObjectManager
     protected void saveScaledImages(Photo photo)
     {
         String photoIdAsString = photo.getId().asString();
-        ImageStorage imageStorage = ImageStorage.getInstance();
         PhotoSize photoSize;
         int it = 0;
         boolean moreSizesExist = true;
