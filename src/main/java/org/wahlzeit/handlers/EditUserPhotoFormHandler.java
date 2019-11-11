@@ -20,6 +20,7 @@
 
 package org.wahlzeit.handlers;
 
+import de.henny022.wahlzeit.screenshots.model.ScreenshotPhotoManager;
 import org.wahlzeit.agents.AsyncTaskExecutor;
 import org.wahlzeit.model.*;
 import org.wahlzeit.services.LogBuilder;
