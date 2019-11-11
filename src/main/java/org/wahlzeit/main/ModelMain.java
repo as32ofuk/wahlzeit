@@ -44,6 +44,7 @@ public abstract class ModelMain extends AbstractMain
 
     protected PhotoManager photoManager;
     protected UserManager userManager;
+    protected GlobalsManager globalsManager;
 
     /**
      *
@@ -57,17 +58,18 @@ public abstract class ModelMain extends AbstractMain
         //GcsAdapter.Builder gcsAdapterBuilder = new GcsAdapter.Builder();
         ImageStorage.setInstance(new DatastoreAdapter());
 
-        log.config(LogBuilder.createSystemMessage().addAction("load globals").toString());
-        GlobalsManager.getInstance().loadGlobals();
-
         log.config(LogBuilder.createSystemMessage().addAction("load user").toString());
         userManager = new UserManager();
+
+        log.config(LogBuilder.createSystemMessage().addAction("load globals").toString());
+        globalsManager = new GlobalsManager(userManager);
+        globalsManager.loadGlobals();
 
         log.config(LogBuilder.createSystemMessage().addAction("init PhotoFactory").toString());
         PhotoFactory photoFactory = new ScreenshotPhotoFactory(userManager);
 
         log.config(LogBuilder.createSystemMessage().addAction("load Photos").toString());
-        photoManager = new PhotoManager(photoFactory, userManager);
+        photoManager = new PhotoManager(photoFactory, userManager, globalsManager);
         photoManager.init();
 
         SingletonProvider.init(photoManager, userManager);
@@ -92,7 +94,7 @@ public abstract class ModelMain extends AbstractMain
         PhotoCaseManager.getInstance().savePhotoCases();
         photoManager.savePhotos();
         userManager.saveClients();
-        GlobalsManager.getInstance().saveGlobals();
+        globalsManager.saveGlobals();
     }
 
     /**

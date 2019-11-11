@@ -31,7 +31,6 @@ import java.io.File;
  */
 public class SetUpFlowers extends ScriptMain
 {
-
     /**
      *
      */
@@ -46,7 +45,7 @@ public class SetUpFlowers extends ScriptMain
     public void startUp(String rootDir) throws Exception
     {
         super.startUp(rootDir);
-        GlobalsManager.getInstance().loadGlobals();
+        globalsManager.loadGlobals();
     }
 
     /**

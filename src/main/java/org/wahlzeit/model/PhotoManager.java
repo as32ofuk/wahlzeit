@@ -42,6 +42,7 @@ public class PhotoManager extends ObjectManager
 
     protected PhotoFactory photoFactory;
     protected UserManager userManager;
+    protected GlobalsManager globalsManager;
 
     /**
      * In-memory cache for photos
@@ -56,10 +57,11 @@ public class PhotoManager extends ObjectManager
     /**
      *
      */
-    public PhotoManager(PhotoFactory photoFactory, UserManager userManager)
+    public PhotoManager(PhotoFactory photoFactory, UserManager userManager, GlobalsManager globalsManager)
     {
         this.photoFactory = photoFactory;
         this.userManager = userManager;
+        this.globalsManager = globalsManager;
         photoTagCollector = photoFactory.createPhotoTagCollector();
     }
 
@@ -387,7 +389,7 @@ public class PhotoManager extends ObjectManager
         assertIsNewPhoto(id);
         doAddPhoto(photo);
 
-        GlobalsManager.getInstance().saveGlobals();
+        globalsManager.saveGlobals();
     }
 
     /**

@@ -20,10 +20,6 @@ public class GlobalsManager extends ObjectManager
 {
 
     private static final Logger log = Logger.getLogger(GlobalsManager.class.getName());
-    /**
-     *
-     */
-    private static GlobalsManager instance = new GlobalsManager();
 
     protected UserManager userManager;
 
@@ -59,7 +55,7 @@ public class GlobalsManager extends ObjectManager
      */
     private void initGlobals()
     {
-        if(!GlobalsManager.getInstance().hasGlobals())
+        if(hasGlobals())
         {
             createDefaultGlobals();
         }
@@ -78,14 +74,6 @@ public class GlobalsManager extends ObjectManager
                 return ofy().load().type(Globals.class).first().now() != null;
             }
         });
-    }
-
-    /**
-     * @methodtype get
-     */
-    public static GlobalsManager getInstance()
-    {
-        return instance;
     }
 
     /**
