@@ -6,6 +6,8 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.RuleChain;
 import org.junit.rules.TestRule;
+import org.wahlzeit.handlers.forms.TellFriendFormHandler;
+import org.wahlzeit.handlers.forms.WebFormHandler;
 import org.wahlzeit.model.UserSession;
 import org.wahlzeit.services.EmailAddress;
 import org.wahlzeit.services.SessionManager;

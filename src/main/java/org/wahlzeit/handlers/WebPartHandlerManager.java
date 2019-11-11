@@ -20,6 +20,8 @@
 
 package org.wahlzeit.handlers;
 
+import org.wahlzeit.handlers.forms.WebFormHandler;
+import org.wahlzeit.handlers.pages.WebPageHandler;
 import org.wahlzeit.services.LogBuilder;
 
 import java.util.HashMap;

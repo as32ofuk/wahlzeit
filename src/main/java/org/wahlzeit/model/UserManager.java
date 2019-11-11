@@ -22,6 +22,8 @@ package org.wahlzeit.model;
 
 import com.googlecode.objectify.ObjectifyService;
 import com.googlecode.objectify.Work;
+import org.wahlzeit.model.clients.Client;
+import org.wahlzeit.model.clients.User;
 import org.wahlzeit.services.EmailAddress;
 import org.wahlzeit.services.LogBuilder;
 import org.wahlzeit.services.mailing.EmailService;

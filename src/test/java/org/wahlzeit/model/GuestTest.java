@@ -5,6 +5,8 @@ import com.googlecode.objectify.Work;
 import org.junit.ClassRule;
 import org.junit.Test;
 import org.junit.rules.RuleChain;
+import org.wahlzeit.model.clients.Guest;
+import org.wahlzeit.model.clients.User;
 import org.wahlzeit.testEnvironmentProvider.LocalDatastoreServiceTestConfigProvider;
 import org.wahlzeit.testEnvironmentProvider.RegisteredOfyEnvironmentProvider;
 

@@ -1,8 +1,7 @@
 package org.wahlzeit.services;
 
 import org.wahlzeit.main.SingletonProvider;
-import org.wahlzeit.model.Client;
-import org.wahlzeit.model.ClientManager;
+import org.wahlzeit.model.clients.Client;
 import org.wahlzeit.model.UserManager;
 import org.wahlzeit.model.UserSession;
 

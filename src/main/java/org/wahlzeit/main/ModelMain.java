@@ -24,6 +24,7 @@ import com.google.appengine.api.images.Image;
 import com.google.appengine.api.images.ImagesServiceFactory;
 import de.henny022.wahlzeit.screenshots.model.ScreenshotPhotoFactory;
 import org.wahlzeit.model.*;
+import org.wahlzeit.model.clients.User;
 import org.wahlzeit.model.persistence.DatastoreAdapter;
 import org.wahlzeit.model.persistence.ImageStorage;
 import org.wahlzeit.services.LogBuilder;

@@ -20,7 +20,10 @@
 
 package org.wahlzeit.handlers;
 
+import org.wahlzeit.handlers.forms.WebFormHandler;
 import org.wahlzeit.model.*;
+import org.wahlzeit.model.clients.Client;
+import org.wahlzeit.model.clients.User;
 import org.wahlzeit.services.Language;
 import org.wahlzeit.services.LogBuilder;
 import org.wahlzeit.services.SysConfig;

@@ -1,5 +1,6 @@
 package org.wahlzeit.model;
 
+import org.wahlzeit.model.clients.Client;
 import org.wahlzeit.services.LogBuilder;
 import org.wahlzeit.services.ObjectManager;
 

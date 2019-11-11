@@ -4,6 +4,10 @@ import com.googlecode.objectify.ObjectifyService;
 import com.googlecode.objectify.Work;
 import org.junit.rules.ExternalResource;
 import org.wahlzeit.model.*;
+import org.wahlzeit.model.clients.Guest;
+import org.wahlzeit.model.languages.EnglishModelConfig;
+import org.wahlzeit.model.languages.GermanModelConfig;
+import org.wahlzeit.model.languages.LanguageConfigs;
 import org.wahlzeit.services.Language;
 import org.wahlzeit.services.SessionManager;
 

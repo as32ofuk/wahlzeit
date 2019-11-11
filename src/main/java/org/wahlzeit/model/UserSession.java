@@ -20,7 +20,9 @@
 
 package org.wahlzeit.model;
 
-import de.henny022.wahlzeit.screenshots.model.ScreenshotPhotoFactory;
+import org.wahlzeit.model.clients.Client;
+import org.wahlzeit.model.clients.Guest;
+import org.wahlzeit.model.clients.User;
 import org.wahlzeit.services.Language;
 import org.wahlzeit.services.Session;
 import org.wahlzeit.utils.HtmlUtil;
