@@ -21,6 +21,8 @@
 package org.wahlzeit.servlets;
 
 import org.wahlzeit.agents.AgentManager;
+import org.wahlzeit.main.SingletonProvider;
+import org.wahlzeit.model.PhotoManager;
 import org.wahlzeit.services.LogBuilder;
 
 import javax.servlet.ServletException;
@@ -35,8 +37,15 @@ import java.util.logging.Logger;
  */
 public class AgentServlet extends HttpServlet
 {
-
     private static Logger log = Logger.getLogger(AgentServlet.class.getName());
+
+    protected AgentManager agentManager;
+
+    @Override
+    public void init() throws ServletException
+    {
+        agentManager = new AgentManager(SingletonProvider.getInstance(PhotoManager.class));
+    }
 
     /**
      * @methodtype command
@@ -54,7 +63,7 @@ public class AgentServlet extends HttpServlet
 
         try
         {
-            AgentManager.getInstance().startAgent(agentName);
+            agentManager.startAgent(agentName);
             response.setStatus(200);
         }
         catch(Exception e)
