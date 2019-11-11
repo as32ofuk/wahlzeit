@@ -25,27 +25,30 @@ import org.wahlzeit.main.ScriptMain;
 /**
  * A superclass for script classes.
  */
-public class RunScript extends ScriptMain {
+public class RunScript extends ScriptMain
+{
 
-	/**
-	 *
-	 */
-	public static void main(String[] argv) {
-		new RunScript().run();
-	}
+    /**
+     *
+     */
+    public static void main(String[] argv)
+    {
+        new RunScript().run();
+    }
 
-	/**
-	 *
-	 */
-	protected String scriptName = "";
+    /**
+     *
+     */
+    protected String scriptName = "";
 
-	/**
-	 *
-	 */
-	protected int handleArg(String arg, int i, String argv[]) {
-		scriptName = arg;
+    /**
+     *
+     */
+    protected int handleArg(String arg, int i, String argv[])
+    {
+        scriptName = arg;
 
-		return i;
-	}
+        return i;
+    }
 
 }

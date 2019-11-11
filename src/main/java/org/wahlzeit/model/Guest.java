@@ -27,27 +27,30 @@ import org.wahlzeit.services.EmailAddress;
  * A Guest is a client that is not logged in.
  */
 @Subclass(index = true)
-public class Guest extends Client {
+public class Guest extends Client
+{
 
-	/**
-	 * The name of each client starts with this prefix
-	 */
-	public static final String GUEST_PREFIX = "guest#";
+    /**
+     * The name of each client starts with this prefix
+     */
+    public static final String GUEST_PREFIX = "guest#";
 
-	/**
-	 *
-	 */
-	public Guest() {
-		String userId = GUEST_PREFIX + UserManager.getInstance().getNextClientId();
-		initialize(userId, userId, EmailAddress.EMPTY, AccessRights.GUEST, null);
-	}
+    /**
+     *
+     */
+    public Guest()
+    {
+        String userId = GUEST_PREFIX + UserManager.getInstance().getNextClientId();
+        initialize(userId, userId, EmailAddress.EMPTY, AccessRights.GUEST, null);
+    }
 
-	/**
-	 * For logging out a user, some settings like the language or the photo size should not change, therefore the
-	 * previousClient is used so set these basic settings in the new <@link>Guest</@link>.
-	 */
-	public Guest(Client previousClient) {
-		String userId = GUEST_PREFIX + UserManager.getInstance().getNextClientId();
-		initialize(userId, userId, EmailAddress.EMPTY, AccessRights.GUEST, previousClient);
-	}
+    /**
+     * For logging out a user, some settings like the language or the photo size should not change, therefore the
+     * previousClient is used so set these basic settings in the new <@link>Guest</@link>.
+     */
+    public Guest(Client previousClient)
+    {
+        String userId = GUEST_PREFIX + UserManager.getInstance().getNextClientId();
+        initialize(userId, userId, EmailAddress.EMPTY, AccessRights.GUEST, previousClient);
+    }
 }

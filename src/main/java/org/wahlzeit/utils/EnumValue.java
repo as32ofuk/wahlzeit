@@ -23,26 +23,27 @@ package org.wahlzeit.utils;
 /**
  * An EnumValue is a an enum wrapper that makes handling enums easier.
  */
-public interface EnumValue {
+public interface EnumValue
+{
 
-	/**
-	 * @methodtype conversion
-	 */
-	int asInt();
+    /**
+     * @methodtype conversion
+     */
+    int asInt();
 
-	/**
-	 * @methodtype conversion
-	 */
-	String asString();
+    /**
+     * @methodtype conversion
+     */
+    String asString();
 
-	/**
-	 * @methodtype get
-	 */
-	EnumValue[] getAllValues();
+    /**
+     * @methodtype get
+     */
+    EnumValue[] getAllValues();
 
-	/**
-	 * @methodtype get
-	 */
-	String getTypeName();
+    /**
+     * @methodtype get
+     */
+    String getTypeName();
 
 }

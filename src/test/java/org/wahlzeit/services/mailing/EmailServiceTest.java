@@ -71,13 +71,13 @@ public class EmailServiceTest
     @Test
     public void testSendValidEmailWithBcc()
     {
-		try
-		{
-			assertTrue(emailService.sendEmailIgnoreException(validAddress, validAddress, validAddress, "hi", "test"));
-		}
-		catch(Exception ex)
-		{
-			Assert.fail("Silent mode does not allow exceptions");
-		}
+        try
+        {
+            assertTrue(emailService.sendEmailIgnoreException(validAddress, validAddress, validAddress, "hi", "test"));
+        }
+        catch(Exception ex)
+        {
+            Assert.fail("Silent mode does not allow exceptions");
+        }
     }
 }

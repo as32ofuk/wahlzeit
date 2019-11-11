@@ -6,21 +6,24 @@ import org.wahlzeit.webparts.WebPartTemplateService;
 
 /**
  * A test setup class.
- * 
+ *
  * @review
  */
-public class SysConfigProvider extends ExternalResource {
+public class SysConfigProvider extends ExternalResource
+{
 
-	@Override
-	protected void before() throws Throwable {
-		SysConfig.dropInstance();
-		SysConfig sysConfig = new SysConfig("src/main/webapp");
-		SysConfig.setInstance(sysConfig);
-		WebPartTemplateService.getInstance().setTemplatesDir(SysConfig.getTemplatesDir());
-	}
+    @Override
+    protected void before() throws Throwable
+    {
+        SysConfig.dropInstance();
+        SysConfig sysConfig = new SysConfig("src/main/webapp");
+        SysConfig.setInstance(sysConfig);
+        WebPartTemplateService.getInstance().setTemplatesDir(SysConfig.getTemplatesDir());
+    }
 
-	@Override
-	protected void after() {
-		SysConfig.dropInstance();
-	}
+    @Override
+    protected void after()
+    {
+        SysConfig.dropInstance();
+    }
 }

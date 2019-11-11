@@ -27,12 +27,13 @@ import org.wahlzeit.webparts.WebPart;
 /**
  * The general interface for web pages.
  */
-public interface WebPageHandler extends WebPartHandler {
+public interface WebPageHandler extends WebPartHandler
+{
 
-	/**
-	 *
-	 */
-	WebPart makeWebPart(UserSession us);
+    /**
+     *
+     */
+    WebPart makeWebPart(UserSession us);
 
 
 }

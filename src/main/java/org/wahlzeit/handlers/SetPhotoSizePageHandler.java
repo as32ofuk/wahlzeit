@@ -20,11 +20,7 @@
 
 package org.wahlzeit.handlers;
 
-import org.wahlzeit.model.AccessRights;
-import org.wahlzeit.model.Client;
-import org.wahlzeit.model.ModelConfig;
-import org.wahlzeit.model.PhotoSize;
-import org.wahlzeit.model.UserSession;
+import org.wahlzeit.model.*;
 import org.wahlzeit.utils.HtmlUtil;
 import org.wahlzeit.webparts.WebPart;
 
@@ -34,47 +30,58 @@ import java.util.Map;
 /**
  * A handler class for a specific web page.
  */
-public class SetPhotoSizePageHandler extends AbstractWebPageHandler {
+public class SetPhotoSizePageHandler extends AbstractWebPageHandler
+{
 
-	/**
-	 *
-	 */
-	public SetPhotoSizePageHandler() {
-		initialize(PartUtil.SHOW_NOTE_PAGE_FILE, AccessRights.GUEST);
-	}
+    /**
+     *
+     */
+    public SetPhotoSizePageHandler()
+    {
+        initialize(PartUtil.SHOW_NOTE_PAGE_FILE, AccessRights.GUEST);
+    }
 
-	/**
-	 *
-	 */
-	protected String doHandleGet(UserSession us, String link, Map args) {
-		PhotoSize result = PhotoSize.MEDIUM;
+    /**
+     *
+     */
+    protected String doHandleGet(UserSession us, String link, Map args)
+    {
+        PhotoSize result = PhotoSize.MEDIUM;
 
-		if (link.equals(PartUtil.SET_EXTRA_SMALL_PHOTO_SIZE_PAGE_NAME)) {
-			result = PhotoSize.EXTRA_SMALL;
-		} else if (link.equals(PartUtil.SET_SMALL_PHOTO_SIZE_PAGE_NAME)) {
-			result = PhotoSize.SMALL;
-		} else if (link.equals(PartUtil.SET_LARGE_PHOTO_SIZE_PAGE_NAME)) {
-			result = PhotoSize.LARGE;
-		} else if (link.equals(PartUtil.SET_EXTRA_LARGE_PHOTO_SIZE_PAGE_NAME)) {
-			result = PhotoSize.EXTRA_LARGE;
-		}
+        if(link.equals(PartUtil.SET_EXTRA_SMALL_PHOTO_SIZE_PAGE_NAME))
+        {
+            result = PhotoSize.EXTRA_SMALL;
+        }
+        else if(link.equals(PartUtil.SET_SMALL_PHOTO_SIZE_PAGE_NAME))
+        {
+            result = PhotoSize.SMALL;
+        }
+        else if(link.equals(PartUtil.SET_LARGE_PHOTO_SIZE_PAGE_NAME))
+        {
+            result = PhotoSize.LARGE;
+        }
+        else if(link.equals(PartUtil.SET_EXTRA_LARGE_PHOTO_SIZE_PAGE_NAME))
+        {
+            result = PhotoSize.EXTRA_LARGE;
+        }
 
-		us.getClient().setPhotoSize(result);
+        us.getClient().setPhotoSize(result);
 
-		return link;
-	}
+        return link;
+    }
 
-	/**
-	 *
-	 */
-	protected void makeWebPageBody(UserSession us, WebPart page) {
-		Client client = us.getClient();
-		ModelConfig config = client.getLanguageConfiguration();
-		page.addString("noteHeading", config.getInformation());
-		String msg1 = config.getNewPhotoSizeSet(client.getPhotoSize());
-		String msg2 = config.getNoteMaximumPhotoSize();
-		String msg3 = config.getContinueWithShowPhoto();
-		page.addString("note", HtmlUtil.asP(msg1) + HtmlUtil.asP(msg2) + HtmlUtil.asP(msg3));
-	}
+    /**
+     *
+     */
+    protected void makeWebPageBody(UserSession us, WebPart page)
+    {
+        Client client = us.getClient();
+        ModelConfig config = client.getLanguageConfiguration();
+        page.addString("noteHeading", config.getInformation());
+        String msg1 = config.getNewPhotoSizeSet(client.getPhotoSize());
+        String msg2 = config.getNoteMaximumPhotoSize();
+        String msg3 = config.getContinueWithShowPhoto();
+        page.addString("note", HtmlUtil.asP(msg1) + HtmlUtil.asP(msg2) + HtmlUtil.asP(msg3));
+    }
 
 }

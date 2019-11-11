@@ -31,216 +31,217 @@ import java.io.Serializable;
 /**
  * A configuration that provide easy access to Wahlzeit model configuration data.
  */
-public interface ModelConfig extends Configuration, Serializable {
+public interface ModelConfig extends Configuration, Serializable
+{
 
-	// Meta stuff
-	Language getLanguage();
+    // Meta stuff
+    Language getLanguage();
 
-	String getLanguageCode();
+    String getLanguageCode();
 
-	// System config
-	EmailAddress getModeratorEmailAddress();
+    // System config
+    EmailAddress getModeratorEmailAddress();
 
-	EmailAddress getAdministratorEmailAddress();
+    EmailAddress getAdministratorEmailAddress();
 
-	EmailAddress getAuditEmailAddress();
+    EmailAddress getAuditEmailAddress();
 
-	// Page template
-	String getPageTitle();
+    // Page template
+    String getPageTitle();
 
-	String getPageHeading();
+    String getPageHeading();
 
-	String getPageFooter(PhotoSize ss);
+    String getPageFooter(PhotoSize ss);
 
-	String getPageMission();
+    String getPageMission();
 
-	// Page menu
-	String getGuestMenu();
+    // Page menu
+    String getGuestMenu();
 
-	String getUserMenu();
+    String getUserMenu();
 
-	String getModeratorMenu();
+    String getModeratorMenu();
 
-	String getAdministratorMenu();
+    String getAdministratorMenu();
 
-	String getCommunityMenu();
+    String getCommunityMenu();
 
-	// General error messages
-	String getIllegalArgumentError();
+    // General error messages
+    String getIllegalArgumentError();
 
-	String getIllegalAccessError();
+    String getIllegalAccessError();
 
-	String getInternalProcessingError();
+    String getInternalProcessingError();
 
-	String getFieldIsMissing();
+    String getFieldIsMissing();
 
-	String getInputIsInvalid();
+    String getInputIsInvalid();
 
-	String getInputIsTooLong();
+    String getInputIsTooLong();
 
-	String getEmailAddressIsMissing();
+    String getEmailAddressIsMissing();
 
-	String getEmailAddressIsInvalid();
+    String getEmailAddressIsInvalid();
 
-	String getUrlIsInvalid();
+    String getUrlIsInvalid();
 
-	// General messages
-	String getKeepGoing();
+    // General messages
+    String getKeepGoing();
 
-	String getContinueWithTellFriends();
+    String getContinueWithTellFriends();
 
-	String getContinueWithShowPhoto();
+    String getContinueWithShowPhoto();
 
-	String getContinueWithShowUserHome();
+    String getContinueWithShowUserHome();
 
-	// SHOW_NOTE_PAGE
-	String getThankYou();
+    // SHOW_NOTE_PAGE
+    String getThankYou();
 
-	String getInformation();
+    String getInformation();
 
-	// SHOW_PHOTO_PAGE
-	String getAnonUserName();
+    // SHOW_PHOTO_PAGE
+    String getAnonUserName();
 
-	String getResetSession();
+    String getResetSession();
 
-	// TELL_FRIEND_FORM
-	String getEmailWasSent();
+    // TELL_FRIEND_FORM
+    String getEmailWasSent();
 
-	// FLAG_PHOTO_FORM
-	String getModeratorWasInformed();
+    // FLAG_PHOTO_FORM
+    String getModeratorWasInformed();
 
-	// SEND_EMAIL_FORM
-	String getNeedToSignupFirst();
+    // SEND_EMAIL_FORM
+    String getNeedToSignupFirst();
 
-	// SET_OPTIONS_FORM
-	String getOptionsWereSet();
+    // SET_OPTIONS_FORM
+    String getOptionsWereSet();
 
-	// SIGNUP_FORM
-	String getUserAlreadyExists();
+    // SIGNUP_FORM
+    String getUserAlreadyExists();
 
-	String getUserNameIsReserved();
+    String getUserNameIsReserved();
 
-	String getPasswordsDontMatch();
+    String getPasswordsDontMatch();
 
-	String getDidntCheckTerms();
+    String getDidntCheckTerms();
 
-	String getConfirmationEmailWasSent();
+    String getConfirmationEmailWasSent();
 
-	// VERIFY_ACCOUNT_PAGE
-	String getNeedToLoginFirst();
+    // VERIFY_ACCOUNT_PAGE
+    String getNeedToLoginFirst();
 
-	String getConfirmAccountSucceeded();
+    String getConfirmAccountSucceeded();
 
-	String getConfirmAccountFailed();
+    String getConfirmAccountFailed();
 
-	// LOGIN_FORM
-	String getLoginIsIncorrect();
+    // LOGIN_FORM
+    String getLoginIsIncorrect();
 
-	String getUserIsDisabled();
+    String getUserIsDisabled();
 
-	// EMAIL_USER_NAME_FORM
-	String getUnknownEmailAddress();
+    // EMAIL_USER_NAME_FORM
+    String getUnknownEmailAddress();
 
-	String getSendUserNameEmailSubject();
+    String getSendUserNameEmailSubject();
 
-	String getUserNameWasEmailed();
+    String getUserNameWasEmailed();
 
-	// EMAIL_PASSWORD_FORM
-	String getUserNameIsUnknown();
+    // EMAIL_PASSWORD_FORM
+    String getUserNameIsUnknown();
 
-	String getSendPasswordEmailSubject();
+    String getSendPasswordEmailSubject();
 
-	String getPasswordWasEmailed();
+    String getPasswordWasEmailed();
 
-	// SET_LANGUAGE_PAGE
-	String getNewLanguageSet();
+    // SET_LANGUAGE_PAGE
+    String getNewLanguageSet();
 
-	// SET_PHOTO_SIZE_PAGE
-	String getNewPhotoSizeSet(PhotoSize ss);
+    // SET_PHOTO_SIZE_PAGE
+    String getNewPhotoSizeSet(PhotoSize ss);
 
-	String getNoteMaximumPhotoSize();
+    String getNoteMaximumPhotoSize();
 
-	// SHOW_USER_PROFILE_FORM
-	String getNoPhotoUploaded();
+    // SHOW_USER_PROFILE_FORM
+    String getNoPhotoUploaded();
 
-	// SHOW_USER_PHOTO_FORM
-	String getNoCharacterName();
+    // SHOW_USER_PHOTO_FORM
+    String getNoCharacterName();
 
-	String getNoSeriesName();
+    String getNoSeriesName();
 
-	String getNoTags();
+    String getNoTags();
 
-	// EDIT_USER_PROFILE_FORM
-	String getProfileUpdateSucceeded();
+    // EDIT_USER_PROFILE_FORM
+    String getProfileUpdateSucceeded();
 
-	// CHANGE_PASSWORD_FORM
-	String getPasswordChangeSucceeded();
+    // CHANGE_PASSWORD_FORM
+    String getPasswordChangeSucceeded();
 
-	// EDIT_USER_PHOTO_FORM
-	String getPhotoUpdateSucceeded();
+    // EDIT_USER_PHOTO_FORM
+    String getPhotoUpdateSucceeded();
 
-	// UPLOAD_PHOTO_FORM
-	String getPhotoUploadFailed();
+    // UPLOAD_PHOTO_FORM
+    String getPhotoUploadFailed();
 
-	String getPhotoUploadSucceeded();
+    String getPhotoUploadSucceeded();
 
-	// LOGOUT_PAGE
-	String getLogoutSucceeded();
+    // LOGOUT_PAGE
+    String getLogoutSucceeded();
 
-	// SHOW_PHOTO_CASE_FORM
-	String getNoFlaggedPhotoCases();
+    // SHOW_PHOTO_CASE_FORM
+    String getNoFlaggedPhotoCases();
 
-	// SHOW_ADMIN_MENU_FORM
-	String getPhotoIsUnknown();
+    // SHOW_ADMIN_MENU_FORM
+    String getPhotoIsUnknown();
 
-	// General email
-	String getGeneralEmailRegards();
+    // General email
+    String getGeneralEmailRegards();
 
-	String getGeneralEmailFooter();
+    String getGeneralEmailFooter();
 
-	// Tell friend email
-	String getTellFriendEmailSubject();
+    // Tell friend email
+    String getTellFriendEmailSubject();
 
-	String getTellFriendEmailWebsite();
+    String getTellFriendEmailWebsite();
 
-	String getTellFriendEmailPhoto();
+    String getTellFriendEmailPhoto();
 
-	// Send email
-	String getSendEmailSubjectPrefix();
+    // Send email
+    String getSendEmailSubjectPrefix();
 
-	String getSendEmailBodyPrefix();
+    String getSendEmailBodyPrefix();
 
-	String getSendEmailBodyPostfix();
+    String getSendEmailBodyPostfix();
 
-	// Welcome email
-	String getWelcomeEmailSubject();
+    // Welcome email
+    String getWelcomeEmailSubject();
 
-	String getWelcomeEmailBody();
+    String getWelcomeEmailBody();
 
-	String getWelcomeEmailUserName();
+    String getWelcomeEmailUserName();
 
-	// Notify about praise email
-	String getNotifyAboutPraiseEmailSubject();
+    // Notify about praise email
+    String getNotifyAboutPraiseEmailSubject();
 
-	String getNotifyAboutPraiseEmailBody();
+    String getNotifyAboutPraiseEmailBody();
 
-	String getNotifyAboutPraiseEmailPostScriptum();
+    String getNotifyAboutPraiseEmailPostScriptum();
 
-	// Data types
-	String asValueString(EnumValue ev);
+    // Data types
+    String asValueString(EnumValue ev);
 
-	// Localisation
-	String asYesOrNoString(boolean yesOrNo);
+    // Localisation
+    String asYesOrNoString(boolean yesOrNo);
 
-	String asDateString(long millis);
+    String asDateString(long millis);
 
-	String asPhotoSummary(String un);
+    String asPhotoSummary(String un);
 
-	String asPhotoCaption(String un);
+    String asPhotoCaption(String un);
 
-	String asPraiseString(double praise);
+    String asPraiseString(double praise);
 
 
-	String getNickNameExists(String nickName);
+    String getNickNameExists(String nickName);
 
 }

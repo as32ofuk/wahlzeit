@@ -27,27 +27,31 @@ import org.wahlzeit.services.EmailAddress;
  * A Moderator is a system user with moderator privileges.
  */
 @Subclass(index = true)
-public class Moderator extends User {
+public class Moderator extends User
+{
 
-	/**
-	 *
-	 */
-	public Moderator(String id, String myName, String myEmailAddress, Client previousClient) {
-		this(id, myName, EmailAddress.getFromString(myEmailAddress), previousClient);
-	}
+    /**
+     *
+     */
+    public Moderator(String id, String myName, String myEmailAddress, Client previousClient)
+    {
+        this(id, myName, EmailAddress.getFromString(myEmailAddress), previousClient);
+    }
 
-	/**
-	 *
-	 */
-	public Moderator(String userId, String nickname, EmailAddress emailAddress, Client previousClient) {
-		initialize(userId, nickname, emailAddress, AccessRights.MODERATOR, previousClient);
-	}
+    /**
+     *
+     */
+    public Moderator(String userId, String nickname, EmailAddress emailAddress, Client previousClient)
+    {
+        initialize(userId, nickname, emailAddress, AccessRights.MODERATOR, previousClient);
+    }
 
-	/**
-	 *
-	 */
-	protected Moderator() {
-		// do nothing
-	}
+    /**
+     *
+     */
+    protected Moderator()
+    {
+        // do nothing
+    }
 
 }

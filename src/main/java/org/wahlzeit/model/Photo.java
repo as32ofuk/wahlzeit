@@ -38,386 +38,426 @@ import java.util.Map;
  * A photo represents a user-provided (uploaded) photo.
  */
 @Entity
-public class Photo extends DataObject {
+public class Photo extends DataObject
+{
 
-	/**
-	 *
-	 */
-	public static final String IMAGE = "image";
-	public static final String THUMB = "thumb";
-	public static final String LINK = "link";
-	public static final String PRAISE = "praise";
-	public static final String NO_VOTES = "noVotes";
-	public static final String CAPTION = "caption";
-	public static final String DESCRIPTION = "description";
-	public static final String KEYWORDS = "keywords";
+    /**
+     *
+     */
+    public static final String IMAGE = "image";
+    public static final String THUMB = "thumb";
+    public static final String LINK = "link";
+    public static final String PRAISE = "praise";
+    public static final String NO_VOTES = "noVotes";
+    public static final String CAPTION = "caption";
+    public static final String DESCRIPTION = "description";
+    public static final String KEYWORDS = "keywords";
 
-	public static final String TAGS = "tags";
-	public static final String OWNER_ID = "ownerId";
+    public static final String TAGS = "tags";
+    public static final String OWNER_ID = "ownerId";
 
-	public static final String STATUS = "status";
-	public static final String IS_INVISIBLE = "isInvisible";
-	public static final String UPLOADED_ON = "uploadedOn";
+    public static final String STATUS = "status";
+    public static final String IS_INVISIBLE = "isInvisible";
+    public static final String UPLOADED_ON = "uploadedOn";
 
-	/**
-	 *
-	 */
-	public static final int MAX_PHOTO_WIDTH = 420;
-	public static final int MAX_PHOTO_HEIGHT = 600;
-	public static final int MAX_THUMB_PHOTO_WIDTH = 105;
-	public static final int MAX_THUMB_PHOTO_HEIGHT = 150;
+    /**
+     *
+     */
+    public static final int MAX_PHOTO_WIDTH = 420;
+    public static final int MAX_PHOTO_HEIGHT = 600;
+    public static final int MAX_THUMB_PHOTO_WIDTH = 105;
+    public static final int MAX_THUMB_PHOTO_HEIGHT = 150;
 
-	protected PhotoId id = null;
-	
-	/**
-	 *
-	 */
-	protected String ownerId;
-	
-	/**
-	 * Each photo can be viewed in different sizes (XS, S, M, L, XL)
-	 * Images are pre-computed in these sizes to optimize bandwidth when requested.
-	 */
-	@Ignore
-	transient protected Map<PhotoSize, Image> images = new ArrayMap<PhotoSize, Image>();
-	
-	/**
-	 *
-	 */
-	protected boolean ownerNotifyAboutPraise = false;
-	protected EmailAddress ownerEmailAddress = EmailAddress.EMPTY;
-	protected Language ownerLanguage = Language.ENGLISH;
-	
-	/**
-	 *
-	 */
-	protected int width;
-	protected int height;
-	protected PhotoSize maxPhotoSize = PhotoSize.MEDIUM; // derived
-	
-	/**
-	 *
-	 */
-	protected Tags tags = Tags.EMPTY_TAGS;
-	
-	/**
-	 *
-	 */
-	protected PhotoStatus status = PhotoStatus.VISIBLE;
-	
-	/**
-	 *
-	 */
-	protected int praiseSum = 10;
-	protected int noVotes = 1;
-	protected int noVotesAtLastNotification = 1;
-	
-	/**
-	 *
-	 */
-	protected long creationTime = System.currentTimeMillis();
-	
-	/**
-	 * The default type is jpg
-	 */
-	protected String ending = "jpg";
-	
-	/**
-	 *
-	 */
-	//TODO: change it to a single long
-	@Id
-	Long idLong;
-	@Parent
-	Key parent = ObjectManager.applicationRootKey;
+    protected PhotoId id = null;
 
-	public Location location;
+    /**
+     *
+     */
+    protected String ownerId;
 
-	/**
-	 *
-	 */
-	public Photo() {
-		id = PhotoId.getNextId();
-		incWriteCount();
-	}
+    /**
+     * Each photo can be viewed in different sizes (XS, S, M, L, XL)
+     * Images are pre-computed in these sizes to optimize bandwidth when requested.
+     */
+    @Ignore
+    transient protected Map<PhotoSize, Image> images = new ArrayMap<PhotoSize, Image>();
 
-	/**
-	 * @methodtype constructor
-	 */
-	public Photo(PhotoId myId) {
-		id = myId;
+    /**
+     *
+     */
+    protected boolean ownerNotifyAboutPraise = false;
+    protected EmailAddress ownerEmailAddress = EmailAddress.EMPTY;
+    protected Language ownerLanguage = Language.ENGLISH;
 
-		incWriteCount();
-	}
+    /**
+     *
+     */
+    protected int width;
+    protected int height;
+    protected PhotoSize maxPhotoSize = PhotoSize.MEDIUM; // derived
 
-	/**
-	 * @methodtype get
-	 */
-	public Image getImage(PhotoSize photoSize) {
-		return images.get(photoSize);
-	}
+    /**
+     *
+     */
+    protected Tags tags = Tags.EMPTY_TAGS;
 
-	/**
-	 * @methodtype set
-	 */
-	public void setImage(PhotoSize photoSize, Image image) {
-		this.images.put(photoSize, image);
-	}
+    /**
+     *
+     */
+    protected PhotoStatus status = PhotoStatus.VISIBLE;
 
-	/**
-	 * @methodtype get
-	 */
-	public String getIdAsString() {
-		return id.asString();
-	}
+    /**
+     *
+     */
+    protected int praiseSum = 10;
+    protected int noVotes = 1;
+    protected int noVotesAtLastNotification = 1;
 
-	/**
-	 * @methodtype get
-	 */
-	public PhotoId getId() {
-		return id;
-	}
+    /**
+     *
+     */
+    protected long creationTime = System.currentTimeMillis();
 
-	/**
-	 * @methodtype get
-	 */
-	public String getOwnerId() {
-		return ownerId;
-	}
+    /**
+     * The default type is jpg
+     */
+    protected String ending = "jpg";
 
-	/**
-	 * @methodtype set
-	 */
-	public void setOwnerId(String newName) {
-		ownerId = newName;
-		incWriteCount();
-	}
+    /**
+     *
+     */
+    //TODO: change it to a single long
+    @Id
+    Long idLong;
+    @Parent
+    Key parent = ObjectManager.applicationRootKey;
 
-	/**
-	 * @methodtype get
-	 */
-	public String getSummary(ModelConfig cfg) {
-		return cfg.asPhotoSummary(ownerId);
-	}
+    public Location location;
 
-	/**
-	 * @methodtype get
-	 */
-	public String getCaption(ModelConfig cfg) {
-		String ownerName = UserManager.getInstance().getUserById(ownerId).getNickName();
-		return cfg.asPhotoCaption(ownerName);
-	}
+    /**
+     *
+     */
+    public Photo()
+    {
+        id = PhotoId.getNextId();
+        incWriteCount();
+    }
 
-	/**
-	 * @methodtype get
-	 */
-	public boolean getOwnerNotifyAboutPraise() {
-		return ownerNotifyAboutPraise;
-	}
+    /**
+     * @methodtype constructor
+     */
+    public Photo(PhotoId myId)
+    {
+        id = myId;
 
-	/**
-	 * @methodtype set
-	 */
-	public void setOwnerNotifyAboutPraise(boolean newNotifyAboutPraise) {
-		ownerNotifyAboutPraise = newNotifyAboutPraise;
-		incWriteCount();
-	}
+        incWriteCount();
+    }
 
-	/**
-	 *
-	 */
-	public Language getOwnerLanguage() {
-		return ownerLanguage;
-	}
+    /**
+     * @methodtype get
+     */
+    public Image getImage(PhotoSize photoSize)
+    {
+        return images.get(photoSize);
+    }
 
-	/**
-	 *
-	 */
-	public void setOwnerLanguage(Language newLanguage) {
-		ownerLanguage = newLanguage;
-		incWriteCount();
-	}
+    /**
+     * @methodtype set
+     */
+    public void setImage(PhotoSize photoSize, Image image)
+    {
+        this.images.put(photoSize, image);
+    }
 
-	/**
-	 * @methodtype boolean-query
-	 */
-	public boolean hasSameOwner(Photo photo) {
-		return photo.getOwnerEmailAddress().equals(ownerEmailAddress);
-	}
+    /**
+     * @methodtype get
+     */
+    public String getIdAsString()
+    {
+        return id.asString();
+    }
 
-	/**
-	 * @methodtype get
-	 */
-	public EmailAddress getOwnerEmailAddress() {
-		return ownerEmailAddress;
-	}
+    /**
+     * @methodtype get
+     */
+    public PhotoId getId()
+    {
+        return id;
+    }
 
-	/**
-	 * @methodtype set
-	 */
-	public void setOwnerEmailAddress(EmailAddress newEmailAddress) {
-		ownerEmailAddress = newEmailAddress;
-		incWriteCount();
-	}
+    /**
+     * @methodtype get
+     */
+    public String getOwnerId()
+    {
+        return ownerId;
+    }
 
-	/**
-	 * @methodtype get
-	 */
-	public int getWidth() {
-		return width;
-	}
+    /**
+     * @methodtype set
+     */
+    public void setOwnerId(String newName)
+    {
+        ownerId = newName;
+        incWriteCount();
+    }
 
-	/**
-	 * @methodtype get
-	 */
-	public int getHeight() {
-		return height;
-	}
+    /**
+     * @methodtype get
+     */
+    public String getSummary(ModelConfig cfg)
+    {
+        return cfg.asPhotoSummary(ownerId);
+    }
 
-	/**
-	 * @methodtype get
-	 */
-	public int getThumbWidth() {
-		return isWiderThanHigher() ? MAX_THUMB_PHOTO_WIDTH : (width * MAX_THUMB_PHOTO_HEIGHT / height);
-	}
+    /**
+     * @methodtype get
+     */
+    public String getCaption(ModelConfig cfg)
+    {
+        String ownerName = UserManager.getInstance().getUserById(ownerId).getNickName();
+        return cfg.asPhotoCaption(ownerName);
+    }
 
-	/**
-	 * @methodtype boolean-query
-	 */
-	public boolean isWiderThanHigher() {
-		return (height * MAX_PHOTO_WIDTH) < (width * MAX_PHOTO_HEIGHT);
-	}
+    /**
+     * @methodtype get
+     */
+    public boolean getOwnerNotifyAboutPraise()
+    {
+        return ownerNotifyAboutPraise;
+    }
 
-	/**
-	 * @methodtype get
-	 */
-	public int getThumbHeight() {
-		return isWiderThanHigher() ? (height * MAX_THUMB_PHOTO_WIDTH / width) : MAX_THUMB_PHOTO_HEIGHT;
-	}
+    /**
+     * @methodtype set
+     */
+    public void setOwnerNotifyAboutPraise(boolean newNotifyAboutPraise)
+    {
+        ownerNotifyAboutPraise = newNotifyAboutPraise;
+        incWriteCount();
+    }
 
-	/**
-	 * @methodtype set
-	 */
-	public void setWidthAndHeight(int newWidth, int newHeight) {
-		width = newWidth;
-		height = newHeight;
+    /**
+     *
+     */
+    public Language getOwnerLanguage()
+    {
+        return ownerLanguage;
+    }
 
-		maxPhotoSize = PhotoSize.getFromWidthHeight(width, height);
+    /**
+     *
+     */
+    public void setOwnerLanguage(Language newLanguage)
+    {
+        ownerLanguage = newLanguage;
+        incWriteCount();
+    }
 
-		incWriteCount();
-	}
+    /**
+     * @methodtype boolean-query
+     */
+    public boolean hasSameOwner(Photo photo)
+    {
+        return photo.getOwnerEmailAddress().equals(ownerEmailAddress);
+    }
 
-	/**
-	 * Can this photo satisfy provided photo size?
-	 *
-	 * @methodtype boolean-query
-	 */
-	public boolean hasPhotoSize(PhotoSize size) {
-		return maxPhotoSize.asInt() >= size.asInt();
-	}
+    /**
+     * @methodtype get
+     */
+    public EmailAddress getOwnerEmailAddress()
+    {
+        return ownerEmailAddress;
+    }
 
-	/**
-	 * @methodtype get
-	 */
-	public PhotoSize getMaxPhotoSize() {
-		return maxPhotoSize;
-	}
+    /**
+     * @methodtype set
+     */
+    public void setOwnerEmailAddress(EmailAddress newEmailAddress)
+    {
+        ownerEmailAddress = newEmailAddress;
+        incWriteCount();
+    }
 
-	/**
-	 * @methodtype get
-	 */
-	public String getPraiseAsString(ModelConfig cfg) {
-		return cfg.asPraiseString(getPraise());
-	}
+    /**
+     * @methodtype get
+     */
+    public int getWidth()
+    {
+        return width;
+    }
 
-	/**
-	 * @methodtype get
-	 */
-	public double getPraise() {
-		return (double) praiseSum / noVotes;
-	}
+    /**
+     * @methodtype get
+     */
+    public int getHeight()
+    {
+        return height;
+    }
 
-	/**
-	 *
-	 */
-	public void addToPraise(int value) {
-		praiseSum += value;
-		noVotes += 1;
-		incWriteCount();
-	}
+    /**
+     * @methodtype get
+     */
+    public int getThumbWidth()
+    {
+        return isWiderThanHigher() ? MAX_THUMB_PHOTO_WIDTH : (width * MAX_THUMB_PHOTO_HEIGHT / height);
+    }
 
-	/**
-	 * @methodtype boolean-query
-	 */
-	public boolean isVisible() {
-		return status.isDisplayable();
-	}
+    /**
+     * @methodtype boolean-query
+     */
+    public boolean isWiderThanHigher()
+    {
+        return (height * MAX_PHOTO_WIDTH) < (width * MAX_PHOTO_HEIGHT);
+    }
 
-	/**
-	 * @methodtype get
-	 */
-	public PhotoStatus getStatus() {
-		return status;
-	}
+    /**
+     * @methodtype get
+     */
+    public int getThumbHeight()
+    {
+        return isWiderThanHigher() ? (height * MAX_THUMB_PHOTO_WIDTH / width) : MAX_THUMB_PHOTO_HEIGHT;
+    }
 
-	/**
-	 * @methodtype set
-	 */
-	public void setStatus(PhotoStatus newStatus) {
-		status = newStatus;
-		incWriteCount();
-	}
+    /**
+     * @methodtype set
+     */
+    public void setWidthAndHeight(int newWidth, int newHeight)
+    {
+        width = newWidth;
+        height = newHeight;
 
-	/**
-	 * @methodtype boolean-query
-	 */
-	public boolean hasTag(String tag) {
-		return tags.hasTag(tag);
-	}
+        maxPhotoSize = PhotoSize.getFromWidthHeight(width, height);
 
-	/**
-	 * @methodtype get
-	 */
-	public Tags getTags() {
-		return tags;
-	}
+        incWriteCount();
+    }
 
-	/**
-	 * @methodtype set
-	 */
-	public void setTags(Tags newTags) {
-		tags = newTags;
-		incWriteCount();
-	}
+    /**
+     * Can this photo satisfy provided photo size?
+     *
+     * @methodtype boolean-query
+     */
+    public boolean hasPhotoSize(PhotoSize size)
+    {
+        return maxPhotoSize.asInt() >= size.asInt();
+    }
 
-	/**
-	 * @methodtype get
-	 */
-	public long getCreationTime() {
-		return creationTime;
-	}
+    /**
+     * @methodtype get
+     */
+    public PhotoSize getMaxPhotoSize()
+    {
+        return maxPhotoSize;
+    }
+
+    /**
+     * @methodtype get
+     */
+    public String getPraiseAsString(ModelConfig cfg)
+    {
+        return cfg.asPraiseString(getPraise());
+    }
+
+    /**
+     * @methodtype get
+     */
+    public double getPraise()
+    {
+        return (double) praiseSum / noVotes;
+    }
+
+    /**
+     *
+     */
+    public void addToPraise(int value)
+    {
+        praiseSum += value;
+        noVotes += 1;
+        incWriteCount();
+    }
+
+    /**
+     * @methodtype boolean-query
+     */
+    public boolean isVisible()
+    {
+        return status.isDisplayable();
+    }
+
+    /**
+     * @methodtype get
+     */
+    public PhotoStatus getStatus()
+    {
+        return status;
+    }
+
+    /**
+     * @methodtype set
+     */
+    public void setStatus(PhotoStatus newStatus)
+    {
+        status = newStatus;
+        incWriteCount();
+    }
+
+    /**
+     * @methodtype boolean-query
+     */
+    public boolean hasTag(String tag)
+    {
+        return tags.hasTag(tag);
+    }
+
+    /**
+     * @methodtype get
+     */
+    public Tags getTags()
+    {
+        return tags;
+    }
+
+    /**
+     * @methodtype set
+     */
+    public void setTags(Tags newTags)
+    {
+        tags = newTags;
+        incWriteCount();
+    }
+
+    /**
+     * @methodtype get
+     */
+    public long getCreationTime()
+    {
+        return creationTime;
+    }
 
 
-	public String getEnding() {
-		return ending;
-	}
+    public String getEnding()
+    {
+        return ending;
+    }
 
-	public void setEnding(String ending) {
-		this.ending = ending;
-	}
+    public void setEnding(String ending)
+    {
+        this.ending = ending;
+    }
 
-	/**
-	 * @methodtype boolean query
-	 */
-	public boolean hasNewPraise() {
-		return noVotes > noVotesAtLastNotification;
-	}
+    /**
+     * @methodtype boolean query
+     */
+    public boolean hasNewPraise()
+    {
+        return noVotes > noVotesAtLastNotification;
+    }
 
-	/**
-	 * @methodtype set
-	 */
-	public void setNoNewPraise() {
-		noVotesAtLastNotification = noVotes;
-		incWriteCount();
-	}
+    /**
+     * @methodtype set
+     */
+    public void setNoNewPraise()
+    {
+        noVotesAtLastNotification = noVotes;
+        incWriteCount();
+    }
 }
