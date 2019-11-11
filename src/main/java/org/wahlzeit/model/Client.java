@@ -25,7 +25,7 @@ import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
 import com.googlecode.objectify.annotation.Ignore;
 import com.googlecode.objectify.annotation.Parent;
-import de.henny022.wahlzeit.screenshots.model.ScreenshotPhotoManager;
+import org.wahlzeit.main.SingletonProvider;
 import org.wahlzeit.services.EmailAddress;
 import org.wahlzeit.services.Language;
 import org.wahlzeit.services.ObjectManager;
@@ -46,6 +46,8 @@ public abstract class Client implements Serializable, Persistent
     public static final String ID = "id";
     public static final String NICK_NAME = "nickName";
     public static final String LANGUAGE = "language";
+
+    protected PhotoManager photoManager;
 
     @Id
     protected String id;
@@ -93,6 +95,8 @@ public abstract class Client implements Serializable, Persistent
     protected void initialize(String id, String nickName, EmailAddress emailAddress, AccessRights accessRights,
                               Client previousClient)
     {
+        this.photoManager = SingletonProvider.getInstance(PhotoManager.class);
+
         this.id = id;
         this.nickName = nickName;
         this.accessRights = accessRights;
@@ -334,7 +338,7 @@ public abstract class Client implements Serializable, Persistent
         while(indexOfLastPraisedPhoto >= 0 && result == null)
         {
             PhotoId lastPraisedPhotoId = praisedPhotoIds.get(indexOfLastPraisedPhoto);
-            result = ScreenshotPhotoManager.getInstance().getPhoto(lastPraisedPhotoId);
+            result = photoManager.getPhoto(lastPraisedPhotoId);
             if(result != null && !result.isVisible())
             {
                 result = null;

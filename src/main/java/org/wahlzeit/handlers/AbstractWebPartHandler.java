@@ -20,7 +20,6 @@
 
 package org.wahlzeit.handlers;
 
-import de.henny022.wahlzeit.screenshots.model.ScreenshotPhotoManager;
 import org.wahlzeit.model.*;
 import org.wahlzeit.services.Language;
 import org.wahlzeit.services.LogBuilder;
@@ -40,8 +39,10 @@ import java.util.logging.Logger;
  */
 public abstract class AbstractWebPartHandler implements WebPartHandler
 {
-
     private static final Logger log = Logger.getLogger(AbstractWebPartHandler.class.getName());
+
+    protected PhotoManager photoManager;
+
     /**
      *
      */
@@ -54,10 +55,11 @@ public abstract class AbstractWebPartHandler implements WebPartHandler
     /**
      *
      */
-    protected void initialize(String myTmplName, AccessRights myRights)
+    protected void initialize(PhotoManager photoManager, String tmplName, AccessRights rights)
     {
-        tmplName = myTmplName;
-        neededRights = myRights;
+        this.photoManager = photoManager;
+        this.tmplName = tmplName;
+        this.neededRights = rights;
     }
 
     /**
@@ -154,7 +156,7 @@ public abstract class AbstractWebPartHandler implements WebPartHandler
     protected boolean isSavedPhotoVisible(UserSession us)
     {
         String id = us.getAsString(us.getSavedArgs(), Photo.ID);
-        Photo photo = ScreenshotPhotoManager.getInstance().getPhoto(id);
+        Photo photo = photoManager.getPhoto(id);
         return photo.isVisible();
     }
 

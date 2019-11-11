@@ -20,7 +20,6 @@
 
 package org.wahlzeit.handlers;
 
-import de.henny022.wahlzeit.screenshots.model.ScreenshotPhotoManager;
 import org.wahlzeit.model.*;
 import org.wahlzeit.services.LogBuilder;
 import org.wahlzeit.services.mailing.EmailService;
@@ -87,7 +86,7 @@ public class SendEmailFormHandler extends AbstractWebFormHandler
 
         String id = us.getAndSaveAsString(args, Photo.ID);
         part.addString(Photo.ID, id);
-        Photo photo = ScreenshotPhotoManager.getInstance().getPhoto(id);
+        Photo photo = photoManager.getPhoto(id);
         part.addString(Photo.THUMB, getPhotoThumb(us, photo));
 
         part.maskAndAddString(USER, photo.getOwnerId());
@@ -104,7 +103,7 @@ public class SendEmailFormHandler extends AbstractWebFormHandler
      */
     protected boolean isWellFormedPost(UserSession us, Map args)
     {
-        return ScreenshotPhotoManager.getInstance().getPhoto(us.getAsString(args, Photo.ID)) != null;
+        return photoManager.getPhoto(us.getAsString(args, Photo.ID)) != null;
     }
 
     /**
@@ -113,7 +112,7 @@ public class SendEmailFormHandler extends AbstractWebFormHandler
     protected String doHandlePost(UserSession us, Map args)
     {
         String id = us.getAndSaveAsString(args, Photo.ID);
-        Photo photo = ScreenshotPhotoManager.getInstance().getPhoto(id);
+        Photo photo = photoManager.getPhoto(id);
 
         String emailSubject = us.getAndSaveAsString(args, EMAIL_SUBJECT);
         String emailBody = us.getAndSaveAsString(args, EMAIL_BODY);

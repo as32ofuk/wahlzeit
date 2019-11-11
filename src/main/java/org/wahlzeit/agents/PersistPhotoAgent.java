@@ -1,7 +1,8 @@
 package org.wahlzeit.agents;
 
-import de.henny022.wahlzeit.screenshots.model.ScreenshotPhotoManager;
+import org.wahlzeit.main.SingletonProvider;
 import org.wahlzeit.model.Photo;
+import org.wahlzeit.model.PhotoManager;
 import org.wahlzeit.services.LogBuilder;
 
 import javax.servlet.ServletException;
@@ -20,8 +21,16 @@ import java.util.logging.Logger;
  */
 public class PersistPhotoAgent extends HttpServlet
 {
-
     private static final Logger log = Logger.getLogger(PersistPhotoAgent.class.getName());
+
+    protected PhotoManager photoManager;
+
+    @Override
+    public void init() throws ServletException
+    {
+        super.init();
+        photoManager = SingletonProvider.getInstance(PhotoManager.class);
+    }
 
     /**
      * @methodtype command
@@ -35,10 +44,10 @@ public class PersistPhotoAgent extends HttpServlet
         log.config(LogBuilder.createSystemMessage().addParameter("Try to persist PhotoId", id).toString());
         if(id != null && !"".equals(id))
         {
-            Photo photo = ScreenshotPhotoManager.getInstance().getPhoto(id);
+            Photo photo = photoManager.getPhoto(id);
             if(photo != null)
             {
-                ScreenshotPhotoManager.getInstance().savePhoto(photo);
+                photoManager.savePhoto(photo);
                 log.config(LogBuilder.createSystemMessage().addMessage("Photo saved.").toString());
             }
             else

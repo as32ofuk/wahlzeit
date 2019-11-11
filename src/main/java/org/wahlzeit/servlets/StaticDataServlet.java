@@ -1,13 +1,15 @@
 package org.wahlzeit.servlets;
 
 import com.google.appengine.api.images.Image;
-import de.henny022.wahlzeit.screenshots.model.ScreenshotPhotoManager;
 import org.apache.http.HttpStatus;
+import org.wahlzeit.main.SingletonProvider;
 import org.wahlzeit.model.Photo;
+import org.wahlzeit.model.PhotoManager;
 import org.wahlzeit.model.PhotoSize;
 import org.wahlzeit.model.persistence.ImageStorage;
 import org.wahlzeit.services.LogBuilder;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -24,8 +26,15 @@ import java.util.logging.Logger;
  */
 public class StaticDataServlet extends AbstractServlet
 {
-
     Logger log = Logger.getLogger(StaticDataServlet.class.getName());
+
+    protected PhotoManager photoManager;
+
+    @Override
+    public void init() throws ServletException
+    {
+        photoManager = SingletonProvider.getInstance(PhotoManager.class);
+    }
 
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException
@@ -80,7 +89,7 @@ public class StaticDataServlet extends AbstractServlet
     private Image getImage(String photoId, int size)
     {
         Image image = null;
-        Photo photo = ScreenshotPhotoManager.getInstance().getPhoto(photoId);
+        Photo photo = photoManager.getPhoto(photoId);
         if(photo != null)
         {
             PhotoSize photoSize = PhotoSize.getFromInt(size);

@@ -20,7 +20,6 @@
 
 package org.wahlzeit.handlers;
 
-import de.henny022.wahlzeit.screenshots.model.ScreenshotPhotoManager;
 import org.wahlzeit.main.ServiceMain;
 import org.wahlzeit.model.*;
 import org.wahlzeit.services.LogBuilder;
@@ -44,7 +43,7 @@ public class ShowAdminPageHandler extends AbstractWebPageHandler implements WebF
      */
     public ShowAdminPageHandler()
     {
-        initialize(PartUtil.SHOW_ADMIN_PAGE_FILE, AccessRights.ADMINISTRATOR);
+        initialize(photoManager, PartUtil.SHOW_ADMIN_PAGE_FILE, AccessRights.ADMINISTRATOR);
     }
 
     /**
@@ -97,7 +96,7 @@ public class ShowAdminPageHandler extends AbstractWebPageHandler implements WebF
         WebFormHandler handler = getFormHandler(PartUtil.NULL_FORM_NAME);
 
         String photoId = us.getSavedArg("photoId").toString();
-        Photo photo = ScreenshotPhotoManager.getInstance().getPhoto(photoId);
+        Photo photo = photoManager.getPhoto(photoId);
         if(photo != null)
         {
             handler = getFormHandler(PartUtil.ADMIN_USER_PHOTO_FORM_NAME);
@@ -163,7 +162,7 @@ public class ShowAdminPageHandler extends AbstractWebPageHandler implements WebF
     protected String performAdminUserPhotoRequest(UserSession us, Map args)
     {
         String photoId = us.getAndSaveAsString(args, "photoId");
-        Photo photo = ScreenshotPhotoManager.getInstance().getPhoto(photoId);
+        Photo photo = photoManager.getPhoto(photoId);
         if(photo == null)
         {
             us.setMessage(us.getClient().getLanguageConfiguration().getPhotoIsUnknown());

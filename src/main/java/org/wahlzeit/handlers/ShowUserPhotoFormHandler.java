@@ -20,7 +20,6 @@
 
 package org.wahlzeit.handlers;
 
-import de.henny022.wahlzeit.screenshots.model.ScreenshotPhotoManager;
 import org.wahlzeit.model.*;
 import org.wahlzeit.services.LogBuilder;
 import org.wahlzeit.utils.HtmlUtil;
@@ -53,7 +52,7 @@ public class ShowUserPhotoFormHandler extends AbstractWebFormHandler
     protected void doMakeWebPart(UserSession us, WebPart part)
     {
         PhotoId photoId = us.getPhotoId();
-        Photo photo = ScreenshotPhotoManager.getInstance().getPhoto(photoId);
+        Photo photo = photoManager.getPhoto(photoId);
         String id = photo.getId().asString();
         ModelConfig config = us.getClient().getLanguageConfiguration();
         part.addString(Photo.ID, id);
@@ -78,7 +77,7 @@ public class ShowUserPhotoFormHandler extends AbstractWebFormHandler
     protected boolean isWellFormedPost(UserSession us, Map args)
     {
         String id = us.getAsString(args, Photo.ID);
-        Photo photo = ScreenshotPhotoManager.getInstance().getPhoto(id);
+        Photo photo = photoManager.getPhoto(id);
         return (photo != null) && us.isPhotoOwner(photo);
     }
 
@@ -90,7 +89,7 @@ public class ShowUserPhotoFormHandler extends AbstractWebFormHandler
         String result = PartUtil.SHOW_USER_HOME_PAGE_NAME;
 
         String id = us.getAndSaveAsString(args, Photo.ID);
-        Photo photo = ScreenshotPhotoManager.getInstance().getPhoto(id);
+        Photo photo = photoManager.getPhoto(id);
 
         UserManager userManager = UserManager.getInstance();
         User user = userManager.getUserById(photo.getOwnerId());
@@ -116,7 +115,7 @@ public class ShowUserPhotoFormHandler extends AbstractWebFormHandler
         else if(us.isFormType(args, "delete"))
         {
             photo.setStatus(photo.getStatus().asDeleted(true));
-            ScreenshotPhotoManager.getInstance().savePhoto(photo);
+            photoManager.savePhoto(photo);
             if(user.getUserPhoto() == photo)
             {
                 user.setUserPhoto(null);

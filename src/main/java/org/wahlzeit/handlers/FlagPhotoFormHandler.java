@@ -20,7 +20,6 @@
 
 package org.wahlzeit.handlers;
 
-import de.henny022.wahlzeit.screenshots.model.ScreenshotPhotoManager;
 import org.wahlzeit.agents.AsyncTaskExecutor;
 import org.wahlzeit.model.*;
 import org.wahlzeit.services.EmailAddress;
@@ -67,7 +66,7 @@ public class FlagPhotoFormHandler extends AbstractWebFormHandler
         part.addStringFromArgs(args, UserSession.MESSAGE);
 
         String id = us.getAsString(args, Photo.ID);
-        Photo photo = ScreenshotPhotoManager.getInstance().getPhoto(id);
+        Photo photo = photoManager.getPhoto(id);
         part.addString(Photo.ID, id);
         part.addString(Photo.THUMB, getPhotoThumb(us, photo));
         part.maskAndAddStringFromArgsWithDefault(args, PhotoCase.FLAGGER, us.getClient().getEmailAddress().asString());
@@ -102,7 +101,7 @@ public class FlagPhotoFormHandler extends AbstractWebFormHandler
             return PartUtil.FLAG_PHOTO_PAGE_NAME;
         }
 
-        Photo photo = ScreenshotPhotoManager.getInstance().getPhoto(id);
+        Photo photo = photoManager.getPhoto(id);
         photo.setStatus(photo.getStatus().asFlagged(true));
         AsyncTaskExecutor.savePhotoAsync(id);
 

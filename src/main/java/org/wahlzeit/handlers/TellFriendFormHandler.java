@@ -20,7 +20,6 @@
 
 package org.wahlzeit.handlers;
 
-import de.henny022.wahlzeit.screenshots.model.ScreenshotPhotoManager;
 import org.wahlzeit.model.AccessRights;
 import org.wahlzeit.model.ModelConfig;
 import org.wahlzeit.model.Photo;
@@ -74,13 +73,13 @@ public class TellFriendFormHandler extends AbstractWebFormHandler
         String emailText = config.getTellFriendEmailWebsite() + "\n\n" + us.getSiteUrl() + "\n\n";
 
         String id = us.getAsString(args, Photo.ID);
-        if(!StringUtil.isNullOrEmptyString(id) && ScreenshotPhotoManager.getInstance().hasPhoto(id))
+        if(!StringUtil.isNullOrEmptyString(id) && photoManager.hasPhoto(id))
         {
             emailText += (config.getTellFriendEmailPhoto() + "\n\n" + us.getSiteUrl() + id + ".html" + "\n\n");
         }
 
         part.addString(Photo.ID, id);
-        Photo photo = ScreenshotPhotoManager.getInstance().getPhoto(id);
+        Photo photo = photoManager.getPhoto(id);
         part.addString(Photo.THUMB, getPhotoThumb(us, photo));
 
         part.maskAndAddStringFromArgsWithDefault(args, EMAIL_BODY, emailText);

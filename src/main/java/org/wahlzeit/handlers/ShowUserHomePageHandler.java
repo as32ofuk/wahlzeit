@@ -20,7 +20,6 @@
 
 package org.wahlzeit.handlers;
 
-import de.henny022.wahlzeit.screenshots.model.ScreenshotPhotoManager;
 import org.wahlzeit.model.AccessRights;
 import org.wahlzeit.model.Photo;
 import org.wahlzeit.model.User;
@@ -41,7 +40,7 @@ public class ShowUserHomePageHandler extends AbstractWebPageHandler
      */
     public ShowUserHomePageHandler()
     {
-        initialize(PartUtil.SHOW_USER_HOME_PAGE_FILE, AccessRights.USER);
+        initialize(photoManager, PartUtil.SHOW_USER_HOME_PAGE_FILE, AccessRights.USER);
     }
 
     /**
@@ -61,7 +60,7 @@ public class ShowUserHomePageHandler extends AbstractWebPageHandler
             for(Photo photo : photos)
             {
                 // load it from the PhotoManager to make sure the same copy is used
-                photo = ScreenshotPhotoManager.getInstance().getPhotoFromId(photo.getId());
+                photo = photoManager.getPhotoFromId(photo.getId());
                 if(photo != null && !photo.getStatus().isDeleted())
                 {
                     part = makeUserPhotoForm(us, photo);

@@ -1,5 +1,7 @@
 package org.wahlzeit.main;
 
+import org.wahlzeit.model.PhotoManager;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -17,11 +19,11 @@ public class SingletonProvider
         return (T) getInstance().singletons.get(clazz);
     }
 
-    public static void init()
+    public static void init(PhotoManager photoManager)
     {
         if(instance == null)
         {
-            instance = new SingletonProvider();
+            instance = new SingletonProvider(photoManager);
         }
         else
         {
@@ -31,9 +33,10 @@ public class SingletonProvider
 
     private Map<Class, Object> singletons;
 
-    private SingletonProvider()
+    private SingletonProvider(PhotoManager photoManager)
     {
         singletons = new HashMap<>();
+        singletons.put(PhotoManager.class, photoManager);
     }
 
 }

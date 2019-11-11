@@ -20,7 +20,6 @@
 
 package org.wahlzeit.model;
 
-import de.henny022.wahlzeit.screenshots.model.ScreenshotPhotoManager;
 import org.wahlzeit.services.LogBuilder;
 import org.wahlzeit.utils.StringUtil;
 
@@ -43,6 +42,8 @@ public class PhotoFilter implements Serializable
     public static final String USER_NAME = "userName";
     public static final String TAGS = "tags";
 
+    protected PhotoManager photoManager;
+
     /**
      *
      */
@@ -64,8 +65,9 @@ public class PhotoFilter implements Serializable
     /**
      *
      */
-    public PhotoFilter()
+    public PhotoFilter(PhotoManager photoManager)
     {
+        this.photoManager = photoManager;
         resetDisplayablePhotoIds();
     }
 
@@ -270,7 +272,7 @@ public class PhotoFilter implements Serializable
         Collection<PhotoId> candidates;
         if(noFilterConditions == 0)
         {
-            candidates = ScreenshotPhotoManager.getInstance().getPhotoCache().keySet();
+            candidates = photoManager.getPhotoCache().keySet();
         }
         else
         {
@@ -278,7 +280,7 @@ public class PhotoFilter implements Serializable
             candidates = new LinkedList<PhotoId>();
             for(String condition : getFilterConditions())
             {
-                ScreenshotPhotoManager.getInstance().addTagsThatMatchCondition(tags, condition);
+                photoManager.addTagsThatMatchCondition(tags, condition);
             }
             // get the list of all photo ids that correspond to the tags
             for(Tag tag : tags)
@@ -290,7 +292,7 @@ public class PhotoFilter implements Serializable
         int newPhotos = 0;
         for(PhotoId candidateId : candidates)
         {
-            Photo photoCandidate = ScreenshotPhotoManager.getInstance().getPhoto(candidateId);
+            Photo photoCandidate = photoManager.getPhoto(candidateId);
             if(!processedPhotoIds.contains(candidateId) && !skippedPhotoIds.contains(candidateId) &&
                     photoCandidate.isVisible())
             {

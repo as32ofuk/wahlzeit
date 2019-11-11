@@ -20,7 +20,6 @@
 
 package org.wahlzeit.handlers;
 
-import de.henny022.wahlzeit.screenshots.model.ScreenshotPhotoManager;
 import org.wahlzeit.model.*;
 import org.wahlzeit.services.LogBuilder;
 import org.wahlzeit.utils.StringUtil;
@@ -35,16 +34,17 @@ import java.util.logging.Logger;
  */
 public class PraisePhotoFormHandler extends AbstractWebFormHandler
 {
-
     private static final Logger log = Logger.getLogger(PraisePhotoFormHandler.class.getName());
 
+    protected PhotoManager photoManager;
 
     /**
      *
      */
-    public PraisePhotoFormHandler()
+    public PraisePhotoFormHandler(PhotoManager photoManager)
     {
         initialize(PartUtil.PRAISE_PHOTO_FORM_FILE, AccessRights.GUEST);
+        this.photoManager = photoManager;
     }
 
     /**
@@ -65,7 +65,7 @@ public class PraisePhotoFormHandler extends AbstractWebFormHandler
     protected boolean isWellFormedPost(UserSession us, Map args)
     {
         String photoId = us.getAsString(args, Photo.ID);
-        Photo photo = ScreenshotPhotoManager.getInstance().getPhoto(photoId);
+        Photo photo = photoManager.getPhoto(photoId);
         return photo != null;
     }
 
@@ -75,7 +75,7 @@ public class PraisePhotoFormHandler extends AbstractWebFormHandler
     protected String doHandlePost(UserSession us, Map args)
     {
         String photoId = us.getAsString(args, Photo.ID);
-        Photo photo = ScreenshotPhotoManager.getInstance().getPhoto(photoId);
+        Photo photo = photoManager.getPhoto(photoId);
         String praise = us.getAsString(args, Photo.PRAISE);
         Client client = us.getClient();
 

@@ -1,7 +1,6 @@
 package org.wahlzeit.agents;
 
 import com.google.apphosting.api.ApiProxy;
-import de.henny022.wahlzeit.screenshots.model.ScreenshotPhotoManager;
 import org.wahlzeit.model.*;
 import org.wahlzeit.services.EmailAddress;
 import org.wahlzeit.services.LogBuilder;
@@ -24,9 +23,12 @@ public class NotifyUsersAboutPraiseAgent extends Agent
 
     private static final Logger log = Logger.getLogger(NotifyUsersAboutPraiseAgent.class.getName());
 
-    public NotifyUsersAboutPraiseAgent()
+    protected PhotoManager photoManager;
+
+    public NotifyUsersAboutPraiseAgent(PhotoManager photoManager)
     {
         initialize(NAME);
+        this.photoManager = photoManager;
     }
 
     /**
@@ -37,7 +39,7 @@ public class NotifyUsersAboutPraiseAgent extends Agent
      */
     protected void doRun()
     {
-        Map<PhotoId, Photo> photoCache = ScreenshotPhotoManager.getInstance().getPhotoCache();
+        Map<PhotoId, Photo> photoCache = photoManager.getPhotoCache();
         Collection<Photo> photos = photoCache.values();
 
         ArrayList<Photo> arrayListOfPhotos;
@@ -63,7 +65,7 @@ public class NotifyUsersAboutPraiseAgent extends Agent
                     arrayListOfPhotos.add(photo);
                     ownerIdPhotosMap.put(ownerId, arrayListOfPhotos);
                     photo.setNoNewPraise();
-                    ScreenshotPhotoManager.getInstance().savePhoto(photo);
+                    photoManager.savePhoto(photo);
                 }
             }
         }

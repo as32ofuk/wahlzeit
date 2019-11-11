@@ -23,7 +23,6 @@ package org.wahlzeit.main;
 import com.google.appengine.api.images.Image;
 import com.google.appengine.api.images.ImagesServiceFactory;
 import de.henny022.wahlzeit.screenshots.model.ScreenshotPhotoFactory;
-import de.henny022.wahlzeit.screenshots.model.ScreenshotPhotoManager;
 import org.wahlzeit.model.*;
 import org.wahlzeit.model.persistence.DatastoreAdapter;
 import org.wahlzeit.model.persistence.ImageStorage;
@@ -41,8 +40,9 @@ import java.util.logging.Logger;
  */
 public abstract class ModelMain extends AbstractMain
 {
-
     private static final Logger log = Logger.getLogger(ModelMain.class.getName());
+
+    protected PhotoManager photoManager;
 
     /**
      *
@@ -66,10 +66,10 @@ public abstract class ModelMain extends AbstractMain
         PhotoFactory photoFactory = new ScreenshotPhotoFactory();
 
         log.config(LogBuilder.createSystemMessage().addAction("load Photos").toString());
-        PhotoManager photoManager = new PhotoManager(photoFactory);
+        photoManager = new PhotoManager(photoFactory);
         photoManager.init();
 
-        SingletonProvider.init();
+        SingletonProvider.init(photoManager);
     }
 
 
@@ -89,7 +89,7 @@ public abstract class ModelMain extends AbstractMain
     public void saveAll() throws IOException
     {
         PhotoCaseManager.getInstance().savePhotoCases();
-        ScreenshotPhotoManager.getInstance().savePhotos();
+        photoManager.savePhotos();
         UserManager.getInstance().saveClients();
         GlobalsManager.getInstance().saveGlobals();
     }
@@ -102,7 +102,6 @@ public abstract class ModelMain extends AbstractMain
         UserManager userManager = UserManager.getInstance();
         User user = new User(userId, nickName, emailAddress);
 
-        PhotoManager photoManager = ScreenshotPhotoManager.getInstance();
         File photoDirFile = new File(photoDir);
         FileFilter photoFileFilter = file -> file.getName().endsWith(".jpg");
         File[] photoFiles = photoDirFile.listFiles(photoFileFilter);

@@ -20,7 +20,6 @@
 
 package org.wahlzeit.handlers;
 
-import de.henny022.wahlzeit.screenshots.model.ScreenshotPhotoManager;
 import org.wahlzeit.agents.AsyncTaskExecutor;
 import org.wahlzeit.model.*;
 import org.wahlzeit.services.LogBuilder;
@@ -34,9 +33,7 @@ import java.util.logging.Logger;
  */
 public class AdminUserPhotoFormHandler extends AbstractWebFormHandler
 {
-
     private static final Logger log = Logger.getLogger(AdminUserPhotoFormHandler.class.getName());
-
 
     /**
      *
@@ -52,7 +49,7 @@ public class AdminUserPhotoFormHandler extends AbstractWebFormHandler
     protected void doMakeWebPart(UserSession us, WebPart part)
     {
         String photoId = (String) us.getSavedArg("photoId");
-        Photo photo = ScreenshotPhotoManager.getInstance().getPhoto(photoId);
+        Photo photo = photoManager.getPhoto(photoId);
         part.addString(Photo.THUMB, getPhotoThumb(us, photo));
 
         part.addString("photoId", photoId);
@@ -67,7 +64,7 @@ public class AdminUserPhotoFormHandler extends AbstractWebFormHandler
     protected String doHandlePost(UserSession us, Map args)
     {
         String id = us.getAndSaveAsString(args, "photoId");
-        Photo photo = ScreenshotPhotoManager.getInstance().getPhoto(id);
+        Photo photo = photoManager.getPhoto(id);
 
         String tags = us.getAndSaveAsString(args, Photo.TAGS);
         photo.setTags(new Tags(tags));
