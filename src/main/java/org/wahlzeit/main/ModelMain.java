@@ -46,6 +46,7 @@ public abstract class ModelMain extends AbstractMain
     protected PhotoManager photoManager;
     protected UserManager userManager;
     protected GlobalsManager globalsManager;
+    protected PhotoCaseManager photoCaseManager;
 
     /**
      *
@@ -73,6 +74,8 @@ public abstract class ModelMain extends AbstractMain
         photoManager = new PhotoManager(photoFactory, userManager, globalsManager, imageStorage);
         photoManager.init();
 
+        photoCaseManager = new PhotoCaseManager();
+
         SingletonProvider.init(photoManager, userManager, imageStorage);
     }
 
@@ -83,7 +86,6 @@ public abstract class ModelMain extends AbstractMain
     protected void shutDown() throws Exception
     {
         saveAll();
-
         super.shutDown();
     }
 
@@ -92,7 +94,7 @@ public abstract class ModelMain extends AbstractMain
      */
     public void saveAll() throws IOException
     {
-        PhotoCaseManager.getInstance().savePhotoCases();
+        photoCaseManager.savePhotoCases();
         photoManager.savePhotos();
         userManager.saveClients();
         globalsManager.saveGlobals();

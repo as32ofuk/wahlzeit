@@ -170,7 +170,7 @@ public class ServiceMain extends ModelMain
                 new ShowInfoPageHandler(photoManager, userManager, AccessRights.GUEST, PartUtil.TERMS_INFO_FILE));
 
         // Flag, Send, Tell, and Options pages
-        temp = manager.addWebPartHandler(PartUtil.FLAG_PHOTO_FORM_NAME, new FlagPhotoFormHandler(photoManager, userManager));
+        temp = manager.addWebPartHandler(PartUtil.FLAG_PHOTO_FORM_NAME, new FlagPhotoFormHandler(photoManager, userManager, photoCaseManager));
         manager.addWebPartHandler(PartUtil.FLAG_PHOTO_PAGE_NAME, new ShowPartPageHandler(photoManager, userManager, AccessRights.GUEST, temp));
         temp = manager.addWebPartHandler(PartUtil.SEND_EMAIL_FORM_NAME, new SendEmailFormHandler(photoManager, userManager));
         manager.addWebPartHandler(PartUtil.SEND_EMAIL_PAGE_NAME, new ShowPartPageHandler(photoManager, userManager, AccessRights.GUEST, temp));
@@ -214,8 +214,8 @@ public class ServiceMain extends ModelMain
         temp = manager.addWebPartHandler(PartUtil.UPLOAD_PHOTO_FORM_NAME, new UploadPhotoFormHandler(photoManager, userManager));
         manager.addWebPartHandler(PartUtil.UPLOAD_PHOTO_PAGE_NAME, new ShowPartPageHandler(photoManager, userManager, AccessRights.USER, temp));
 
-        manager.addWebPartHandler(PartUtil.EDIT_PHOTO_CASE_FORM_NAME, new EditPhotoCaseFormHandler(photoManager, userManager));
-        manager.addWebPartHandler(PartUtil.SHOW_PHOTO_CASES_PAGE_NAME, new ShowPhotoCasesPageHandler(photoManager, userManager));
+        manager.addWebPartHandler(PartUtil.EDIT_PHOTO_CASE_FORM_NAME, new EditPhotoCaseFormHandler(photoManager, userManager, photoCaseManager));
+        manager.addWebPartHandler(PartUtil.SHOW_PHOTO_CASES_PAGE_NAME, new ShowPhotoCasesPageHandler(photoManager, userManager, photoCaseManager));
 
         // Admin page incl. AdminUserProfile and AdminUserPhoto
         temp = new ShowAdminPageHandler(photoManager, userManager);

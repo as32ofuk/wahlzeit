@@ -29,32 +29,18 @@ import java.util.*;
  */
 public class PhotoCaseManager extends ObjectManager
 {
-
     /**
      *
      */
-    protected static final PhotoCaseManager instance = new PhotoCaseManager();
-    /**
-     *
-     */
-    protected Map<CaseId, PhotoCase> openPhotoCases = new HashMap<CaseId, PhotoCase>();
+    protected Map<CaseId, PhotoCase> openPhotoCases = new HashMap<>();
 
     /**
      * @methodtype constructor
      * @methodproperty composed
      */
-    protected PhotoCaseManager()
+    public PhotoCaseManager()
     {
-        initialize();
-    }
-
-    /**
-     * @methodtype initialization
-     * @methodproperty regular
-     */
-    protected void initialize()
-    {
-        Collection<PhotoCase> opc = new LinkedList<PhotoCase>();
+        Collection<PhotoCase> opc = new LinkedList<>();
         loadOpenPhotoCases(opc);
         for(PhotoCase pc : opc)
         {
@@ -68,14 +54,6 @@ public class PhotoCaseManager extends ObjectManager
     public void loadOpenPhotoCases(Collection<PhotoCase> result)
     {
         readObjects(result, PhotoCase.class, PhotoCase.WAS_DECIDED, false);
-    }
-
-    /**
-     * @methodtype get
-     */
-    public static final PhotoCaseManager getInstance()
-    {
-        return instance;
     }
 
     /**

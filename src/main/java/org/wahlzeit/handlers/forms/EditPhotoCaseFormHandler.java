@@ -38,9 +38,12 @@ public class EditPhotoCaseFormHandler extends AbstractWebFormHandler
 {
     private static final Logger log = Logger.getLogger(EditPhotoCaseFormHandler.class.getName());
 
-    public EditPhotoCaseFormHandler(PhotoManager photoManager, UserManager userManager)
+    protected PhotoCaseManager photoCaseManager;
+
+    public EditPhotoCaseFormHandler(PhotoManager photoManager, UserManager userManager, PhotoCaseManager photoCaseManager)
     {
         super(photoManager, userManager, PartUtil.EDIT_PHOTO_CASE_FORM_FILE, AccessRights.MODERATOR);
+        this.photoCaseManager = photoCaseManager;
     }
 
     /**
@@ -78,9 +81,8 @@ public class EditPhotoCaseFormHandler extends AbstractWebFormHandler
     protected String doHandlePost(UserSession us, Map args)
     {
         String id = us.getAndSaveAsString(args, PhotoCase.ID);
-        PhotoCaseManager pcm = PhotoCaseManager.getInstance();
 
-        PhotoCase photoCase = pcm.getPhotoCase(PhotoId.getIdFromString(id));
+        PhotoCase photoCase = photoCaseManager.getPhotoCase(PhotoId.getIdFromString(id));
         Photo photo = photoCase.getPhoto();
         PhotoStatus status = photo.getStatus();
         if(us.isFormType(args, "unflag"))
@@ -103,7 +105,7 @@ public class EditPhotoCaseFormHandler extends AbstractWebFormHandler
                 addParameter("Photo", photo.getId().asString()).toString());
 
         photoCase.setDecided();
-        pcm.removePhotoCase(photoCase);
+        photoCaseManager.removePhotoCase(photoCase);
 
         log.info(LogBuilder.createUserMessage().
                 addAction("EditPhotoCase").

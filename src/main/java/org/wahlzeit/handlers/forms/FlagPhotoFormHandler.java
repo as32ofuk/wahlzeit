@@ -40,9 +40,12 @@ public class FlagPhotoFormHandler extends AbstractWebFormHandler
 {
     private static final Logger log = Logger.getLogger(FlagPhotoFormHandler.class.getName());
 
-    public FlagPhotoFormHandler(PhotoManager photoManager, UserManager userManager)
+    protected PhotoCaseManager photoCaseManager;
+
+    public FlagPhotoFormHandler(PhotoManager photoManager, UserManager userManager, PhotoCaseManager photoCaseManager)
     {
         super(photoManager, userManager, PartUtil.FLAG_PHOTO_FORM_FILE, AccessRights.GUEST);
+        this.photoCaseManager = photoCaseManager;
     }
 
     /**
@@ -105,8 +108,7 @@ public class FlagPhotoFormHandler extends AbstractWebFormHandler
         photoCase.setFlagger(flagger);
         photoCase.setReason(reason);
         photoCase.setExplanation(explanation);
-        PhotoCaseManager pcm = PhotoCaseManager.getInstance();
-        pcm.addPhotoCase(photoCase);
+        photoCaseManager.addPhotoCase(photoCase);
 
         EmailService emailService = EmailServiceManager.getDefaultService();
 
@@ -127,5 +129,4 @@ public class FlagPhotoFormHandler extends AbstractWebFormHandler
 
         return PartUtil.SHOW_NOTE_PAGE_NAME;
     }
-
 }

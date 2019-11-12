@@ -36,9 +36,12 @@ import java.util.Map;
  */
 public class ShowPhotoCasesPageHandler extends AbstractWebPageHandler
 {
-    public ShowPhotoCasesPageHandler(PhotoManager photoManager, UserManager userManager)
+    protected PhotoCaseManager photoCaseManager;
+
+    public ShowPhotoCasesPageHandler(PhotoManager photoManager, UserManager userManager, PhotoCaseManager photoCaseManager)
     {
         super(photoManager, userManager, PartUtil.SHOW_PHOTO_CASES_PAGE_FILE, AccessRights.MODERATOR);
+        this.photoCaseManager = photoCaseManager;
     }
 
     /**
@@ -49,8 +52,7 @@ public class ShowPhotoCasesPageHandler extends AbstractWebPageHandler
         Map args = us.getSavedArgs();
         page.addStringFromArgs(args, UserSession.MESSAGE);
 
-        PhotoCaseManager pcm = PhotoCaseManager.getInstance();
-        PhotoCase[] flaggedCases = pcm.getOpenPhotoCasesByAscendingAge();
+        PhotoCase[] flaggedCases = photoCaseManager.getOpenPhotoCasesByAscendingAge();
         if(flaggedCases.length != 0)
         {
             WritableList openCases = new WritableList();
