@@ -1,5 +1,6 @@
 package org.wahlzeit.main;
 
+import org.wahlzeit.handlers.WebPartHandlerManager;
 import org.wahlzeit.model.PhotoManager;
 import org.wahlzeit.model.UserManager;
 import org.wahlzeit.model.persistence.ImageStorage;
@@ -13,6 +14,10 @@ public class SingletonProvider
 
     public static SingletonProvider getInstance()
     {
+        if(instance == null)
+        {
+            throw new IllegalStateException("SingletonProvider wasn't initialized");
+        }
         return instance;
     }
 
@@ -21,11 +26,11 @@ public class SingletonProvider
         return (T) getInstance().singletons.get(clazz);
     }
 
-    public static void init(PhotoManager photoManager, UserManager userManager, ImageStorage imageStorage)
+    public static void init(PhotoManager photoManager, UserManager userManager, ImageStorage imageStorage, WebPartHandlerManager webPartHandlerManager)
     {
         if(instance == null)
         {
-            instance = new SingletonProvider(photoManager, userManager, imageStorage);
+            instance = new SingletonProvider(photoManager, userManager, imageStorage, webPartHandlerManager);
         }
         else
         {
@@ -35,12 +40,13 @@ public class SingletonProvider
 
     private Map<Class, Object> singletons;
 
-    private SingletonProvider(PhotoManager photoManager, UserManager userManager, ImageStorage imageStorage)
+    private SingletonProvider(PhotoManager photoManager, UserManager userManager, ImageStorage imageStorage, WebPartHandlerManager webPartHandlerManager)
     {
         singletons = new HashMap<>();
         singletons.put(PhotoManager.class, photoManager);
         singletons.put(UserManager.class, userManager);
         singletons.put(ImageStorage.class, imageStorage);
+        singletons.put(WebPartHandlerManager.class, webPartHandlerManager);
     }
 
 }

@@ -21,10 +21,12 @@
 package org.wahlzeit.handlers.pages;
 
 import org.wahlzeit.handlers.PartUtil;
+import org.wahlzeit.handlers.WebPartHandlerManager;
 import org.wahlzeit.model.*;
 import org.wahlzeit.services.SysConfig;
 import org.wahlzeit.utils.StringUtil;
 import org.wahlzeit.webparts.WebPart;
+import org.wahlzeit.webparts.WebPartTemplateService;
 
 import java.util.Map;
 
@@ -35,9 +37,9 @@ import java.util.Map;
  */
 public class FilterPhotosPageHandler extends AbstractWebPageHandler
 {
-    public FilterPhotosPageHandler(PhotoManager photoManager, UserManager userManager, SysConfig sysConfig)
+    public FilterPhotosPageHandler(PhotoManager photoManager, UserManager userManager, SysConfig sysConfig, WebPartHandlerManager webPartHandlerManager, WebPartTemplateService webPartTemplateService)
     {
-        super(photoManager, userManager, sysConfig, PartUtil.SHOW_NOTE_PAGE_FILE, AccessRights.GUEST);
+        super(photoManager, userManager, sysConfig, webPartHandlerManager, webPartTemplateService, PartUtil.SHOW_NOTE_PAGE_FILE, AccessRights.GUEST);
     }
 
     /**

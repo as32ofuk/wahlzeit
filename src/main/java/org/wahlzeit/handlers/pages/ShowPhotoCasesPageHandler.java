@@ -21,11 +21,13 @@
 package org.wahlzeit.handlers.pages;
 
 import org.wahlzeit.handlers.PartUtil;
+import org.wahlzeit.handlers.WebPartHandlerManager;
 import org.wahlzeit.handlers.forms.WebFormHandler;
 import org.wahlzeit.model.*;
 import org.wahlzeit.services.SysConfig;
 import org.wahlzeit.utils.HtmlUtil;
 import org.wahlzeit.webparts.WebPart;
+import org.wahlzeit.webparts.WebPartTemplateService;
 import org.wahlzeit.webparts.Writable;
 import org.wahlzeit.webparts.WritableList;
 
@@ -39,9 +41,9 @@ public class ShowPhotoCasesPageHandler extends AbstractWebPageHandler
 {
     protected PhotoCaseManager photoCaseManager;
 
-    public ShowPhotoCasesPageHandler(PhotoManager photoManager, UserManager userManager, SysConfig sysConfig, PhotoCaseManager photoCaseManager)
+    public ShowPhotoCasesPageHandler(PhotoManager photoManager, UserManager userManager, SysConfig sysConfig, WebPartHandlerManager webPartHandlerManager, WebPartTemplateService webPartTemplateService, PhotoCaseManager photoCaseManager)
     {
-        super(photoManager, userManager, sysConfig, PartUtil.SHOW_PHOTO_CASES_PAGE_FILE, AccessRights.MODERATOR);
+        super(photoManager, userManager, sysConfig, webPartHandlerManager, webPartTemplateService, PartUtil.SHOW_PHOTO_CASES_PAGE_FILE, AccessRights.MODERATOR);
         this.photoCaseManager = photoCaseManager;
     }
 

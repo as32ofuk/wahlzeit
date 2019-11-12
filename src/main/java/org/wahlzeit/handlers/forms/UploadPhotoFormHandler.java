@@ -23,12 +23,14 @@ package org.wahlzeit.handlers.forms;
 import com.google.appengine.api.images.Image;
 import org.wahlzeit.agents.AsyncTaskExecutor;
 import org.wahlzeit.handlers.PartUtil;
+import org.wahlzeit.handlers.WebPartHandlerManager;
 import org.wahlzeit.model.*;
 import org.wahlzeit.model.clients.User;
 import org.wahlzeit.services.LogBuilder;
 import org.wahlzeit.services.SysConfig;
 import org.wahlzeit.utils.StringUtil;
 import org.wahlzeit.webparts.WebPart;
+import org.wahlzeit.webparts.WebPartTemplateService;
 
 import java.util.Map;
 import java.util.logging.Logger;
@@ -40,9 +42,9 @@ public class UploadPhotoFormHandler extends AbstractWebFormHandler
 {
     private static Logger log = Logger.getLogger(UploadPhotoFormHandler.class.getName());
 
-    public UploadPhotoFormHandler(PhotoManager photoManager, UserManager userManager, SysConfig sysConfig)
+    public UploadPhotoFormHandler(PhotoManager photoManager, UserManager userManager, SysConfig sysConfig, WebPartHandlerManager webPartHandlerManager, WebPartTemplateService webPartTemplateService)
     {
-        super(photoManager, userManager, sysConfig, PartUtil.UPLOAD_PHOTO_FORM_FILE, AccessRights.USER);
+        super(photoManager, userManager, sysConfig, webPartHandlerManager, webPartTemplateService, PartUtil.UPLOAD_PHOTO_FORM_FILE, AccessRights.USER);
     }
 
     /**

@@ -21,12 +21,14 @@
 package org.wahlzeit.handlers.pages;
 
 import org.wahlzeit.handlers.PartUtil;
+import org.wahlzeit.handlers.WebPartHandlerManager;
 import org.wahlzeit.handlers.forms.WebFormHandler;
 import org.wahlzeit.model.*;
 import org.wahlzeit.model.clients.User;
 import org.wahlzeit.services.SysConfig;
 import org.wahlzeit.utils.HtmlUtil;
 import org.wahlzeit.webparts.WebPart;
+import org.wahlzeit.webparts.WebPartTemplateService;
 import org.wahlzeit.webparts.Writable;
 import org.wahlzeit.webparts.WritableList;
 
@@ -35,9 +37,9 @@ import org.wahlzeit.webparts.WritableList;
  */
 public class ShowUserHomePageHandler extends AbstractWebPageHandler
 {
-    public ShowUserHomePageHandler(PhotoManager photoManager, UserManager userManager, SysConfig sysConfig)
+    public ShowUserHomePageHandler(PhotoManager photoManager, UserManager userManager, SysConfig sysConfig, WebPartHandlerManager webPartHandlerManager, WebPartTemplateService webPartTemplateService)
     {
-        super(photoManager, userManager, sysConfig, PartUtil.SHOW_USER_HOME_PAGE_FILE, AccessRights.USER);
+        super(photoManager, userManager, sysConfig, webPartHandlerManager, webPartTemplateService, PartUtil.SHOW_USER_HOME_PAGE_FILE, AccessRights.USER);
     }
 
     /**

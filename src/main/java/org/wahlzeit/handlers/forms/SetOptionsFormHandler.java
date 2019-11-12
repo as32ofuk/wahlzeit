@@ -21,12 +21,14 @@
 package org.wahlzeit.handlers.forms;
 
 import org.wahlzeit.handlers.PartUtil;
+import org.wahlzeit.handlers.WebPartHandlerManager;
 import org.wahlzeit.model.*;
 import org.wahlzeit.model.clients.Client;
 import org.wahlzeit.services.Language;
 import org.wahlzeit.services.LogBuilder;
 import org.wahlzeit.services.SysConfig;
 import org.wahlzeit.webparts.WebPart;
+import org.wahlzeit.webparts.WebPartTemplateService;
 
 import java.util.Map;
 import java.util.logging.Logger;
@@ -45,9 +47,9 @@ public class SetOptionsFormHandler extends AbstractWebFormHandler
 
     private static final Logger log = Logger.getLogger(SetOptionsFormHandler.class.getName());
 
-    public SetOptionsFormHandler(PhotoManager photoManager, UserManager userManager, SysConfig sysConfig)
+    public SetOptionsFormHandler(PhotoManager photoManager, UserManager userManager, SysConfig sysConfig, WebPartHandlerManager webPartHandlerManager, WebPartTemplateService webPartTemplateService)
     {
-        super(photoManager, userManager, sysConfig, PartUtil.SET_OPTIONS_FORM_FILE, AccessRights.GUEST);
+        super(photoManager, userManager, sysConfig, webPartHandlerManager, webPartTemplateService, PartUtil.SET_OPTIONS_FORM_FILE, AccessRights.GUEST);
     }
 
     /**

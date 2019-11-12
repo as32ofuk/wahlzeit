@@ -47,6 +47,8 @@ public abstract class AbstractWebPartHandler implements WebPartHandler
     protected PhotoManager photoManager;
     protected UserManager userManager;
     protected SysConfig sysConfig;
+    protected WebPartHandlerManager webPartHandlerManager;
+    protected WebPartTemplateService webPartTemplateService;
 
     /**
      *
@@ -57,11 +59,19 @@ public abstract class AbstractWebPartHandler implements WebPartHandler
      */
     protected AccessRights neededRights;
 
-    public AbstractWebPartHandler(PhotoManager photoManager, UserManager userManager, SysConfig sysConfig, String templateName, AccessRights neededRights)
+    public AbstractWebPartHandler(PhotoManager photoManager,
+                                  UserManager userManager,
+                                  SysConfig sysConfig,
+                                  WebPartHandlerManager webPartHandlerManager,
+                                  WebPartTemplateService webPartTemplateService,
+                                  String templateName,
+                                  AccessRights neededRights)
     {
         this.photoManager = photoManager;
         this.userManager = userManager;
         this.sysConfig = sysConfig;
+        this.webPartHandlerManager = webPartHandlerManager;
+        this.webPartTemplateService = webPartTemplateService;
         this.templateName = templateName;
         this.neededRights = neededRights;
     }
@@ -79,9 +89,8 @@ public abstract class AbstractWebPartHandler implements WebPartHandler
      */
     protected final WebPart createWebPart(UserSession us, String name)
     {
-        WebPartTemplateService wpts = WebPartTemplateService.getInstance();
-        WebPartTemplate tmpl = wpts.getTemplate(us.getClient().getLanguageConfiguration().getLanguageCode(), name);
-        return new WebPart(tmpl);
+        WebPartTemplate template = webPartTemplateService.getTemplate(us.getClient().getLanguageConfiguration().getLanguageCode(), name);
+        return new WebPart(template);
     }
 
     /**
@@ -142,7 +151,7 @@ public abstract class AbstractWebPartHandler implements WebPartHandler
      */
     protected final WebFormHandler getFormHandler(String name)
     {
-        return WebPartHandlerManager.getWebFormHandler(name);
+        return webPartHandlerManager.getWebFormHandler(name);
     }
 
     /**

@@ -31,6 +31,7 @@ import org.wahlzeit.handlers.PartUtil;
 import org.wahlzeit.handlers.forms.WebFormHandler;
 import org.wahlzeit.handlers.pages.WebPageHandler;
 import org.wahlzeit.handlers.WebPartHandlerManager;
+import org.wahlzeit.main.SingletonProvider;
 import org.wahlzeit.model.clients.User;
 import org.wahlzeit.model.UserSession;
 import org.wahlzeit.services.LogBuilder;
@@ -86,7 +87,7 @@ public class MainServlet extends AbstractServlet
         log.info(LogBuilder.createSystemMessage().
                 addParameter("POST arguments", getRequestArgsAsString(us, args)).toString());
 
-        WebFormHandler formHandler = WebPartHandlerManager.getWebFormHandler(link);
+        WebFormHandler formHandler = SingletonProvider.getInstance(WebPartHandlerManager.class).getWebFormHandler(link);
         link = PartUtil.DEFAULT_PAGE_NAME;
         if(formHandler != null)
         {
@@ -118,7 +119,7 @@ public class MainServlet extends AbstractServlet
         log.info(LogBuilder.createUserMessage().addParameter("requested URI", request.getRequestURI()).toString());
 
 
-        WebPageHandler handler = WebPartHandlerManager.getWebPageHandler(link);
+        WebPageHandler handler = SingletonProvider.getInstance(WebPartHandlerManager.class).getWebPageHandler(link);
         String newLink = PartUtil.DEFAULT_PAGE_NAME;
         if(handler != null)
         {

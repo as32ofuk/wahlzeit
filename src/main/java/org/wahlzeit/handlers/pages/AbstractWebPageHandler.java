@@ -21,6 +21,7 @@
 package org.wahlzeit.handlers.pages;
 
 import org.wahlzeit.handlers.AbstractWebPartHandler;
+import org.wahlzeit.handlers.WebPartHandlerManager;
 import org.wahlzeit.model.*;
 import org.wahlzeit.model.clients.Client;
 import org.wahlzeit.services.ConfigDir;
@@ -28,15 +29,16 @@ import org.wahlzeit.services.Language;
 import org.wahlzeit.services.SysConfig;
 import org.wahlzeit.utils.HtmlUtil;
 import org.wahlzeit.webparts.WebPart;
+import org.wahlzeit.webparts.WebPartTemplateService;
 
 /**
  * A superclass for handling web pages.
  */
 public abstract class AbstractWebPageHandler extends AbstractWebPartHandler implements WebPageHandler
 {
-    public AbstractWebPageHandler(PhotoManager photoManager, UserManager userManager, SysConfig sysConfig, String tmplName, AccessRights neededRights)
+    public AbstractWebPageHandler(PhotoManager photoManager, UserManager userManager, SysConfig sysConfig, WebPartHandlerManager webPartHandlerManager, WebPartTemplateService webPartTemplateService, String tmplName, AccessRights neededRights)
     {
-        super(photoManager, userManager, sysConfig, tmplName, neededRights);
+        super(photoManager, userManager, sysConfig, webPartHandlerManager, webPartTemplateService, tmplName, neededRights);
     }
 
     /**

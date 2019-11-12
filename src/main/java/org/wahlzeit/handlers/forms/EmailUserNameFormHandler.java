@@ -21,6 +21,7 @@
 package org.wahlzeit.handlers.forms;
 
 import org.wahlzeit.handlers.PartUtil;
+import org.wahlzeit.handlers.WebPartHandlerManager;
 import org.wahlzeit.model.*;
 import org.wahlzeit.model.clients.User;
 import org.wahlzeit.services.EmailAddress;
@@ -30,6 +31,7 @@ import org.wahlzeit.services.mailing.EmailService;
 import org.wahlzeit.services.mailing.EmailServiceManager;
 import org.wahlzeit.utils.StringUtil;
 import org.wahlzeit.webparts.WebPart;
+import org.wahlzeit.webparts.WebPartTemplateService;
 
 import java.util.Map;
 import java.util.logging.Logger;
@@ -41,9 +43,9 @@ public class EmailUserNameFormHandler extends AbstractWebFormHandler
 {
     private static final Logger log = Logger.getLogger(EmailUserNameFormHandler.class.getName());
 
-    public EmailUserNameFormHandler(PhotoManager photoManager, UserManager userManager, SysConfig sysConfig)
+    public EmailUserNameFormHandler(PhotoManager photoManager, UserManager userManager, SysConfig sysConfig, WebPartHandlerManager webPartHandlerManager, WebPartTemplateService webPartTemplateService)
     {
-        super(photoManager, userManager, sysConfig, PartUtil.EMAIL_USER_NAME_FORM_FILE, AccessRights.GUEST);
+        super(photoManager, userManager, sysConfig, webPartHandlerManager, webPartTemplateService, PartUtil.EMAIL_USER_NAME_FORM_FILE, AccessRights.GUEST);
     }
 
     /**

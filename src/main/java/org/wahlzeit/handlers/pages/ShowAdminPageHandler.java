@@ -21,6 +21,7 @@
 package org.wahlzeit.handlers.pages;
 
 import org.wahlzeit.handlers.PartUtil;
+import org.wahlzeit.handlers.WebPartHandlerManager;
 import org.wahlzeit.handlers.forms.WebFormHandler;
 import org.wahlzeit.main.ServiceMain;
 import org.wahlzeit.model.*;
@@ -29,6 +30,7 @@ import org.wahlzeit.services.LogBuilder;
 import org.wahlzeit.services.SysConfig;
 import org.wahlzeit.utils.StringUtil;
 import org.wahlzeit.webparts.WebPart;
+import org.wahlzeit.webparts.WebPartTemplateService;
 import org.wahlzeit.webparts.Writable;
 
 import java.util.Map;
@@ -41,9 +43,9 @@ public class ShowAdminPageHandler extends AbstractWebPageHandler implements WebF
 {
     private static Logger log = Logger.getLogger(ShowAdminPageHandler.class.getName());
 
-    public ShowAdminPageHandler(PhotoManager photoManager, UserManager userManager, SysConfig sysConfig)
+    public ShowAdminPageHandler(PhotoManager photoManager, UserManager userManager, SysConfig sysConfig, WebPartHandlerManager webPartHandlerManager, WebPartTemplateService webPartTemplateService)
     {
-        super(photoManager, userManager, sysConfig, PartUtil.SHOW_ADMIN_PAGE_FILE, AccessRights.ADMINISTRATOR);
+        super(photoManager, userManager, sysConfig, webPartHandlerManager, webPartTemplateService, PartUtil.SHOW_ADMIN_PAGE_FILE, AccessRights.ADMINISTRATOR);
     }
 
     /**

@@ -37,36 +37,15 @@ import java.util.logging.Logger;
  */
 public class WebPartTemplateService
 {
-
-    /**
-     *
-     */
-    protected static final WebPartTemplateService instance = new WebPartTemplateService();
     private static final Logger log = Logger.getLogger(WebPartTemplateService.class.getName());
     /**
      *
      */
-    protected Map<String, WebPartTemplate> templates = new HashMap<String, WebPartTemplate>();
+    protected Map<String, WebPartTemplate> templates = new HashMap<>();
     /**
      *
      */
     protected ConfigDir templatesDir = null;
-
-    /**
-     *
-     */
-    protected WebPartTemplateService()
-    {
-        // do nothing
-    }
-
-    /**
-     * Convenience method...
-     */
-    public static WebPartTemplateService getInstance()
-    {
-        return instance;
-    }
 
     /**
      *

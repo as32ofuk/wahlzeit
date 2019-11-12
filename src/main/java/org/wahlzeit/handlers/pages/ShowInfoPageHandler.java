@@ -21,12 +21,14 @@
 package org.wahlzeit.handlers.pages;
 
 import org.wahlzeit.handlers.PartUtil;
+import org.wahlzeit.handlers.WebPartHandlerManager;
 import org.wahlzeit.model.AccessRights;
 import org.wahlzeit.model.PhotoManager;
 import org.wahlzeit.model.UserManager;
 import org.wahlzeit.model.UserSession;
 import org.wahlzeit.services.SysConfig;
 import org.wahlzeit.webparts.WebPart;
+import org.wahlzeit.webparts.WebPartTemplateService;
 
 
 /**
@@ -39,9 +41,9 @@ public class ShowInfoPageHandler extends AbstractWebPageHandler
      */
     protected String infoTemplateName;
 
-    public ShowInfoPageHandler(PhotoManager photoManager, UserManager userManager, SysConfig sysConfig, AccessRights neededRights, String infoTemplateName)
+    public ShowInfoPageHandler(PhotoManager photoManager, UserManager userManager, SysConfig sysConfig, WebPartHandlerManager webPartHandlerManager, WebPartTemplateService webPartTemplateService, AccessRights neededRights, String infoTemplateName)
     {
-        super(photoManager, userManager, sysConfig, PartUtil.SHOW_INFO_PAGE_FILE, neededRights);
+        super(photoManager, userManager, sysConfig, webPartHandlerManager, webPartTemplateService, PartUtil.SHOW_INFO_PAGE_FILE, neededRights);
         this.infoTemplateName = infoTemplateName;
     }
 

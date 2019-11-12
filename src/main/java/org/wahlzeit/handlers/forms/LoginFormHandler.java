@@ -3,6 +3,7 @@ package org.wahlzeit.handlers.forms;
 import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
 import org.wahlzeit.handlers.PartUtil;
+import org.wahlzeit.handlers.WebPartHandlerManager;
 import org.wahlzeit.model.*;
 import org.wahlzeit.model.clients.Administrator;
 import org.wahlzeit.model.clients.Client;
@@ -10,6 +11,7 @@ import org.wahlzeit.model.clients.User;
 import org.wahlzeit.services.LogBuilder;
 import org.wahlzeit.services.SysConfig;
 import org.wahlzeit.webparts.WebPart;
+import org.wahlzeit.webparts.WebPartTemplateService;
 
 import java.util.Map;
 import java.util.logging.Logger;
@@ -22,9 +24,9 @@ public class LoginFormHandler extends AbstractWebFormHandler
 {
     private static final Logger log = Logger.getLogger(LoginFormHandler.class.getName());
 
-    public LoginFormHandler(PhotoManager photoManager, UserManager userManager, SysConfig sysConfig)
+    public LoginFormHandler(PhotoManager photoManager, UserManager userManager, SysConfig sysConfig, WebPartHandlerManager webPartHandlerManager, WebPartTemplateService webPartTemplateService)
     {
-        super(photoManager, userManager, sysConfig, PartUtil.LOGIN_FORM_FILE, AccessRights.GUEST);
+        super(photoManager, userManager, sysConfig, webPartHandlerManager, webPartTemplateService, PartUtil.LOGIN_FORM_FILE, AccessRights.GUEST);
     }
 
     @Override

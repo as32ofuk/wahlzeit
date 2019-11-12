@@ -21,12 +21,14 @@
 package org.wahlzeit.handlers.forms;
 
 import org.wahlzeit.handlers.PartUtil;
+import org.wahlzeit.handlers.WebPartHandlerManager;
 import org.wahlzeit.model.AccessRights;
 import org.wahlzeit.model.PhotoManager;
 import org.wahlzeit.model.UserManager;
 import org.wahlzeit.model.UserSession;
 import org.wahlzeit.services.SysConfig;
 import org.wahlzeit.webparts.WebPart;
+import org.wahlzeit.webparts.WebPartTemplateService;
 
 
 /**
@@ -34,9 +36,9 @@ import org.wahlzeit.webparts.WebPart;
  */
 public class NullFormHandler extends AbstractWebFormHandler
 {
-    public NullFormHandler(PhotoManager photoManager, UserManager userManager, SysConfig sysConfig)
+    public NullFormHandler(PhotoManager photoManager, UserManager userManager, SysConfig sysConfig, WebPartHandlerManager webPartHandlerManager, WebPartTemplateService webPartTemplateService)
     {
-        super(photoManager, userManager, sysConfig, PartUtil.NULL_FORM_FILE, AccessRights.GUEST);
+        super(photoManager, userManager, sysConfig, webPartHandlerManager, webPartTemplateService, PartUtil.NULL_FORM_FILE, AccessRights.GUEST);
     }
 
     /**

@@ -67,6 +67,7 @@ public class ServiceMain extends ModelMain
     protected boolean isInProduction = false;
 
     protected WebPartHandlerManager webPartHandlerManager;
+    protected WebPartTemplateService webPartTemplateService;
 
     /**
      *
@@ -126,6 +127,8 @@ public class ServiceMain extends ModelMain
         addDefaultUserWithPictures();
 
         log.config(LogBuilder.createSystemMessage().addMessage("StartUp complete.").toString());
+
+        SingletonProvider.init(photoManager, userManager, imageStorage, webPartHandlerManager);
     }
 
     /**
@@ -134,7 +137,8 @@ public class ServiceMain extends ModelMain
     public void configureWebPartTemplateService()
     {
         ConfigDir templatesDir = sysConfig.getTemplatesDir();
-        WebPartTemplateService.getInstance().setTemplatesDir(templatesDir);
+        webPartTemplateService = new WebPartTemplateService();
+        webPartTemplateService.setTemplatesDir(templatesDir);
     }
 
     /**
@@ -143,7 +147,7 @@ public class ServiceMain extends ModelMain
     public void configureWebPartHandlers()
     {
         webPartHandlerManager = new WebPartHandlerManager();
-        HandlerFactory handlerFactory = new HandlerFactory(photoManager, userManager, sysConfig);
+        HandlerFactory handlerFactory = new HandlerFactory(photoManager, userManager, sysConfig, webPartHandlerManager, webPartTemplateService);
 
         // NullInfo and NullForm
         webPartHandlerManager.addWebPartHandler(handlerFactory.createNullFormHandler(), PartUtil.NULL_FORM_NAME);

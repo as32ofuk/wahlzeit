@@ -22,6 +22,7 @@ package org.wahlzeit.handlers.forms;
 
 import org.wahlzeit.agents.AsyncTaskExecutor;
 import org.wahlzeit.handlers.PartUtil;
+import org.wahlzeit.handlers.WebPartHandlerManager;
 import org.wahlzeit.model.*;
 import org.wahlzeit.services.EmailAddress;
 import org.wahlzeit.services.LogBuilder;
@@ -30,6 +31,7 @@ import org.wahlzeit.services.mailing.EmailService;
 import org.wahlzeit.services.mailing.EmailServiceManager;
 import org.wahlzeit.utils.StringUtil;
 import org.wahlzeit.webparts.WebPart;
+import org.wahlzeit.webparts.WebPartTemplateService;
 
 import java.util.Map;
 import java.util.logging.Logger;
@@ -43,9 +45,9 @@ public class FlagPhotoFormHandler extends AbstractWebFormHandler
 
     protected PhotoCaseManager photoCaseManager;
 
-    public FlagPhotoFormHandler(PhotoManager photoManager, UserManager userManager, SysConfig sysConfig, PhotoCaseManager photoCaseManager)
+    public FlagPhotoFormHandler(PhotoManager photoManager, UserManager userManager, SysConfig sysConfig, WebPartHandlerManager webPartHandlerManager, WebPartTemplateService webPartTemplateService, PhotoCaseManager photoCaseManager)
     {
-        super(photoManager, userManager, sysConfig, PartUtil.FLAG_PHOTO_FORM_FILE, AccessRights.GUEST);
+        super(photoManager, userManager, sysConfig, webPartHandlerManager, webPartTemplateService, PartUtil.FLAG_PHOTO_FORM_FILE, AccessRights.GUEST);
         this.photoCaseManager = photoCaseManager;
     }
 

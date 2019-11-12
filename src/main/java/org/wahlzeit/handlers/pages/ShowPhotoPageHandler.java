@@ -21,12 +21,14 @@
 package org.wahlzeit.handlers.pages;
 
 import org.wahlzeit.handlers.PartUtil;
+import org.wahlzeit.handlers.WebPartHandlerManager;
 import org.wahlzeit.handlers.forms.WebFormHandler;
 import org.wahlzeit.model.*;
 import org.wahlzeit.model.clients.Client;
 import org.wahlzeit.services.SysConfig;
 import org.wahlzeit.utils.HtmlUtil;
 import org.wahlzeit.webparts.WebPart;
+import org.wahlzeit.webparts.WebPartTemplateService;
 import org.wahlzeit.webparts.Writable;
 import org.wahlzeit.webparts.WritableList;
 
@@ -37,9 +39,9 @@ import java.util.Map;
  */
 public class ShowPhotoPageHandler extends AbstractWebPageHandler implements WebFormHandler
 {
-    public ShowPhotoPageHandler(PhotoManager photoManager, UserManager userManager, SysConfig sysConfig)
+    public ShowPhotoPageHandler(PhotoManager photoManager, UserManager userManager, SysConfig sysConfig, WebPartHandlerManager webPartHandlerManager, WebPartTemplateService webPartTemplateService)
     {
-        super(photoManager, userManager, sysConfig, PartUtil.SHOW_PHOTO_PAGE_FILE, AccessRights.GUEST);
+        super(photoManager, userManager, sysConfig, webPartHandlerManager, webPartTemplateService, PartUtil.SHOW_PHOTO_PAGE_FILE, AccessRights.GUEST);
     }
 
     /**
