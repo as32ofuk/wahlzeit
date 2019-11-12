@@ -129,7 +129,7 @@ public class ServiceMain extends ModelMain
      */
     public void configureWebPartTemplateService()
     {
-        ConfigDir templatesDir = SysConfig.getTemplatesDir();
+        ConfigDir templatesDir = sysConfig.getTemplatesDir();
         WebPartTemplateService.getInstance().setTemplatesDir(templatesDir);
     }
 

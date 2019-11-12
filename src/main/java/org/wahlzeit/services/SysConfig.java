@@ -28,13 +28,8 @@ import java.util.logging.Logger;
  */
 public class SysConfig extends AbstractConfig
 {
-
     public static String DATA_PATH = "org-wahlzeit-dirkriehle";
 
-    /**
-     *
-     */
-    protected static SysConfig instance = null;
     private static Logger log = Logger.getLogger(SysConfig.class.getName());
 
     /**
@@ -84,105 +79,59 @@ public class SysConfig extends AbstractConfig
     }
 
     /**
-     * Drop singleton instance to cope with repeated startup/shutdown scenarios
+     *
      */
-    public static synchronized void dropInstance()
+    public String getRootDirAsString()
     {
-        log.config(LogBuilder.createSystemMessage().addAction("drop SysConfig instance").toString());
-        instance = null;
+        return rootDir;
     }
 
     /**
      *
      */
-    public static String getRootDirAsString()
+    public ConfigDir getStaticDir()
     {
-        return getInstance().rootDir;
+        return staticDir;
     }
 
     /**
      *
      */
-    public static SysConfig getInstance()
+    public ConfigDir getScriptsDir()
     {
-        if(instance == null)
-        {
-            log.config(LogBuilder.createSystemMessage().addAction("create generic SysConfig").toString());
-            setInstance(new SysConfig(""));
-        }
-        return instance;
-    }
-
-    /**
-     * Sets the singleton instance of SysConfig.
-     *
-     * @methodtype set
-     * @methodproperty composed, class
-     */
-    public static synchronized void setInstance(SysConfig sysConfig)
-    {
-        assertIsUninitialized();
-        instance = sysConfig;
-    }
-
-    /**
-     * @methodtype assertion
-     * @methodproperty primitive, class
-     */
-    public static synchronized void assertIsUninitialized()
-    {
-        if(instance != null)
-        {
-            throw new IllegalStateException("attempt to initalize SysConfig again");
-        }
+        return scriptsDir;
     }
 
     /**
      *
      */
-    public static ConfigDir getStaticDir()
+    public ConfigDir getTemplatesDir()
     {
-        return getInstance().staticDir;
+        return templatesDir;
     }
 
     /**
      *
      */
-    public static ConfigDir getScriptsDir()
+    public Directory getPhotosDir()
     {
-        return getInstance().scriptsDir;
+        return photosDir;
     }
 
     /**
      *
      */
-    public static ConfigDir getTemplatesDir()
+    public Directory getBackupDir()
     {
-        return getInstance().templatesDir;
+        return backupDir;
     }
 
     /**
      *
      */
-    public static Directory getPhotosDir()
+    public Directory getTempDir()
     {
-        return getInstance().photosDir;
-    }
-
-    /**
-     *
-     */
-    public static Directory getBackupDir()
-    {
-        return getInstance().backupDir;
-    }
-
-    /**
-     *
-     */
-    public static Directory getTempDir()
-    {
-        return getInstance().tempDir;
+        return tempDir;
     }
 
 }

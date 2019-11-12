@@ -53,7 +53,7 @@ public class SetUpFlowers extends ScriptMain
      */
     public void execute() throws Exception
     {
-        String photoDir = SysConfig.getRootDirAsString() + File.separator + "config" + File.separator + "flowers";
+        String photoDir = sysConfig.getRootDirAsString() + File.separator + "config" + File.separator + "flowers";
         createUser("1337", "testuser", "info@wahlzeit.org", photoDir);
     }
 

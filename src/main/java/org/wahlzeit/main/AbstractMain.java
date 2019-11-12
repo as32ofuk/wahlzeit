@@ -35,6 +35,8 @@ public abstract class AbstractMain
      */
     protected SysSession mainSession = null;
 
+    protected SysConfig sysConfig;
+
     /**
      *
      */
@@ -48,7 +50,7 @@ public abstract class AbstractMain
      */
     protected void startUp(String rootDir) throws Exception
     {
-        SysConfig.setInstance(createSysConfig(rootDir));
+        sysConfig = createSysConfig(rootDir);
 
         mainSession = new SysSession("system");
         SessionManager.setThreadLocalSession(mainSession);
@@ -83,7 +85,6 @@ public abstract class AbstractMain
      */
     protected void shutDown() throws Exception
     {
-        SysConfig.dropInstance();
     }
 
 }
