@@ -32,7 +32,6 @@ import java.util.Properties;
  */
 public abstract class AbstractConfig implements Configuration, Serializable
 {
-
     /**
      *
      */

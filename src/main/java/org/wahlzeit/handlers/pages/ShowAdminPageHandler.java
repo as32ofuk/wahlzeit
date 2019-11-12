@@ -26,6 +26,7 @@ import org.wahlzeit.main.ServiceMain;
 import org.wahlzeit.model.*;
 import org.wahlzeit.model.clients.User;
 import org.wahlzeit.services.LogBuilder;
+import org.wahlzeit.services.SysConfig;
 import org.wahlzeit.utils.StringUtil;
 import org.wahlzeit.webparts.WebPart;
 import org.wahlzeit.webparts.Writable;
@@ -40,9 +41,9 @@ public class ShowAdminPageHandler extends AbstractWebPageHandler implements WebF
 {
     private static Logger log = Logger.getLogger(ShowAdminPageHandler.class.getName());
 
-    public ShowAdminPageHandler(PhotoManager photoManager, UserManager userManager)
+    public ShowAdminPageHandler(PhotoManager photoManager, UserManager userManager, SysConfig sysConfig)
     {
-        super(photoManager, userManager, PartUtil.SHOW_ADMIN_PAGE_FILE, AccessRights.ADMINISTRATOR);
+        super(photoManager, userManager, sysConfig, PartUtil.SHOW_ADMIN_PAGE_FILE, AccessRights.ADMINISTRATOR);
     }
 
     /**

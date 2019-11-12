@@ -25,6 +25,7 @@ import org.wahlzeit.model.*;
 import org.wahlzeit.model.clients.User;
 import org.wahlzeit.services.EmailAddress;
 import org.wahlzeit.services.LogBuilder;
+import org.wahlzeit.services.SysConfig;
 import org.wahlzeit.services.mailing.EmailService;
 import org.wahlzeit.services.mailing.EmailServiceManager;
 import org.wahlzeit.utils.StringUtil;
@@ -40,9 +41,9 @@ public class EmailUserNameFormHandler extends AbstractWebFormHandler
 {
     private static final Logger log = Logger.getLogger(EmailUserNameFormHandler.class.getName());
 
-    public EmailUserNameFormHandler(PhotoManager photoManager, UserManager userManager)
+    public EmailUserNameFormHandler(PhotoManager photoManager, UserManager userManager, SysConfig sysConfig)
     {
-        super(photoManager, userManager, PartUtil.EMAIL_USER_NAME_FORM_FILE, AccessRights.GUEST);
+        super(photoManager, userManager, sysConfig, PartUtil.EMAIL_USER_NAME_FORM_FILE, AccessRights.GUEST);
     }
 
     /**

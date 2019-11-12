@@ -23,6 +23,7 @@ package org.wahlzeit.handlers.forms;
 import org.wahlzeit.handlers.PartUtil;
 import org.wahlzeit.model.*;
 import org.wahlzeit.services.LogBuilder;
+import org.wahlzeit.services.SysConfig;
 import org.wahlzeit.utils.HtmlUtil;
 import org.wahlzeit.utils.StringUtil;
 import org.wahlzeit.webparts.WebPart;
@@ -40,9 +41,9 @@ public class EditPhotoCaseFormHandler extends AbstractWebFormHandler
 
     protected PhotoCaseManager photoCaseManager;
 
-    public EditPhotoCaseFormHandler(PhotoManager photoManager, UserManager userManager, PhotoCaseManager photoCaseManager)
+    public EditPhotoCaseFormHandler(PhotoManager photoManager, UserManager userManager, SysConfig sysConfig, PhotoCaseManager photoCaseManager)
     {
-        super(photoManager, userManager, PartUtil.EDIT_PHOTO_CASE_FORM_FILE, AccessRights.MODERATOR);
+        super(photoManager, userManager, sysConfig, PartUtil.EDIT_PHOTO_CASE_FORM_FILE, AccessRights.MODERATOR);
         this.photoCaseManager = photoCaseManager;
     }
 

@@ -25,6 +25,7 @@ import org.wahlzeit.model.*;
 import org.wahlzeit.model.clients.User;
 import org.wahlzeit.services.Language;
 import org.wahlzeit.services.LogBuilder;
+import org.wahlzeit.services.SysConfig;
 import org.wahlzeit.utils.HtmlUtil;
 import org.wahlzeit.utils.StringUtil;
 import org.wahlzeit.webparts.WebPart;
@@ -39,9 +40,9 @@ public class AdminUserProfileFormHandler extends AbstractWebFormHandler
 {
     private static final Logger log = Logger.getLogger(AdminUserProfileFormHandler.class.getName());
 
-    public AdminUserProfileFormHandler(PhotoManager photoManager, UserManager userManager)
+    public AdminUserProfileFormHandler(PhotoManager photoManager, UserManager userManager, SysConfig sysConfig)
     {
-        super(photoManager, userManager, PartUtil.ADMIN_USER_PROFILE_FORM_FILE, AccessRights.ADMINISTRATOR);
+        super(photoManager, userManager, sysConfig, PartUtil.ADMIN_USER_PROFILE_FORM_FILE, AccessRights.ADMINISTRATOR);
     }
 
     /**

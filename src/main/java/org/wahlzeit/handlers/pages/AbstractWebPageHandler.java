@@ -34,9 +34,9 @@ import org.wahlzeit.webparts.WebPart;
  */
 public abstract class AbstractWebPageHandler extends AbstractWebPartHandler implements WebPageHandler
 {
-    public AbstractWebPageHandler(PhotoManager photoManager, UserManager userManager, String tmplName, AccessRights neededRights)
+    public AbstractWebPageHandler(PhotoManager photoManager, UserManager userManager, SysConfig sysConfig, String tmplName, AccessRights neededRights)
     {
-        super(photoManager, userManager, tmplName, neededRights);
+        super(photoManager, userManager, sysConfig, tmplName, neededRights);
     }
 
     /**
@@ -54,7 +54,7 @@ public abstract class AbstractWebPageHandler extends AbstractWebPartHandler impl
     {
         WebPart result = createWebPart(us);
 
-        ConfigDir staticDir = SysConfig.getStaticDir();
+        ConfigDir staticDir = sysConfig.getStaticDir();
         String stylesheetUrl = HtmlUtil.asPath(staticDir.getRelativeConfigFileName("wahlzeit.css"));
         result.addString("stylesheet", stylesheetUrl);
         String javascriptUrl = HtmlUtil.asPath(staticDir.getRelativeConfigFileName("wahlzeit.js"));

@@ -23,6 +23,7 @@ package org.wahlzeit.model.languages;
 import org.wahlzeit.model.AbstractModelConfig;
 import org.wahlzeit.model.PhotoSize;
 import org.wahlzeit.services.Language;
+import org.wahlzeit.services.SysConfig;
 import org.wahlzeit.utils.HtmlUtil;
 
 import java.text.DecimalFormat;
@@ -33,16 +34,13 @@ import java.text.SimpleDateFormat;
  */
 public class EnglishModelConfig extends AbstractModelConfig
 {
-
-    /**
-     *
-     */
-    public EnglishModelConfig()
+    public EnglishModelConfig(SysConfig sysConfig)
     {
+        super(sysConfig, Language.ENGLISH);
+        this.dateFormatter = new SimpleDateFormat("MMM d, yyyy");
         DecimalFormat praiseFormatter = new DecimalFormat("##.##");
         praiseFormatter.setMinimumFractionDigits(2);
-
-        initialize(Language.ENGLISH, new SimpleDateFormat("MMM d, yyyy"), praiseFormatter);
+        this.praiseFormatter = praiseFormatter;
     }
 
     /**

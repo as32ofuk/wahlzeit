@@ -47,39 +47,42 @@ public abstract class AbstractModelConfig extends AbstractConfig implements Mode
     /**
      *
      */
-    protected Language language = Language.ENGLISH;
-    protected DateFormat dateFormatter = new SimpleDateFormat("MMM d, yyyy");
-    protected DecimalFormat praiseFormatter = new DecimalFormat("##.#");
+    protected Language language;
+    protected DateFormat dateFormatter;
+    protected DecimalFormat praiseFormatter;
 
-    /**
-     *
-     */
-    protected AbstractModelConfig()
+    protected SysConfig sysConfig;
+
+
+    public AbstractModelConfig(SysConfig sysConfig)
     {
-        // do nothing
+        this(sysConfig, Language.ENGLISH);
     }
 
-    /**
-     *
-     */
-    protected void initialize(Language myLanguage, DateFormat myDateFormatter, DecimalFormat myPraiseFormatter)
+    public AbstractModelConfig(SysConfig sysConfig, Language language)
     {
-        language = myLanguage;
-        dateFormatter = myDateFormatter;
-        praiseFormatter = myPraiseFormatter;
+        this.sysConfig = sysConfig;
+        this.language = language;
+        dateFormatter = new SimpleDateFormat("MMM d, yyyy");
+        praiseFormatter = new DecimalFormat("##.#");
+        loadAllProperties();
+        setValues();
+    }
 
+    void loadAllProperties()
+    {
         try
         {
-            ConfigDir templatesDir = SysConfig.getTemplatesDir();
+            ConfigDir templatesDir = sysConfig.getTemplatesDir();
 
-            String shortDefaultFileName = myLanguage.asIsoCode() + File.separator + "ModelConfig.properties";
+            String shortDefaultFileName = language.asIsoCode() + File.separator + "ModelConfig.properties";
             if(templatesDir.hasDefaultFile(shortDefaultFileName))
             {
                 String absoluteDefaultFileName = templatesDir.getAbsoluteDefaultConfigFileName(shortDefaultFileName);
                 loadProperties(absoluteDefaultFileName);
             }
 
-            String shortCustomFileName = myLanguage.asIsoCode() + File.separator + "CustomModelConfig.properties";
+            String shortCustomFileName = language.asIsoCode() + File.separator + "CustomModelConfig.properties";
             if(templatesDir.hasCustomFile(shortCustomFileName))
             {
                 String absoluteCustomFileName = templatesDir.getAbsoluteCustomConfigFileName(shortCustomFileName);
@@ -88,10 +91,15 @@ public abstract class AbstractModelConfig extends AbstractConfig implements Mode
         }
         catch(IOException ioex)
         {
-            log.warning(
-                    LogBuilder.createSystemMessage().addException("initializing directories failed", ioex).toString());
+            log.warning(LogBuilder.createSystemMessage().addException("initializing directories failed", ioex).toString());
         }
+    }
 
+    /**
+     *
+     */
+    protected void setValues()
+    {
         String menuDash = "&nbsp;" + doGetValue("MenuDash") + "&nbsp;";
 
         String footerCommunityPart = doGetValue("FooterCommunityPart");

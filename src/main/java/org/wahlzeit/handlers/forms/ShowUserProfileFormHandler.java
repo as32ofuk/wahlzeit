@@ -23,6 +23,7 @@ package org.wahlzeit.handlers.forms;
 import org.wahlzeit.handlers.PartUtil;
 import org.wahlzeit.model.*;
 import org.wahlzeit.model.clients.User;
+import org.wahlzeit.services.SysConfig;
 import org.wahlzeit.webparts.WebPart;
 
 import java.util.Map;
@@ -33,9 +34,9 @@ import java.util.Map;
  */
 public class ShowUserProfileFormHandler extends AbstractWebFormHandler
 {
-    public ShowUserProfileFormHandler(PhotoManager photoManager, UserManager userManager)
+    public ShowUserProfileFormHandler(PhotoManager photoManager, UserManager userManager, SysConfig sysConfig)
     {
-        super(photoManager, userManager, PartUtil.SHOW_USER_PROFILE_FORM_FILE, AccessRights.USER);
+        super(photoManager, userManager, sysConfig, PartUtil.SHOW_USER_PROFILE_FORM_FILE, AccessRights.USER);
     }
 
     /**

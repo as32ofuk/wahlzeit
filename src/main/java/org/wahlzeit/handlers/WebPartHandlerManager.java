@@ -34,31 +34,24 @@ import java.util.logging.Logger;
  */
 public class WebPartHandlerManager
 {
-
-    /**
-     *
-     */
-    protected static final WebPartHandlerManager instance = new WebPartHandlerManager();
     private static final Logger log = Logger.getLogger(WebPartHandler.class.getName());
     /**
      *
      */
-    protected Map<String, WebPartHandler> handler = new HashMap<String, WebPartHandler>();
+    protected Map<String, WebPartHandler> handler;
 
-    /**
-     *
-     */
-    protected WebPartHandlerManager()
+
+    public WebPartHandlerManager()
     {
-        // do nothing
+        handler = new HashMap<String, WebPartHandler>();
     }
 
     /**
      *
      */
-    public static WebPageHandler getWebPageHandler(String name)
+    public WebPageHandler getWebPageHandler(String name)
     {
-        return instance.getWebPageHandlerFor(name);
+        return getWebPageHandlerFor(name);
     }
 
     /**
@@ -86,9 +79,9 @@ public class WebPartHandlerManager
     /**
      *
      */
-    public static WebFormHandler getWebFormHandler(String name)
+    public WebFormHandler getWebFormHandler(String name)
     {
-        return instance.getWebFormHandlerFor(name);
+        return getWebFormHandlerFor(name);
     }
 
     /**
@@ -105,12 +98,18 @@ public class WebPartHandlerManager
         return (WebFormHandler) result;
     }
 
-    /**
-     *
-     */
-    public static WebPartHandlerManager getInstance()
+    public WebPartHandler addWebPartHandler(WebPartHandler handler, String... names)
     {
-        return instance;
+        for(String name : names)
+        {
+            addWebPartHandler(name, handler);
+        }
+        return handler;
+    }
+
+    public WebPartHandler addWebPartHandler(WebPartHandler handler, String name)
+    {
+        return addWebPartHandler(name, handler);
     }
 
     /**

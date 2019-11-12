@@ -25,6 +25,7 @@ import org.wahlzeit.model.AccessRights;
 import org.wahlzeit.model.PhotoManager;
 import org.wahlzeit.model.UserManager;
 import org.wahlzeit.model.UserSession;
+import org.wahlzeit.services.SysConfig;
 import org.wahlzeit.utils.StringUtil;
 import org.wahlzeit.webparts.WebPart;
 
@@ -36,9 +37,9 @@ import java.util.Map;
  */
 public class ShowNotePageHandler extends AbstractWebPageHandler
 {
-    public ShowNotePageHandler(PhotoManager photoManager, UserManager userManager)
+    public ShowNotePageHandler(PhotoManager photoManager, UserManager userManager, SysConfig sysConfig)
     {
-        super(photoManager, userManager, PartUtil.SHOW_NOTE_PAGE_FILE, AccessRights.GUEST);
+        super(photoManager, userManager, sysConfig, PartUtil.SHOW_NOTE_PAGE_FILE, AccessRights.GUEST);
     }
 
     /**

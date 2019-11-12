@@ -26,6 +26,7 @@ import org.wahlzeit.model.AccessRights;
 import org.wahlzeit.model.PhotoManager;
 import org.wahlzeit.model.UserManager;
 import org.wahlzeit.model.UserSession;
+import org.wahlzeit.services.SysConfig;
 import org.wahlzeit.webparts.WebPart;
 import org.wahlzeit.webparts.Writable;
 
@@ -42,9 +43,9 @@ public class ShowPartPageHandler extends AbstractWebPageHandler
      */
     protected WebPartHandler partHandler;
 
-    public ShowPartPageHandler(PhotoManager photoManager, UserManager userManager, AccessRights neededRights, WebPartHandler partHandler)
+    public ShowPartPageHandler(PhotoManager photoManager, UserManager userManager, SysConfig sysConfig, AccessRights neededRights, WebPartHandler partHandler)
     {
-        super(photoManager, userManager, PartUtil.SHOW_PART_PAGE_FILE, neededRights);
+        super(photoManager, userManager, sysConfig, PartUtil.SHOW_PART_PAGE_FILE, neededRights);
         this.partHandler = partHandler;
     }
 

@@ -25,6 +25,7 @@ import org.wahlzeit.model.*;
 import org.wahlzeit.model.clients.Client;
 import org.wahlzeit.services.Language;
 import org.wahlzeit.services.LogBuilder;
+import org.wahlzeit.services.SysConfig;
 import org.wahlzeit.webparts.WebPart;
 
 import java.util.Map;
@@ -44,9 +45,9 @@ public class SetOptionsFormHandler extends AbstractWebFormHandler
 
     private static final Logger log = Logger.getLogger(SetOptionsFormHandler.class.getName());
 
-    public SetOptionsFormHandler(PhotoManager photoManager, UserManager userManager)
+    public SetOptionsFormHandler(PhotoManager photoManager, UserManager userManager, SysConfig sysConfig)
     {
-        super(photoManager, userManager, PartUtil.SET_OPTIONS_FORM_FILE, AccessRights.GUEST);
+        super(photoManager, userManager, sysConfig, PartUtil.SET_OPTIONS_FORM_FILE, AccessRights.GUEST);
     }
 
     /**

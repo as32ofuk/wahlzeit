@@ -25,6 +25,7 @@ import org.wahlzeit.model.AccessRights;
 import org.wahlzeit.model.PhotoManager;
 import org.wahlzeit.model.UserManager;
 import org.wahlzeit.model.UserSession;
+import org.wahlzeit.services.SysConfig;
 import org.wahlzeit.webparts.WebPart;
 
 
@@ -33,9 +34,9 @@ import org.wahlzeit.webparts.WebPart;
  */
 public class NullFormHandler extends AbstractWebFormHandler
 {
-    public NullFormHandler(PhotoManager photoManager, UserManager userManager)
+    public NullFormHandler(PhotoManager photoManager, UserManager userManager, SysConfig sysConfig)
     {
-        super(photoManager, userManager, PartUtil.NULL_FORM_FILE, AccessRights.GUEST);
+        super(photoManager, userManager, sysConfig, PartUtil.NULL_FORM_FILE, AccessRights.GUEST);
     }
 
     /**

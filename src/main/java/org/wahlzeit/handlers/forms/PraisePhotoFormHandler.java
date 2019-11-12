@@ -24,6 +24,7 @@ import org.wahlzeit.handlers.PartUtil;
 import org.wahlzeit.model.*;
 import org.wahlzeit.model.clients.Client;
 import org.wahlzeit.services.LogBuilder;
+import org.wahlzeit.services.SysConfig;
 import org.wahlzeit.utils.StringUtil;
 import org.wahlzeit.webparts.WebPart;
 
@@ -38,9 +39,9 @@ public class PraisePhotoFormHandler extends AbstractWebFormHandler
 {
     private static final Logger log = Logger.getLogger(PraisePhotoFormHandler.class.getName());
 
-    public PraisePhotoFormHandler(PhotoManager photoManager, UserManager userManager)
+    public PraisePhotoFormHandler(PhotoManager photoManager, UserManager userManager, SysConfig sysConfig)
     {
-        super(photoManager, userManager, PartUtil.PRAISE_PHOTO_FORM_FILE, AccessRights.GUEST);
+        super(photoManager, userManager, sysConfig, PartUtil.PRAISE_PHOTO_FORM_FILE, AccessRights.GUEST);
     }
 
     /**

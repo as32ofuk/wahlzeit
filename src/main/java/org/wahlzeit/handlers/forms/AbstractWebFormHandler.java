@@ -27,6 +27,7 @@ import org.wahlzeit.model.PhotoManager;
 import org.wahlzeit.model.UserManager;
 import org.wahlzeit.model.UserSession;
 import org.wahlzeit.services.LogBuilder;
+import org.wahlzeit.services.SysConfig;
 import org.wahlzeit.webparts.WebPart;
 
 import java.util.Map;
@@ -40,9 +41,9 @@ public abstract class AbstractWebFormHandler extends AbstractWebPartHandler impl
 {
     private static final Logger log = Logger.getLogger(AbstractWebFormHandler.class.getName());
 
-    public AbstractWebFormHandler(PhotoManager photoManager, UserManager userManager, String tmplName, AccessRights neededRights)
+    public AbstractWebFormHandler(PhotoManager photoManager, UserManager userManager, SysConfig sysConfig, String templateName, AccessRights neededRights)
     {
-        super(photoManager, userManager, tmplName, neededRights);
+        super(photoManager, userManager, sysConfig, templateName, neededRights);
     }
 
     /**

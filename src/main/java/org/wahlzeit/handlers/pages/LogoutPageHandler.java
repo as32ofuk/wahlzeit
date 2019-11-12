@@ -24,6 +24,7 @@ import org.wahlzeit.handlers.PartUtil;
 import org.wahlzeit.model.*;
 import org.wahlzeit.model.clients.Client;
 import org.wahlzeit.model.clients.Guest;
+import org.wahlzeit.services.SysConfig;
 import org.wahlzeit.utils.HtmlUtil;
 import org.wahlzeit.webparts.WebPart;
 
@@ -35,9 +36,9 @@ import java.util.Map;
  */
 public class LogoutPageHandler extends AbstractWebPageHandler
 {
-    public LogoutPageHandler(PhotoManager photoManager, UserManager userManager)
+    public LogoutPageHandler(PhotoManager photoManager, UserManager userManager, SysConfig sysConfig)
     {
-        super(photoManager, userManager, PartUtil.SHOW_NOTE_PAGE_FILE, AccessRights.USER);
+        super(photoManager, userManager, sysConfig, PartUtil.SHOW_NOTE_PAGE_FILE, AccessRights.USER);
     }
 
     /**

@@ -24,6 +24,7 @@ import org.wahlzeit.handlers.PartUtil;
 import org.wahlzeit.model.*;
 import org.wahlzeit.services.EmailAddress;
 import org.wahlzeit.services.LogBuilder;
+import org.wahlzeit.services.SysConfig;
 import org.wahlzeit.services.mailing.EmailService;
 import org.wahlzeit.services.mailing.EmailServiceManager;
 import org.wahlzeit.utils.StringUtil;
@@ -48,9 +49,9 @@ public class TellFriendFormHandler extends AbstractWebFormHandler
 
     private static final Logger log = Logger.getLogger(TellFriendFormHandler.class.getName());
 
-    public TellFriendFormHandler(PhotoManager photoManager, UserManager userManager)
+    public TellFriendFormHandler(PhotoManager photoManager, UserManager userManager, SysConfig sysConfig)
     {
-        super(photoManager, userManager, PartUtil.TELL_FRIEND_FORM_FILE, AccessRights.GUEST);
+        super(photoManager, userManager, sysConfig, PartUtil.TELL_FRIEND_FORM_FILE, AccessRights.GUEST);
     }
 
     /**

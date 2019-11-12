@@ -46,21 +46,23 @@ public abstract class AbstractWebPartHandler implements WebPartHandler
 
     protected PhotoManager photoManager;
     protected UserManager userManager;
+    protected SysConfig sysConfig;
 
     /**
      *
      */
-    protected String tmplName;
+    protected String templateName;
     /**
      *
      */
     protected AccessRights neededRights;
 
-    public AbstractWebPartHandler(PhotoManager photoManager, UserManager userManager, String tmplName, AccessRights neededRights)
+    public AbstractWebPartHandler(PhotoManager photoManager, UserManager userManager, SysConfig sysConfig, String templateName, AccessRights neededRights)
     {
         this.photoManager = photoManager;
         this.userManager = userManager;
-        this.tmplName = tmplName;
+        this.sysConfig = sysConfig;
+        this.templateName = templateName;
         this.neededRights = neededRights;
     }
 
@@ -69,7 +71,7 @@ public abstract class AbstractWebPartHandler implements WebPartHandler
      */
     protected final WebPart createWebPart(UserSession us)
     {
-        return createWebPart(us, tmplName);
+        return createWebPart(us, templateName);
     }
 
     /**
@@ -106,7 +108,7 @@ public abstract class AbstractWebPartHandler implements WebPartHandler
      */
     protected String getPhotoAsRelativeResourcePathString(Photo photo, PhotoSize size)
     {
-        return SysConfig.getPhotosDir().getRelativeDir() + "/?type=image&photoId=" + photo.getId().asString() +
+        return sysConfig.getPhotosDir().getRelativeDir() + "/?type=image&photoId=" + photo.getId().asString() +
                 "&size=" + String.valueOf(size.asInt());
     }
 
@@ -116,7 +118,7 @@ public abstract class AbstractWebPartHandler implements WebPartHandler
     protected String getEmptyImageAsRelativeResourcePathString(Language lang)
     {
         String resName = lang.asIsoCode() + File.separator + "empty.png";
-        return HtmlUtil.asPath(SysConfig.getStaticDir().getRelativeConfigFileName(resName));
+        return HtmlUtil.asPath(sysConfig.getStaticDir().getRelativeConfigFileName(resName));
     }
 
     /**
@@ -299,7 +301,7 @@ public abstract class AbstractWebPartHandler implements WebPartHandler
     protected String getHeadingImageAsRelativeResourcePathString(Language lang)
     {
         String resName = lang.asIsoCode() + File.separator + "heading.png";
-        return HtmlUtil.asPath(SysConfig.getStaticDir().getRelativeConfigFileName(resName));
+        return HtmlUtil.asPath(sysConfig.getStaticDir().getRelativeConfigFileName(resName));
     }
 
     /**

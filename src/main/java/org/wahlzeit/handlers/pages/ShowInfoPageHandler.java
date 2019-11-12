@@ -25,6 +25,7 @@ import org.wahlzeit.model.AccessRights;
 import org.wahlzeit.model.PhotoManager;
 import org.wahlzeit.model.UserManager;
 import org.wahlzeit.model.UserSession;
+import org.wahlzeit.services.SysConfig;
 import org.wahlzeit.webparts.WebPart;
 
 
@@ -36,12 +37,12 @@ public class ShowInfoPageHandler extends AbstractWebPageHandler
     /**
      *
      */
-    protected String infoTmplName = null;
+    protected String infoTemplateName;
 
-    public ShowInfoPageHandler(PhotoManager photoManager, UserManager userManager, AccessRights neededRights, String infoTmplName)
+    public ShowInfoPageHandler(PhotoManager photoManager, UserManager userManager, SysConfig sysConfig, AccessRights neededRights, String infoTemplateName)
     {
-        super(photoManager, userManager, PartUtil.SHOW_INFO_PAGE_FILE, neededRights);
-        this.infoTmplName = infoTmplName;
+        super(photoManager, userManager, sysConfig, PartUtil.SHOW_INFO_PAGE_FILE, neededRights);
+        this.infoTemplateName = infoTemplateName;
     }
 
     /**
@@ -49,7 +50,7 @@ public class ShowInfoPageHandler extends AbstractWebPageHandler
      */
     protected void makeWebPageBody(UserSession us, WebPart page)
     {
-        page.addWritable("info", createWebPart(us, infoTmplName));
+        page.addWritable("info", createWebPart(us, infoTemplateName));
     }
 
 }

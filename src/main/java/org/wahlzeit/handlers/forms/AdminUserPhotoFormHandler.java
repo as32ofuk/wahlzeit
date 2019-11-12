@@ -24,6 +24,7 @@ import org.wahlzeit.agents.AsyncTaskExecutor;
 import org.wahlzeit.handlers.PartUtil;
 import org.wahlzeit.model.*;
 import org.wahlzeit.services.LogBuilder;
+import org.wahlzeit.services.SysConfig;
 import org.wahlzeit.webparts.WebPart;
 
 import java.util.Map;
@@ -36,9 +37,9 @@ public class AdminUserPhotoFormHandler extends AbstractWebFormHandler
 {
     private static final Logger log = Logger.getLogger(AdminUserPhotoFormHandler.class.getName());
 
-    public AdminUserPhotoFormHandler(PhotoManager photoManager, UserManager userManager)
+    public AdminUserPhotoFormHandler(PhotoManager photoManager, UserManager userManager, SysConfig sysConfig)
     {
-        super(photoManager, userManager, PartUtil.ADMIN_USER_PHOTO_FORM_FILE, AccessRights.ADMINISTRATOR);
+        super(photoManager, userManager, sysConfig, PartUtil.ADMIN_USER_PHOTO_FORM_FILE, AccessRights.ADMINISTRATOR);
     }
 
     /**

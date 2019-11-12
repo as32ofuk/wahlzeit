@@ -25,6 +25,7 @@ import org.wahlzeit.handlers.PartUtil;
 import org.wahlzeit.model.*;
 import org.wahlzeit.services.EmailAddress;
 import org.wahlzeit.services.LogBuilder;
+import org.wahlzeit.services.SysConfig;
 import org.wahlzeit.services.mailing.EmailService;
 import org.wahlzeit.services.mailing.EmailServiceManager;
 import org.wahlzeit.utils.StringUtil;
@@ -42,9 +43,9 @@ public class FlagPhotoFormHandler extends AbstractWebFormHandler
 
     protected PhotoCaseManager photoCaseManager;
 
-    public FlagPhotoFormHandler(PhotoManager photoManager, UserManager userManager, PhotoCaseManager photoCaseManager)
+    public FlagPhotoFormHandler(PhotoManager photoManager, UserManager userManager, SysConfig sysConfig, PhotoCaseManager photoCaseManager)
     {
-        super(photoManager, userManager, PartUtil.FLAG_PHOTO_FORM_FILE, AccessRights.GUEST);
+        super(photoManager, userManager, sysConfig, PartUtil.FLAG_PHOTO_FORM_FILE, AccessRights.GUEST);
         this.photoCaseManager = photoCaseManager;
     }
 

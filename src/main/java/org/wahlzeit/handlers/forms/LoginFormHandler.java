@@ -8,6 +8,7 @@ import org.wahlzeit.model.clients.Administrator;
 import org.wahlzeit.model.clients.Client;
 import org.wahlzeit.model.clients.User;
 import org.wahlzeit.services.LogBuilder;
+import org.wahlzeit.services.SysConfig;
 import org.wahlzeit.webparts.WebPart;
 
 import java.util.Map;
@@ -21,9 +22,9 @@ public class LoginFormHandler extends AbstractWebFormHandler
 {
     private static final Logger log = Logger.getLogger(LoginFormHandler.class.getName());
 
-    public LoginFormHandler(PhotoManager photoManager, UserManager userManager)
+    public LoginFormHandler(PhotoManager photoManager, UserManager userManager, SysConfig sysConfig)
     {
-        super(photoManager, userManager, PartUtil.LOGIN_FORM_FILE, AccessRights.GUEST);
+        super(photoManager, userManager, sysConfig, PartUtil.LOGIN_FORM_FILE, AccessRights.GUEST);
     }
 
     @Override
