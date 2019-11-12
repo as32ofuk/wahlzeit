@@ -21,6 +21,8 @@ package org.wahlzeit.model;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.wahlzeit.model.persistence.DatastoreAdapter;
+import org.wahlzeit.model.persistence.ImageStorage;
 
 import static org.junit.Assert.*;
 
@@ -32,7 +34,12 @@ public class PhotoFilterTest
     @Before
     public void initPhotoFilter()
     {
-        photoFilter = new PhotoFilter();
+        UserManager userManager = new UserManager();
+        PhotoFactory photoFactory = new PhotoFactory(userManager);
+        GlobalsManager globalsManager = new GlobalsManager(userManager);
+        ImageStorage imageStorage = new DatastoreAdapter();
+        PhotoManager photoManager = new PhotoManager(photoFactory, userManager, globalsManager, imageStorage);
+        photoFilter = new PhotoFilter(photoManager);
     }
 
     /**

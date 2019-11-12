@@ -18,6 +18,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -69,10 +70,10 @@ public class TellFriendTest
 
         String expectedRecipient = to.asString();
         String recipient = part.getValue(TellFriendFormHandler.EMAIL_TO).toString();
-        assertTrue("Recipient not as expected, instead: " + recipient, recipient.equals(expectedRecipient));
+        assertEquals("Recipient not as expected, instead: " + recipient, recipient, expectedRecipient);
 
         String subject = part.getValue(TellFriendFormHandler.EMAIL_SUBJECT).toString();
-        assertTrue("Subject not as expected, instead: " + subject, expectedSubject.equals(subject));
+        assertEquals("Subject not as expected, instead: " + subject, expectedSubject, subject);
     }
 
     /**

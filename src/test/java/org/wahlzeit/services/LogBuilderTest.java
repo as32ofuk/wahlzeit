@@ -20,7 +20,6 @@ import static org.wahlzeit.services.LogBuilder.*;
 public class LogBuilderTest
 {
 
-
     @ClassRule
     public static RuleChain ruleChain = RuleChain.
             outerRule(new LocalDatastoreServiceTestConfigProvider()).

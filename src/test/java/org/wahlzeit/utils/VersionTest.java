@@ -22,8 +22,7 @@ package org.wahlzeit.utils;
 
 import org.junit.Test;
 
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
+import static org.junit.Assert.*;
 
 /**
  * Test cases for the Version class.
@@ -37,11 +36,11 @@ public class VersionTest
     @Test
     public void testValidGetVersionAsInt()
     {
-        assertTrue(Version.getVersionAsInt("0.0.0") == 0);
-        assertTrue(Version.getVersionAsInt("0.0.1") == 1);
-        assertTrue(Version.getVersionAsInt("0.1.0") == 1000);
-        assertTrue(Version.getVersionAsInt("1.0.0") == 1000000);
-        assertTrue(Version.getVersionAsInt("12.33.99") == 12 * 1000000 + 33 * 1000 + 99);
+        assertEquals(0, Version.getVersionAsInt("0.0.0"));
+        assertEquals(1, Version.getVersionAsInt("0.0.1"));
+        assertEquals(1000, Version.getVersionAsInt("0.1.0"));
+        assertEquals(1000000, Version.getVersionAsInt("1.0.0"));
+        assertEquals(Version.getVersionAsInt("12.33.99"), 12 * 1000000 + 33 * 1000 + 99);
     }
 
     /**
@@ -83,7 +82,7 @@ public class VersionTest
     @Test
     public void testValidGetMajorVersionAsInt()
     {
-        assertTrue(Version.getMajorNumberAsInt("12.33.15") == 12);
+        assertEquals(12, Version.getMajorNumberAsInt("12.33.15"));
     }
 
     /**
@@ -124,7 +123,7 @@ public class VersionTest
     @Test
     public void testGetMinorVersionAsInt()
     {
-        assertTrue(Version.getMinorNumberAsInt("12.33.15") == 33);
+        assertEquals(33, Version.getMinorNumberAsInt("12.33.15"));
     }
 
     /**
@@ -169,7 +168,7 @@ public class VersionTest
     @Test
     public void testGetRevisionVersionAsInt()
     {
-        assertTrue(Version.getRevisionNumberAsInt("12.33.15") == 15);
+        assertEquals(15, Version.getRevisionNumberAsInt("12.33.15"));
     }
 
     /**

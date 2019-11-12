@@ -24,6 +24,8 @@ import junit.framework.TestCase;
 
 import java.util.Set;
 
+import static org.junit.Assert.assertNotEquals;
+
 /**
  * Test cases for the Tags class.
  */
@@ -56,13 +58,13 @@ public class TagsTest extends TestCase
         Tags tags3 = new Tags("a, c, b");
         Tags tags4 = new Tags("a, b");
         Tags tags5 = new Tags("a, a, b, c");
-        assertTrue(tags1.equals(tags1));
-        assertTrue(tags1.equals(tags2));
-        assertTrue(tags1.equals(tags3));
-        assertFalse(tags1.equals(tags4));
-        assertTrue(tags1.equals(tags5));
-        assertFalse(tags1.equals(null));
-        assertFalse(tags1.equals(new Object()));
+        assertEquals(tags1, tags1);
+        assertEquals(tags1, tags2);
+        assertEquals(tags1, tags3);
+        assertNotEquals(tags1, tags4);
+        assertEquals(tags1, tags5);
+        assertNotEquals(null, tags1);
+        assertNotEquals(tags1, new Object());
     }
 
     /**
@@ -136,7 +138,7 @@ public class TagsTest extends TestCase
         assertEquals(0, t2.getSize());
 
         Tags empty = Tags.EMPTY_TAGS;
-        assertTrue(empty.getSize() == 0);
+        assertEquals(0, empty.getSize());
     }
 
     /**
@@ -241,7 +243,7 @@ public class TagsTest extends TestCase
 
         Tags tags3 = new Tags("bingo, bingo");
         String[] tags3array = tags3.asArray();
-        assertTrue(tags3array.length == 1);
+        assertEquals(1, tags3array.length);
     }
 
     /**
@@ -251,7 +253,7 @@ public class TagsTest extends TestCase
     {
         Tags tags1 = new Tags(" flo wer , Kinokuniya, bingo, bongo");
         String[] tags1array = tags1.asArray();
-        assertTrue(tags1array.length == 4);
+        assertEquals(4, tags1array.length);
         assertEquals(tags1array[0], "bingo");
         assertEquals(tags1array[1], "bongo");
         assertEquals(tags1array[2], "flower");
@@ -261,7 +263,7 @@ public class TagsTest extends TestCase
 
         Tags tags2 = new Tags(" @ 2a hum5ug ; yah!, ohmpf ,,,");
         String[] tags2array = tags2.asArray();
-        assertTrue(tags2array.length == 2);
+        assertEquals(2, tags2array.length);
         assertEquals(tags2array[0], "2ahum5ugyah");
         assertEquals(tags2array[1], "ohmpf");
 
@@ -278,8 +280,8 @@ public class TagsTest extends TestCase
     {
         Set<String> set = Tags.asTagSetFromString("x-y--z@!;,b---ni hao", '-');
 
-        assertTrue(set != null);
-        assertTrue(set.size() == 4);
+        assertNotNull(set);
+        assertEquals(4, set.size());
         assertTrue(set.contains("x"));
         assertTrue(set.contains("y"));
         assertTrue(set.contains("zb"));

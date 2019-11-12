@@ -2,11 +2,14 @@ package org.wahlzeit.model;
 
 import com.googlecode.objectify.ObjectifyService;
 import com.googlecode.objectify.Work;
+import org.junit.Before;
 import org.junit.ClassRule;
 import org.junit.Test;
 import org.junit.rules.RuleChain;
 import org.wahlzeit.model.clients.Guest;
 import org.wahlzeit.model.clients.User;
+import org.wahlzeit.model.persistence.DatastoreAdapter;
+import org.wahlzeit.model.persistence.ImageStorage;
 import org.wahlzeit.testEnvironmentProvider.LocalDatastoreServiceTestConfigProvider;
 import org.wahlzeit.testEnvironmentProvider.RegisteredOfyEnvironmentProvider;
 
@@ -24,6 +27,21 @@ public class GuestTest
             outerRule(new LocalDatastoreServiceTestConfigProvider()).
             around(new RegisteredOfyEnvironmentProvider());
 
+    UserManager userManager;
+    PhotoManager photoManager;
+
+    @Before
+    public void setUp() throws Exception
+    {
+        PhotoFactory photoFactory;
+        GlobalsManager globalsManager;
+        ImageStorage imageStorage;
+        userManager = new UserManager();
+        photoFactory = new PhotoFactory(userManager);
+        globalsManager = new GlobalsManager(userManager);
+        imageStorage = new DatastoreAdapter();
+        photoManager = new PhotoManager(photoFactory, userManager, globalsManager, imageStorage);
+    }
 
     @Test
     public void testNameGeneration()
@@ -37,7 +55,7 @@ public class GuestTest
             @Override
             public Void run()
             {
-                new User("1337", "han", "star@wa.rs");
+                new User(photoManager, userManager, "1337", "han", "star@wa.rs");
                 return null;
             }
         });
@@ -57,7 +75,7 @@ public class GuestTest
             @Override
             public Guest run()
             {
-                return new Guest();
+                return new Guest(photoManager, userManager);
             }
         });
         String userName = testGuest.getId();
@@ -67,6 +85,6 @@ public class GuestTest
 
     protected void testGetGuestFromUserManager(String name)
     {
-        assertNotNull(UserManager.getInstance().getClientById(name));
+        assertNotNull(userManager.getClientById(name));
     }
 }

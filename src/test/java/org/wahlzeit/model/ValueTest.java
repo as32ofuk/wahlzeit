@@ -22,7 +22,7 @@ package org.wahlzeit.model;
 
 import org.junit.Test;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 /**
  * Test cases for a variety of value object classes.
@@ -36,38 +36,38 @@ public class ValueTest
     @Test
     public void testUserStatus()
     {
-        assertTrue(UserStatus.CREATED == UserStatus.getFromInt(0));
-        assertTrue(UserStatus.CONFIRMED == UserStatus.getFromInt(1));
-        assertTrue(UserStatus.DISABLED == UserStatus.getFromInt(2));
+        assertSame(UserStatus.CREATED, UserStatus.getFromInt(0));
+        assertSame(UserStatus.CONFIRMED, UserStatus.getFromInt(1));
+        assertSame(UserStatus.DISABLED, UserStatus.getFromInt(2));
 
         UserStatus us = UserStatus.CREATED;
-        assertTrue(us.asInt() == 0);
-        assertTrue(!us.isConfirmed());
+        assertEquals(0, us.asInt());
+        assertFalse(us.isConfirmed());
 
         UserStatus us2 = us.asConfirmed();
-        assertTrue(us != us2);
+        assertNotSame(us, us2);
         assertTrue(us2.isConfirmed());
 
         UserStatus us3 = us2.asDisabled();
-        assertTrue(us2 != us3);
+        assertNotSame(us2, us3);
         assertTrue(us3.isCreated());
         assertTrue(us3.isConfirmed());
         assertTrue(us3.isDisabled());
 
         UserStatus us4 = us.asDisabled();
         assertTrue(us4.isDisabled());
-        assertTrue(us3 != us4);
+        assertNotSame(us3, us4);
 
         us3 = us3.asEnabled();
         assertTrue(us3.isConfirmed());
-        assertTrue(!us3.isDisabled());
+        assertFalse(us3.isDisabled());
 
         us4 = us4.asEnabled();
-        assertTrue(!us4.isConfirmed());
-        assertTrue(!us4.isDisabled());
+        assertFalse(us4.isConfirmed());
+        assertFalse(us4.isDisabled());
 
         us4 = us4.asConfirmed();
-        assertTrue(us3 == us4);
+        assertSame(us3, us4);
     }
 
     /**

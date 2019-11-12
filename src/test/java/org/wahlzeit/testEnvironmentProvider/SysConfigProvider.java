@@ -15,15 +15,13 @@ public class SysConfigProvider extends ExternalResource
     @Override
     protected void before() throws Throwable
     {
-        SysConfig.dropInstance();
         SysConfig sysConfig = new SysConfig("src/main/webapp");
-        SysConfig.setInstance(sysConfig);
-        WebPartTemplateService.getInstance().setTemplatesDir(SysConfig.getTemplatesDir());
+        WebPartTemplateService webPartTemplateService = new WebPartTemplateService();
+        webPartTemplateService.setTemplatesDir(sysConfig.getTemplatesDir());
     }
 
     @Override
     protected void after()
     {
-        SysConfig.dropInstance();
     }
 }

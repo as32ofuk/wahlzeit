@@ -2,8 +2,7 @@ package org.wahlzeit.model;
 
 import org.junit.Test;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public class UserStatusTest
 {
@@ -14,10 +13,10 @@ public class UserStatusTest
     @Test
     public void testGetFromInt()
     {
-        assertTrue(UserStatus.getFromInt(UserStatus.CREATED.asInt()) == UserStatus.CREATED);
-        assertTrue(UserStatus.getFromInt(UserStatus.CONFIRMED.asInt()) == UserStatus.CONFIRMED);
-        assertTrue(UserStatus.getFromInt(UserStatus.DISABLED.asInt()) == UserStatus.DISABLED);
-        assertTrue(UserStatus.getFromInt(UserStatus.DISABLED2.asInt()) == UserStatus.DISABLED2);
+        assertSame(UserStatus.getFromInt(UserStatus.CREATED.asInt()), UserStatus.CREATED);
+        assertSame(UserStatus.getFromInt(UserStatus.CONFIRMED.asInt()), UserStatus.CONFIRMED);
+        assertSame(UserStatus.getFromInt(UserStatus.DISABLED.asInt()), UserStatus.DISABLED);
+        assertSame(UserStatus.getFromInt(UserStatus.DISABLED2.asInt()), UserStatus.DISABLED2);
     }
 
     /**
@@ -26,12 +25,12 @@ public class UserStatusTest
     @Test
     public void testGetFromString()
     {
-        assertTrue(UserStatus.getFromString(UserStatus.CREATED.asString()).equals(UserStatus.CREATED));
-        assertTrue(UserStatus.getFromString(UserStatus.CONFIRMED.asString()).equals(UserStatus.CONFIRMED));
-        assertTrue(UserStatus.getFromString(UserStatus.DISABLED.asString()).equals(UserStatus.DISABLED));
+        assertEquals(UserStatus.getFromString(UserStatus.CREATED.asString()), UserStatus.CREATED);
+        assertEquals(UserStatus.getFromString(UserStatus.CONFIRMED.asString()), UserStatus.CONFIRMED);
+        assertEquals(UserStatus.getFromString(UserStatus.DISABLED.asString()), UserStatus.DISABLED);
 
         // DISABLED2.asString() -> DISABLED.asString()
-        assertTrue(UserStatus.getFromString(UserStatus.DISABLED2.asString()).equals(UserStatus.DISABLED));
+        assertEquals(UserStatus.getFromString(UserStatus.DISABLED2.asString()), UserStatus.DISABLED);
     }
 
     /**
