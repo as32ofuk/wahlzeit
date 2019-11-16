@@ -21,6 +21,7 @@
 package org.wahlzeit.handlers;
 
 import com.google.appengine.api.images.Image;
+import de.henny022.wahlzeit.screeshots.model.ScreenshotPhotoManager;
 import org.wahlzeit.agents.AsyncTaskExecutor;
 import org.wahlzeit.model.*;
 import org.wahlzeit.services.LogBuilder;

@@ -1,7 +1,7 @@
 package org.wahlzeit.agents;
 
 import org.wahlzeit.model.Photo;
-import org.wahlzeit.model.ScreenshotPhotoManager;
+import de.henny022.wahlzeit.screeshots.model.ScreenshotPhotoManager;
 import org.wahlzeit.services.LogBuilder;
 
 import javax.servlet.ServletException;

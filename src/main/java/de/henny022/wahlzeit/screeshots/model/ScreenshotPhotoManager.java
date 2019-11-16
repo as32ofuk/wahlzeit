@@ -1,4 +1,8 @@
-package org.wahlzeit.model;
+package de.henny022.wahlzeit.screeshots.model;
+
+import org.wahlzeit.model.Photo;
+import org.wahlzeit.model.PhotoId;
+import org.wahlzeit.model.PhotoManager;
 
 public class ScreenshotPhotoManager extends PhotoManager
 {
