@@ -32,60 +32,68 @@ import java.util.logging.Logger;
 /**
  * A handler class for a specific web form.
  */
-public class PraisePhotoFormHandler extends AbstractWebFormHandler {
+public class PraisePhotoFormHandler extends AbstractWebFormHandler
+{
 
-	private static final Logger log = Logger.getLogger(PraisePhotoFormHandler.class.getName());
+    private static final Logger log = Logger.getLogger(PraisePhotoFormHandler.class.getName());
 
 
-	/**
-	 *
-	 */
-	public PraisePhotoFormHandler() {
-		initialize(PartUtil.PRAISE_PHOTO_FORM_FILE, AccessRights.GUEST);
-	}
+    /**
+     *
+     */
+    public PraisePhotoFormHandler()
+    {
+        initialize(PartUtil.PRAISE_PHOTO_FORM_FILE, AccessRights.GUEST);
+    }
 
-	/**
-	 *
-	 */
-	protected void doMakeWebPart(UserSession us, WebPart part) {
-		PhotoId photoId = us.getPhotoId();
-		if (photoId != null) {
-			part.addString(Photo.ID, photoId.asString());
-		}
-	}
+    /**
+     *
+     */
+    protected void doMakeWebPart(UserSession us, WebPart part)
+    {
+        PhotoId photoId = us.getPhotoId();
+        if(photoId != null)
+        {
+            part.addString(Photo.ID, photoId.asString());
+        }
+    }
 
-	/**
-	 * https://youtu.be/-FRm3VPhseI
-	 */
-	protected boolean isWellFormedPost(UserSession us, Map args) {
-		String photoId = us.getAsString(args, Photo.ID);
-		Photo photo = ScreenshotPhotoManager.getInstance().getPhoto(photoId);
-		return photo != null;
-	}
+    /**
+     * https://youtu.be/-FRm3VPhseI
+     */
+    protected boolean isWellFormedPost(UserSession us, Map args)
+    {
+        String photoId = us.getAsString(args, Photo.ID);
+        Photo photo = ScreenshotPhotoManager.getInstance().getPhoto(photoId);
+        return photo != null;
+    }
 
-	/**
-	 * https://youtu.be/-FRm3VPhseI
-	 */
-	protected String doHandlePost(UserSession us, Map args) {
-		String photoId = us.getAsString(args, Photo.ID);
-		Photo photo = ScreenshotPhotoManager.getInstance().getPhoto(photoId);
-		String praise = us.getAsString(args, Photo.PRAISE);
-		Client client = us.getClient();
+    /**
+     * https://youtu.be/-FRm3VPhseI
+     */
+    protected String doHandlePost(UserSession us, Map args)
+    {
+        String photoId = us.getAsString(args, Photo.ID);
+        Photo photo = ScreenshotPhotoManager.getInstance().getPhoto(photoId);
+        String praise = us.getAsString(args, Photo.PRAISE);
+        Client client = us.getClient();
 
-		boolean wasPraised = false;
-		if (!StringUtil.isNullOrEmptyString(praise)) {
-			if (!us.hasPraisedPhoto(photo)) {
-				int value = Integer.parseInt(praise);
-				photo.addToPraise(value);
-				client.addPraisedPhotoId(photo.getId());
-				us.addProcessedPhoto(photo);
-				wasPraised = true;
-			}
-		}
+        boolean wasPraised = false;
+        if(!StringUtil.isNullOrEmptyString(praise))
+        {
+            if(!us.hasPraisedPhoto(photo))
+            {
+                int value = Integer.parseInt(praise);
+                photo.addToPraise(value);
+                client.addPraisedPhotoId(photo.getId());
+                us.addProcessedPhoto(photo);
+                wasPraised = true;
+            }
+        }
 
-		log.info(LogBuilder.createUserMessage().addAction(wasPraised ? "PraisePhoto" : "SkipPhoto").toString());
+        log.info(LogBuilder.createUserMessage().addAction(wasPraised ? "PraisePhoto" : "SkipPhoto").toString());
 
-		return PartUtil.SHOW_PHOTO_PAGE_NAME;
-	}
+        return PartUtil.SHOW_PHOTO_PAGE_NAME;
+    }
 
 }

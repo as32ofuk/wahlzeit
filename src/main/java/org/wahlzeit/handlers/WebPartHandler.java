@@ -29,16 +29,17 @@ import java.util.Map;
 /**
  * The general interface for web partgs.
  */
-public interface WebPartHandler {
+public interface WebPartHandler
+{
 
-	/**
-	 *
-	 */
-	WebPart makeWebPart(UserSession us);
+    /**
+     *
+     */
+    WebPart makeWebPart(UserSession us);
 
-	/**
-	 *
-	 */
-	String handleGet(UserSession us, String link, Map args);
+    /**
+     *
+     */
+    String handleGet(UserSession us, String link, Map args);
 
 }

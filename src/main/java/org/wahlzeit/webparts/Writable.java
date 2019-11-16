@@ -26,11 +26,12 @@ import java.io.Writer;
 /**
  * A Writable can write a representation of itself to a Writer.
  */
-public interface Writable {
+public interface Writable
+{
 
-	/**
-	 *
-	 */
-	void writeOn(Writer writer) throws IOException;
+    /**
+     *
+     */
+    void writeOn(Writer writer) throws IOException;
 
 }

@@ -32,81 +32,87 @@ import java.util.logging.Logger;
 /**
  * A handler class for a specific web form.
  */
-public class EditUserPhotoFormHandler extends AbstractWebFormHandler {
+public class EditUserPhotoFormHandler extends AbstractWebFormHandler
+{
 
-	private static final Logger log = Logger.getLogger(EditUserPhotoFormHandler.class.getName());
+    private static final Logger log = Logger.getLogger(EditUserPhotoFormHandler.class.getName());
 
 
-	/**
-	 *
-	 */
-	public EditUserPhotoFormHandler() {
-		initialize(PartUtil.EDIT_USER_PHOTO_FORM_FILE, AccessRights.USER);
-	}
+    /**
+     *
+     */
+    public EditUserPhotoFormHandler()
+    {
+        initialize(PartUtil.EDIT_USER_PHOTO_FORM_FILE, AccessRights.USER);
+    }
 
-	/**
-	 *
-	 */
-	protected boolean isWellFormedGet(UserSession us, String link, Map args) {
-		return hasSavedPhotoId(us);
-	}
+    /**
+     *
+     */
+    protected boolean isWellFormedGet(UserSession us, String link, Map args)
+    {
+        return hasSavedPhotoId(us);
+    }
 
-	/**
-	 * https://youtu.be/-FRm3VPhseI
-	 */
-	protected void doMakeWebPart(UserSession us, WebPart part) {
-		Map<String, Object> args = us.getSavedArgs();
-		ModelConfig config = us.getClient().getLanguageConfiguration();
-		part.addStringFromArgs(args, UserSession.MESSAGE);
+    /**
+     * https://youtu.be/-FRm3VPhseI
+     */
+    protected void doMakeWebPart(UserSession us, WebPart part)
+    {
+        Map<String, Object> args = us.getSavedArgs();
+        ModelConfig config = us.getClient().getLanguageConfiguration();
+        part.addStringFromArgs(args, UserSession.MESSAGE);
 
-		String id = us.getAsString(args, Photo.ID);
-		Photo photo = ScreenshotPhotoManager.getInstance().getPhoto(id);
+        String id = us.getAsString(args, Photo.ID);
+        Photo photo = ScreenshotPhotoManager.getInstance().getPhoto(id);
 
-		part.addString(Photo.ID, id);
-		part.addString(Photo.THUMB, getPhotoThumb(us, photo));
+        part.addString(Photo.ID, id);
+        part.addString(Photo.THUMB, getPhotoThumb(us, photo));
 
-		part.addString(Photo.PRAISE, photo.getPraiseAsString(config));
-		part.maskAndAddString(Photo.TAGS, photo.getTags().asString());
+        part.addString(Photo.PRAISE, photo.getPraiseAsString(config));
+        part.maskAndAddString(Photo.TAGS, photo.getTags().asString());
 
-		part.addString(Photo.IS_INVISIBLE, HtmlUtil.asCheckboxCheck(photo.getStatus().isInvisible()));
-		part.addString(Photo.STATUS, config.asValueString(photo.getStatus()));
-		part.addString(Photo.UPLOADED_ON, config.asDateString(photo.getCreationTime()));
-	}
+        part.addString(Photo.IS_INVISIBLE, HtmlUtil.asCheckboxCheck(photo.getStatus().isInvisible()));
+        part.addString(Photo.STATUS, config.asValueString(photo.getStatus()));
+        part.addString(Photo.UPLOADED_ON, config.asDateString(photo.getCreationTime()));
+    }
 
-	/**
-	 * https://youtu.be/-FRm3VPhseI
-	 */
-	protected boolean isWellFormedPost(UserSession us, Map args) {
-		String id = us.getAsString(args, Photo.ID);
-		Photo photo = ScreenshotPhotoManager.getInstance().getPhoto(id);
-		return (photo != null) && us.isPhotoOwner(photo);
-	}
+    /**
+     * https://youtu.be/-FRm3VPhseI
+     */
+    protected boolean isWellFormedPost(UserSession us, Map args)
+    {
+        String id = us.getAsString(args, Photo.ID);
+        Photo photo = ScreenshotPhotoManager.getInstance().getPhoto(id);
+        return (photo != null) && us.isPhotoOwner(photo);
+    }
 
-	/**
-	 * https://youtu.be/-FRm3VPhseI
-	 */
-	protected String doHandlePost(UserSession us, Map args) {
-		String id = us.getAndSaveAsString(args, Photo.ID);
-		Photo photo = ScreenshotPhotoManager.getInstance().getPhoto(id);
+    /**
+     * https://youtu.be/-FRm3VPhseI
+     */
+    protected String doHandlePost(UserSession us, Map args)
+    {
+        String id = us.getAndSaveAsString(args, Photo.ID);
+        Photo photo = ScreenshotPhotoManager.getInstance().getPhoto(id);
 
-		String tags = us.getAndSaveAsString(args, Photo.TAGS);
-		photo.setTags(new Tags(tags));
+        String tags = us.getAndSaveAsString(args, Photo.TAGS);
+        photo.setTags(new Tags(tags));
 
-		String status = us.getAndSaveAsString(args, Photo.IS_INVISIBLE);
-		boolean isInvisible = (status != null) && status.equals("on");
-		PhotoStatus ps = photo.getStatus().asInvisible(isInvisible);
-		photo.setStatus(ps);
+        String status = us.getAndSaveAsString(args, Photo.IS_INVISIBLE);
+        boolean isInvisible = (status != null) && status.equals("on");
+        PhotoStatus ps = photo.getStatus().asInvisible(isInvisible);
+        photo.setStatus(ps);
 
-		AsyncTaskExecutor.savePhotoAsync(id);
+        AsyncTaskExecutor.savePhotoAsync(id);
 
-		log.info(LogBuilder.createUserMessage().
-				addAction("EditUserPhoto").
-				addParameter("Photo", photo.getId().asString()).toString());
+        log.info(LogBuilder.createUserMessage().
+                addAction("EditUserPhoto").
+                addParameter("Photo", photo.getId().asString()).toString());
 
-		ModelConfig config = us.getClient().getLanguageConfiguration();
-		us.setTwoLineMessage(config.getPhotoUpdateSucceeded(), config.getContinueWithShowUserHome());
+        ModelConfig config = us.getClient().getLanguageConfiguration();
+        us.setTwoLineMessage(config.getPhotoUpdateSucceeded(), config.getContinueWithShowUserHome());
 
-		return PartUtil.SHOW_NOTE_PAGE_NAME;
-	}
+        return PartUtil.SHOW_NOTE_PAGE_NAME;
+    }
 
 }

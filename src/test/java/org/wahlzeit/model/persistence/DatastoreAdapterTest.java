@@ -16,34 +16,40 @@ import static org.junit.Assert.fail;
 
 /**
  * Test class for {@link DatastoreAdapter}
- * 
+ *
  * @review
  */
-public class DatastoreAdapterTest extends AbstractAdapterTest {
+public class DatastoreAdapterTest extends AbstractAdapterTest
+{
 
-	@ClassRule
-	public static TestRule chain = RuleChain.
-			outerRule(new LocalDatastoreServiceTestConfigProvider()).
-			around(new RegisteredOfyEnvironmentProvider());
+    @ClassRule
+    public static TestRule chain = RuleChain.
+            outerRule(new LocalDatastoreServiceTestConfigProvider()).
+            around(new RegisteredOfyEnvironmentProvider());
 
-	private Image tooLargeTestImage;
-
-
-	@Override
-	protected void storageDependentSetUp() {
-		imageStorage = new DatastoreAdapter();
-
-		ByteBuffer bb = ByteBuffer.allocate(1024 * 1025);
-		tooLargeTestImage = ImagesServiceFactory.makeImage(bb.array());
-	}
+    private Image tooLargeTestImage;
 
 
-	@Test(expected = ArrayIndexOutOfBoundsException.class)
-	public void testUpperSizeLimit() {
-		try {
-			imageStorage.writeImage(tooLargeTestImage, "blub", 1);
-		} catch (IOException e) {
-			fail("IOException should not be thrown!");
-		}
-	}
+    @Override
+    protected void storageDependentSetUp()
+    {
+        imageStorage = new DatastoreAdapter();
+
+        ByteBuffer bb = ByteBuffer.allocate(1024 * 1025);
+        tooLargeTestImage = ImagesServiceFactory.makeImage(bb.array());
+    }
+
+
+    @Test(expected = ArrayIndexOutOfBoundsException.class)
+    public void testUpperSizeLimit()
+    {
+        try
+        {
+            imageStorage.writeImage(tooLargeTestImage, "blub", 1);
+        }
+        catch(IOException e)
+        {
+            fail("IOException should not be thrown!");
+        }
+    }
 }

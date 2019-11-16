@@ -27,11 +27,12 @@ import java.util.Map;
 /**
  * The general interface for web forms
  */
-public interface WebFormHandler extends WebPartHandler {
+public interface WebFormHandler extends WebPartHandler
+{
 
-	/**
-	 * @return suggest name of page to render
-	 */
-	String handlePost(UserSession us, Map args);
+    /**
+     * @return suggest name of page to render
+     */
+    String handlePost(UserSession us, Map args);
 
 }

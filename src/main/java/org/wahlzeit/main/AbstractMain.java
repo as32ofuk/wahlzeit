@@ -27,56 +27,63 @@ import org.wahlzeit.services.SysSession;
 /**
  * A superclass for a Main class for system startup and shutdown.
  */
-public abstract class AbstractMain {
+public abstract class AbstractMain
+{
 
-	/**
-	 *
-	 */
-	protected SysSession mainSession = null;
+    /**
+     *
+     */
+    protected SysSession mainSession = null;
 
-	/**
-	 *
-	 */
-	protected AbstractMain() {
-		// do nothing
-	}
+    /**
+     *
+     */
+    protected AbstractMain()
+    {
+        // do nothing
+    }
 
-	/**
-	 *
-	 */
-	protected void startUp(String rootDir) throws Exception {
-		SysConfig.setInstance(createSysConfig(rootDir));
+    /**
+     *
+     */
+    protected void startUp(String rootDir) throws Exception
+    {
+        SysConfig.setInstance(createSysConfig(rootDir));
 
-		mainSession = new SysSession("system");
-		SessionManager.setThreadLocalSession(mainSession);
-	}
+        mainSession = new SysSession("system");
+        SessionManager.setThreadLocalSession(mainSession);
+    }
 
-	/**
-	 *
-	 */
-	protected SysConfig createSysConfig(String rootDir) {
-		return createDevSysConfig(rootDir);
-	}
+    /**
+     *
+     */
+    protected SysConfig createSysConfig(String rootDir)
+    {
+        return createDevSysConfig(rootDir);
+    }
 
-	/**
-	 *
-	 */
-	protected SysConfig createProdSysConfig(String rootDir) {
-		return new SysConfig(rootDir);
-	}
+    /**
+     *
+     */
+    protected SysConfig createProdSysConfig(String rootDir)
+    {
+        return new SysConfig(rootDir);
+    }
 
-	/**
-	 *
-	 */
-	protected SysConfig createDevSysConfig(String rootDir) {
-		return new SysConfig(rootDir);
-	}
+    /**
+     *
+     */
+    protected SysConfig createDevSysConfig(String rootDir)
+    {
+        return new SysConfig(rootDir);
+    }
 
-	/**
-	 *
-	 */
-	protected void shutDown() throws Exception {
-		SysConfig.dropInstance();
-	}
+    /**
+     *
+     */
+    protected void shutDown() throws Exception
+    {
+        SysConfig.dropInstance();
+    }
 
 }

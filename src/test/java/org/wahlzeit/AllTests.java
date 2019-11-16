@@ -4,7 +4,6 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.wahlzeit.handlers.TellFriendTest;
 import org.wahlzeit.model.*;
-import org.wahlzeit.model.persistence.AbstractAdapterTest;
 import org.wahlzeit.model.persistence.DatastoreAdapterTest;
 import org.wahlzeit.services.EmailService;
 import org.wahlzeit.services.LogBuilderTest;

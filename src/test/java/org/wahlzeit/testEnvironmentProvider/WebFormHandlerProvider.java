@@ -8,21 +8,24 @@ import org.wahlzeit.handlers.WebPartHandlerManager;
 
 /**
  * A test setup class.
- * 
+ *
  * @review
  */
-public class WebFormHandlerProvider extends ExternalResource {
+public class WebFormHandlerProvider extends ExternalResource
+{
 
-	private WebFormHandler webFormHandler;
+    private WebFormHandler webFormHandler;
 
-	@Override
-	protected void before() throws Throwable {
-		WebPartHandlerManager.getInstance()
-				.addWebPartHandler(PartUtil.TELL_FRIEND_FORM_NAME, new TellFriendFormHandler());
-		webFormHandler = WebPartHandlerManager.getWebFormHandler(PartUtil.TELL_FRIEND_FORM_NAME);
-	}
+    @Override
+    protected void before() throws Throwable
+    {
+        WebPartHandlerManager.getInstance()
+                .addWebPartHandler(PartUtil.TELL_FRIEND_FORM_NAME, new TellFriendFormHandler());
+        webFormHandler = WebPartHandlerManager.getWebFormHandler(PartUtil.TELL_FRIEND_FORM_NAME);
+    }
 
-	public WebFormHandler getWebFormHandler() {
-		return webFormHandler;
-	}
+    public WebFormHandler getWebFormHandler()
+    {
+        return webFormHandler;
+    }
 }

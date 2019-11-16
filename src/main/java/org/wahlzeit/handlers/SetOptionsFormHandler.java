@@ -20,11 +20,7 @@
 
 package org.wahlzeit.handlers;
 
-import org.wahlzeit.model.AccessRights;
-import org.wahlzeit.model.Client;
-import org.wahlzeit.model.ModelConfig;
-import org.wahlzeit.model.PhotoSize;
-import org.wahlzeit.model.UserSession;
+import org.wahlzeit.model.*;
 import org.wahlzeit.services.Language;
 import org.wahlzeit.services.LogBuilder;
 import org.wahlzeit.webparts.WebPart;
@@ -35,62 +31,66 @@ import java.util.logging.Logger;
 /**
  * A handler class for a specific web form.
  */
-public class SetOptionsFormHandler extends AbstractWebFormHandler {
+public class SetOptionsFormHandler extends AbstractWebFormHandler
+{
 
-	/**
-	 *
-	 */
-	public static final String LANGUAGE = "language";
-	public static final String PHOTO_SIZE = "photoSize";
+    /**
+     *
+     */
+    public static final String LANGUAGE = "language";
+    public static final String PHOTO_SIZE = "photoSize";
 
-	private static final Logger log = Logger.getLogger(SetOptionsFormHandler.class.getName());
+    private static final Logger log = Logger.getLogger(SetOptionsFormHandler.class.getName());
 
-	/**
-	 *
-	 */
-	public SetOptionsFormHandler() {
-		initialize(PartUtil.SET_OPTIONS_FORM_FILE, AccessRights.GUEST);
-	}
+    /**
+     *
+     */
+    public SetOptionsFormHandler()
+    {
+        initialize(PartUtil.SET_OPTIONS_FORM_FILE, AccessRights.GUEST);
+    }
 
-	/**
-	 *
-	 */
-	protected void doMakeWebPart(UserSession us, WebPart part) {
-		Map args = us.getSavedArgs();
-		part.addStringFromArgs(args, UserSession.MESSAGE);
+    /**
+     *
+     */
+    protected void doMakeWebPart(UserSession us, WebPart part)
+    {
+        Map args = us.getSavedArgs();
+        part.addStringFromArgs(args, UserSession.MESSAGE);
 
-		part.addString(UserSession.MESSAGE, us.getMessage());
+        part.addString(UserSession.MESSAGE, us.getMessage());
 
-		Client client = us.getClient();
-		part.addSelect(LANGUAGE, Language.class, client.getLanguage().asString());
-		part.addSelect(PHOTO_SIZE, PhotoSize.class, client.getPhotoSize().asString());
-	}
+        Client client = us.getClient();
+        part.addSelect(LANGUAGE, Language.class, client.getLanguage().asString());
+        part.addSelect(PHOTO_SIZE, PhotoSize.class, client.getPhotoSize().asString());
+    }
 
-	/**
-	 *
-	 */
-	protected String doHandlePost(UserSession us, Map args) {
-		String language = us.getAndSaveAsString(args, LANGUAGE);
-		Language langValue = Language.getFromString(language);
-		Client client = us.getClient();
-		client.setLanguage(langValue);
+    /**
+     *
+     */
+    protected String doHandlePost(UserSession us, Map args)
+    {
+        String language = us.getAndSaveAsString(args, LANGUAGE);
+        Language langValue = Language.getFromString(language);
+        Client client = us.getClient();
+        client.setLanguage(langValue);
 
-		String photoSize = us.getAndSaveAsString(args, PHOTO_SIZE);
-		PhotoSize photoValue = PhotoSize.getFromString(photoSize);
-		client.setPhotoSize(photoValue);
+        String photoSize = us.getAndSaveAsString(args, PHOTO_SIZE);
+        PhotoSize photoValue = PhotoSize.getFromString(photoSize);
+        client.setPhotoSize(photoValue);
 
-		log.info(LogBuilder.createUserMessage().
-				addAction("Set options").
-				addParameter("language", language).
-				addParameter("photo size", photoSize).toString());
+        log.info(LogBuilder.createUserMessage().
+                addAction("Set options").
+                addParameter("language", language).
+                addParameter("photo size", photoSize).toString());
 
-		ModelConfig config = us.getClient().getLanguageConfiguration();
-		String msg1 = config.getOptionsWereSet();
-		String msg2 = config.getNoteMaximumPhotoSize();
-		String msg3 = config.getContinueWithShowPhoto();
-		us.setThreeLineMessage(msg1, msg2, msg3);
+        ModelConfig config = us.getClient().getLanguageConfiguration();
+        String msg1 = config.getOptionsWereSet();
+        String msg2 = config.getNoteMaximumPhotoSize();
+        String msg3 = config.getContinueWithShowPhoto();
+        us.setThreeLineMessage(msg1, msg2, msg3);
 
-		return PartUtil.SHOW_NOTE_PAGE_NAME;
-	}
+        return PartUtil.SHOW_NOTE_PAGE_NAME;
+    }
 
 }

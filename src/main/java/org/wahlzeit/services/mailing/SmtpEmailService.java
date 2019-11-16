@@ -23,13 +23,7 @@ package org.wahlzeit.services.mailing;
 import org.wahlzeit.services.EmailAddress;
 import org.wahlzeit.services.LogBuilder;
 
-import javax.mail.Authenticator;
-import javax.mail.BodyPart;
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.Multipart;
-import javax.mail.Session;
-import javax.mail.Transport;
+import javax.mail.*;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
@@ -39,91 +33,105 @@ import java.util.logging.Logger;
 /**
  *
  */
-public class SmtpEmailService extends AbstractEmailService {
+public class SmtpEmailService extends AbstractEmailService
+{
 
-	private static final Logger log = Logger.getLogger(SmtpEmailService.class.getName());
+    private static final Logger log = Logger.getLogger(SmtpEmailService.class.getName());
 
-	/**
-	 *
-	 */
-	private Session session;
+    /**
+     *
+     */
+    private Session session;
 
-	/**
-	 * Default constructor for GAE. There is usually no need to change those parameter.
-	 */
-	public SmtpEmailService() {
-		this("smtp.google.com", "smtp", null);
-	}
+    /**
+     * Default constructor for GAE. There is usually no need to change those parameter.
+     */
+    public SmtpEmailService()
+    {
+        this("smtp.google.com", "smtp", null);
+    }
 
-	/**
-	 *
-	 */
-	public SmtpEmailService(String host, String protocol, Authenticator authenticator) {
-		initialize(host, protocol, authenticator);
-	}
+    /**
+     *
+     */
+    public SmtpEmailService(String host, String protocol, Authenticator authenticator)
+    {
+        initialize(host, protocol, authenticator);
+    }
 
-	/**
-	 * @methodtype initialization
-	 */
-	protected void initialize(String host, String protocol, Authenticator authenticator) {
-		Properties props = new Properties();
+    /**
+     * @methodtype initialization
+     */
+    protected void initialize(String host, String protocol, Authenticator authenticator)
+    {
+        Properties props = new Properties();
 
-		props.put("mail.host", host);
-		props.put("mail.transport.protocol", protocol);
+        props.put("mail.host", host);
+        props.put("mail.transport.protocol", protocol);
 
-		session = Session.getDefaultInstance(props, authenticator);
-	}
+        session = Session.getDefaultInstance(props, authenticator);
+    }
 
-	/**
-	 *
-	 */
-	@Override
-	protected Message doCreateEmail(EmailAddress from, EmailAddress to, EmailAddress bcc, String subject, String body)
-			throws MailingException {
-		Message msg = new MimeMessage(session);
+    /**
+     *
+     */
+    @Override
+    protected Message doCreateEmail(EmailAddress from, EmailAddress to, EmailAddress bcc, String subject, String body)
+            throws MailingException
+    {
+        Message msg = new MimeMessage(session);
 
-		try {
-			msg.setFrom(from.asInternetAddress());
-			msg.addRecipient(Message.RecipientType.TO, to.asInternetAddress());
-			if (bcc.isValid()) {
-				msg.addRecipient(Message.RecipientType.BCC, bcc.asInternetAddress());
-			}
-			msg.setSubject(subject);
-			msg.setContent(createMultipart(body));
-		} catch (MessagingException e) {
-			log.warning(LogBuilder.createSystemMessage().addException("failed to create email", e).toString());
-			throw new MailingException(e.getMessage());
-		}
-		return msg;
-	}
+        try
+        {
+            msg.setFrom(from.asInternetAddress());
+            msg.addRecipient(Message.RecipientType.TO, to.asInternetAddress());
+            if(bcc.isValid())
+            {
+                msg.addRecipient(Message.RecipientType.BCC, bcc.asInternetAddress());
+            }
+            msg.setSubject(subject);
+            msg.setContent(createMultipart(body));
+        }
+        catch(MessagingException e)
+        {
+            log.warning(LogBuilder.createSystemMessage().addException("failed to create email", e).toString());
+            throw new MailingException(e.getMessage());
+        }
+        return msg;
+    }
 
-	/**
-	 * @methodtype factory
-	 * @methodproperties primitive, hook
-	 */
-	protected Multipart createMultipart(String body) throws MessagingException {
-		Multipart mp = new MimeMultipart();
-		BodyPart textPart = new MimeBodyPart();
+    /**
+     * @methodtype factory
+     * @methodproperties primitive, hook
+     */
+    protected Multipart createMultipart(String body) throws MessagingException
+    {
+        Multipart mp = new MimeMultipart();
+        BodyPart textPart = new MimeBodyPart();
 
-		textPart.setText(body); // sets type to "text/plain"
-		mp.addBodyPart(textPart);
+        textPart.setText(body); // sets type to "text/plain"
+        mp.addBodyPart(textPart);
 
-		return mp;
-	}
+        return mp;
+    }
 
-	/**
-	 *
-	 */
-	@Override
-	protected void doSendEmail(Message msg) throws MailingException {
-		try {
-			Transport.send(msg);
-			log.config(LogBuilder.createSystemMessage().
-					addMessage("email send").
-					addParameter("subject", msg.getSubject()).toString());
-		} catch (MessagingException ex) {
-			throw new MailingException("Sending email failed", ex);
-		}
-	}
+    /**
+     *
+     */
+    @Override
+    protected void doSendEmail(Message msg) throws MailingException
+    {
+        try
+        {
+            Transport.send(msg);
+            log.config(LogBuilder.createSystemMessage().
+                    addMessage("email send").
+                    addParameter("subject", msg.getSubject()).toString());
+        }
+        catch(MessagingException ex)
+        {
+            throw new MailingException("Sending email failed", ex);
+        }
+    }
 
 }

@@ -26,7 +26,9 @@ public class ScreenshotPhotoFactory extends PhotoFactory
         return instance;
     }
 
-    protected ScreenshotPhotoFactory(){}
+    protected ScreenshotPhotoFactory()
+    {
+    }
 
     /**
      * @methodtype factory
