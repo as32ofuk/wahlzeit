@@ -27,8 +27,8 @@ public class GuestTest
             outerRule(new LocalDatastoreServiceTestConfigProvider()).
             around(new RegisteredOfyEnvironmentProvider());
 
-    UserManager userManager;
-    PhotoManager photoManager;
+    private UserManager userManager;
+    private PhotoManager photoManager;
 
     @Before
     public void setUp() throws Exception
@@ -55,7 +55,7 @@ public class GuestTest
             @Override
             public Void run()
             {
-                new User(photoManager, userManager, "1337", "han", "star@wa.rs");
+                new User(userManager, "1337", "han", "star@wa.rs");
                 return null;
             }
         });
@@ -75,7 +75,7 @@ public class GuestTest
             @Override
             public Guest run()
             {
-                return new Guest(photoManager, userManager);
+                return new Guest(userManager);
             }
         });
         String userName = testGuest.getId();

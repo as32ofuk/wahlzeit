@@ -48,9 +48,6 @@ public abstract class Client implements Serializable, Persistent
     public static final String NICK_NAME = "nickName";
     public static final String LANGUAGE = "language";
 
-    protected PhotoManager photoManager;
-    protected UserManager userManager;
-
     @Id
     protected String id;
 
@@ -83,20 +80,18 @@ public abstract class Client implements Serializable, Persistent
     protected List<PhotoId> skippedPhotoIds;
 
 
-    public Client(PhotoManager photoManager, UserManager userManager, String id, String nickName, Client previousClient)
+    public Client(UserManager userManager, String id, String nickName, Client previousClient)
     {
-        this(photoManager, userManager, id, nickName, EmailAddress.EMPTY, AccessRights.NONE, previousClient);
+        this(userManager, id, nickName, EmailAddress.EMPTY, AccessRights.NONE, previousClient);
     }
 
-    public Client(PhotoManager photoManager, UserManager userManager, String id, String nickName, EmailAddress emailAddress, AccessRights accessRights, Client previousClient)
+    public Client(UserManager userManager, String id, String nickName, EmailAddress emailAddress, AccessRights accessRights, Client previousClient)
     {
-        this.photoManager = photoManager;
-        this.userManager = userManager;
         this.id = id;
         this.nickName = nickName;
         this.emailAddress = emailAddress;
         this.accessRights = accessRights;
-        
+
         skippedPhotoIds = new ArrayList<>();
         praisedPhotoIds = new ArrayList<>();
         photoSize = PhotoSize.MEDIUM;
@@ -150,7 +145,7 @@ public abstract class Client implements Serializable, Persistent
     /**
      * @methodtype set
      */
-    public void setNickName(String nickName) throws IllegalArgumentException
+    public void setNickName(String nickName, UserManager userManager) throws IllegalArgumentException
     {
         userManager.changeNickname(this.nickName, nickName);
         this.nickName = nickName;
@@ -330,7 +325,7 @@ public abstract class Client implements Serializable, Persistent
     /**
      * @methodtype get
      */
-    public Photo getLastPraisedPhoto()
+    public Photo getLastPraisedPhoto(PhotoManager photoManager)
     {
         int indexOfLastPraisedPhoto = praisedPhotoIds.size() - 1;
         Photo result = null;

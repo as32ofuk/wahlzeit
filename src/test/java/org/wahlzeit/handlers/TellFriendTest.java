@@ -26,17 +26,18 @@ import static org.junit.Assert.assertTrue;
  */
 public class TellFriendTest
 {
-
-    @ClassRule
-    public static SysConfigProvider sysConfigProvider = new SysConfigProvider();
-    @ClassRule
-    public static WebFormHandlerProvider webFormHandlerProvider = new WebFormHandlerProvider();
-
     @Rule
     public TestRule chain = RuleChain.
             outerRule(new LocalDatastoreServiceTestConfigProvider()).
+            around(new SingletonProviderProvider()).
             around(new RegisteredOfyEnvironmentProvider()).
-            around(new UserSessionProvider());
+            around(new UserSessionProvider()).
+            around(webFormHandlerProvider = new WebFormHandlerProvider());
+
+    @ClassRule
+    public static SysConfigProvider sysConfigProvider = new SysConfigProvider();
+
+    public WebFormHandlerProvider webFormHandlerProvider;
 
     private UserSession session;
     private WebFormHandler handler;
@@ -60,7 +61,7 @@ public class TellFriendTest
         // no failure is good behavior
 
         EmailAddress to = EmailAddress.getFromString("engel@himmel.de");
-        Map<String, String> args = new HashMap<String, String>();
+        Map<String, String> args = new HashMap<>();
         args.put(TellFriendFormHandler.EMAIL_TO, to.asString());
         String expectedSubject = "Oh well...";
         args.put(TellFriendFormHandler.EMAIL_SUBJECT, expectedSubject);

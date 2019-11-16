@@ -79,26 +79,25 @@ public class User extends Client
     protected long creationTime = System.currentTimeMillis();
 
 
-
     /**
      *
      */
-    public User(PhotoManager photoManager, UserManager userManager, String id, String myName, String myEmailAddress)
+    public User(UserManager userManager, String id, String myName, String myEmailAddress)
     {
-        this(photoManager, userManager, id, myName, EmailAddress.getFromString(myEmailAddress), null);
+        this(userManager, id, myName, EmailAddress.getFromString(myEmailAddress), null);
     }
 
     /**
      *
      */
-    public User(PhotoManager photoManager, UserManager userManager, String id, String myName, String myEmailAddress, Client previousClient)
+    public User(UserManager userManager, String id, String myName, String myEmailAddress, Client previousClient)
     {
-        this(photoManager, userManager, id, myName, EmailAddress.getFromString(myEmailAddress), previousClient);
+        this(userManager, id, myName, EmailAddress.getFromString(myEmailAddress), previousClient);
     }
 
-    public User(PhotoManager photoManager, UserManager userManager, String id, String nickname, EmailAddress emailAddress, Client previousClient)
+    public User(UserManager userManager, String id, String nickname, EmailAddress emailAddress, Client previousClient)
     {
-        super(photoManager, userManager, id, nickname, emailAddress, AccessRights.USER, previousClient);
+        super(userManager, id, nickname, emailAddress, AccessRights.USER, previousClient);
         log.config(LogBuilder.createSystemMessage().
                 addAction("initialize user").
                 addParameter("id", id).

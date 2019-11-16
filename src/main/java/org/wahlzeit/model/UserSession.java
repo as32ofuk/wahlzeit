@@ -77,7 +77,7 @@ public class UserSession extends Session implements Serializable
             httpSession.setAttribute(SITE_URL, mySiteUrl);
             httpSession.setAttribute(PHOTO_FILTER, photoManager.createPhotoFilter());
 
-            setClient(new Guest(photoManager, userManager));
+            setClient(new Guest(userManager));
             try
             {
                 Language language = Language.getFromIsoCode(myLanguage);

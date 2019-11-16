@@ -154,9 +154,9 @@ public class UserManager extends ClientManager
     /**
      * @methodtype get
      */
-    public User getUserById(String name)
+    public User getUserById(String id)
     {
-        Client client = super.getClientById(name);
+        Client client = super.getClientById(id);
         if(client instanceof User)
         {
             return (User) client;

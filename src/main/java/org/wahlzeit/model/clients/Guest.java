@@ -40,17 +40,17 @@ public class Guest extends Client
     /**
      *
      */
-    public Guest(PhotoManager photoManager, UserManager userManager)
+    public Guest(UserManager userManager)
     {
-        this(photoManager, userManager, null);
+        this(userManager, null);
     }
 
     /**
      * For logging out a user, some settings like the language or the photo size should not change, therefore the
      * previousClient is used so set these basic settings in the new <@link>Guest</@link>.
      */
-    public Guest(PhotoManager photoManager, UserManager userManager, Client previousClient)
+    public Guest(UserManager userManager, Client previousClient)
     {
-        super(photoManager, userManager, GUEST_PREFIX + userManager.getNextClientId(), GUEST_PREFIX + userManager.getLastClientId(), EmailAddress.EMPTY, AccessRights.GUEST, previousClient);
+        super(userManager, GUEST_PREFIX + userManager.getNextClientId(), GUEST_PREFIX + userManager.getLastClientId(), EmailAddress.EMPTY, AccessRights.GUEST, previousClient);
     }
 }

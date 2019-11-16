@@ -38,6 +38,11 @@ public class SingletonProvider
         }
     }
 
+    public static boolean isInitialized()
+    {
+        return instance != null;
+    }
+
     private Map<Class, Object> singletons;
 
     private SingletonProvider(PhotoManager photoManager, UserManager userManager, ImageStorage imageStorage, WebPartHandlerManager webPartHandlerManager)

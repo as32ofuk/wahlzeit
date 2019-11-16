@@ -3,7 +3,10 @@ package org.wahlzeit.services;
 import org.junit.ClassRule;
 import org.junit.Test;
 import org.junit.rules.RuleChain;
+import org.wahlzeit.main.SingletonProvider;
 import org.wahlzeit.model.CaseId;
+import org.wahlzeit.model.UserManager;
+import org.wahlzeit.model.UserSession;
 import org.wahlzeit.testEnvironmentProvider.*;
 
 import java.io.PrintWriter;
@@ -23,6 +26,7 @@ public class LogBuilderTest
     @ClassRule
     public static RuleChain ruleChain = RuleChain.
             outerRule(new LocalDatastoreServiceTestConfigProvider()).
+            around(new SingletonProviderProvider()).
             around(new RegisteredOfyEnvironmentProvider()).
             around(new SysConfigProvider()).
             around(new UserServiceProvider()).
@@ -44,9 +48,11 @@ public class LogBuilderTest
 
     protected String getExpectedUserMessage()
     {
+        // i need to fix appengine test environment
+        String clientName = UserSession.ANONYMOUS_CLIENT;
         return LEVEL + NAME_VALUE_SEPARATOR + USER_LEVEL + INFO_SEPARATOR +
                 SESSION + NAME_VALUE_SEPARATOR + UserSessionProvider.USER_SESSION_NAME + INFO_SEPARATOR +
-                CLIENT + NAME_VALUE_SEPARATOR + SessionManager.getThreadLocalSession().getClientId();
+                CLIENT + NAME_VALUE_SEPARATOR + clientName;
     }
 
     @Test
@@ -59,9 +65,11 @@ public class LogBuilderTest
 
     protected String getExpectedSystemMessage()
     {
+        // i need to fix appengine test environment
+        String clientName = UserSession.ANONYMOUS_CLIENT;
         return LEVEL + NAME_VALUE_SEPARATOR + SYSTEM_LEVEL + INFO_SEPARATOR +
                 SESSION + NAME_VALUE_SEPARATOR + UserSessionProvider.USER_SESSION_NAME + INFO_SEPARATOR +
-                CLIENT + NAME_VALUE_SEPARATOR + SessionManager.getThreadLocalSession().getClientId();
+                CLIENT + NAME_VALUE_SEPARATOR + clientName;
     }
 
     @Test

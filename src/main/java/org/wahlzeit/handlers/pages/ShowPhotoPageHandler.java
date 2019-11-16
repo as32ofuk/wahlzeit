@@ -92,7 +92,7 @@ public class ShowPhotoPageHandler extends AbstractWebPageHandler implements WebF
     protected boolean isToShowAds(UserSession us)
     {
         Client client = us.getClient();
-        Photo lastPraisedPhoto = client.getLastPraisedPhoto();
+        Photo lastPraisedPhoto = client.getLastPraisedPhoto(photoManager);
         return lastPraisedPhoto != null;
     }
 
@@ -131,7 +131,7 @@ public class ShowPhotoPageHandler extends AbstractWebPageHandler implements WebF
         WritableList parts = new WritableList();
 
         Client client = us.getClient();
-        Photo lastPraisedPhoto = client.getLastPraisedPhoto();
+        Photo lastPraisedPhoto = client.getLastPraisedPhoto(photoManager);
         if(lastPraisedPhoto != null)
         {
             parts.append(makePriorPhotoInfo(us, lastPraisedPhoto));

@@ -72,11 +72,11 @@ public class LoginFormHandler extends AbstractWebFormHandler
                 Client previousClient = us.getClient();
                 if(userService.isUserAdmin())
                 {
-                    user = new Administrator(photoManager, userManager, userId, nickName, emailAddress, previousClient);
+                    user = new Administrator(userManager, userId, nickName, emailAddress, previousClient);
                 }
                 else
                 {
-                    user = new User(photoManager, userManager, userId, nickName, emailAddress, previousClient);
+                    user = new User(userManager, userId, nickName, emailAddress, previousClient);
                 }
                 userManager.emailWelcomeMessage(us, user);
                 us.setClient(user);

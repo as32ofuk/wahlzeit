@@ -50,7 +50,7 @@ public class UserSessionProvider extends ExternalResource
             @Override
             public String run()
             {
-                Guest guest = new Guest(photoManager, userManager);
+                Guest guest = new Guest(userManager);
                 guest.setLanguage(Language.ENGLISH);
                 return guest.getId();
             }

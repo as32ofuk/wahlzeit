@@ -72,6 +72,7 @@ public abstract class AbstractWebPartHandler implements WebPartHandler
         this.sysConfig = sysConfig;
         this.webPartHandlerManager = webPartHandlerManager;
         this.webPartTemplateService = webPartTemplateService;
+        webPartTemplateService.setTemplatesDir(sysConfig.getTemplatesDir());
         this.templateName = templateName;
         this.neededRights = neededRights;
     }

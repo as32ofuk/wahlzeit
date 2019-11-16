@@ -105,7 +105,7 @@ public abstract class ModelMain extends AbstractMain
      */
     protected void createUser(String userId, String nickName, String emailAddress, String photoDir)
     {
-        User user = new User(photoManager, userManager, userId, nickName, emailAddress);
+        User user = new User(userManager, userId, nickName, emailAddress);
 
         File photoDirFile = new File(photoDir);
         FileFilter photoFileFilter = file -> file.getName().endsWith(".jpg");

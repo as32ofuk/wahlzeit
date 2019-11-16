@@ -40,28 +40,29 @@ public class Wahlzeit implements ServletContextListener
     /**
      *
      */
-    public void contextInitialized(ServletContextEvent sce)
+    public void contextInitialized(ServletContextEvent servletContextEvent)
     {
         try
         {
-            ServletContext sc = sce.getServletContext();
+            ServletContext servletContext = servletContextEvent.getServletContext();
 
             // configures logging
-            String contextPath = sc.getContextPath();
+            String contextPath = servletContext.getContextPath();
             System.setProperty("contextPath", contextPath);
-            log.config(LogBuilder.createSystemMessage().
-                    addParameter("System property context path", contextPath).toString());
+            // TODO LogBuilder uses Singleton that is initialized in startUp
+            //log.config(LogBuilder.createSystemMessage().addParameter("System property context path", contextPath).toString());
 
             // determines file system root path to resources
-            File dummyFile = new File(sc.getRealPath("dummy.txt"));
+            File dummyFile = new File(servletContext.getRealPath("dummy.txt"));
             String rootDir = dummyFile.getParent();
-            log.config(LogBuilder.createSystemMessage().
-                    addParameter("Root directory", rootDir).toString());
+            // TODO LogBuilder uses Singleton that is initialized in startUp
+            //log.config(LogBuilder.createSystemMessage().addParameter("Root directory", rootDir).toString());
 
             ServiceMain.getInstance().startUp(true, rootDir);
         }
         catch(Exception ex)
         {
+            ex.printStackTrace();
             log.warning(LogBuilder.createSystemMessage().
                     addException("Initializing context failed", ex).toString());
             throw new RuntimeException("End of story!", ex);

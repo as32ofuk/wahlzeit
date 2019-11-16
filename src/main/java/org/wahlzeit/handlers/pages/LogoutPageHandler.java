@@ -49,7 +49,7 @@ public class LogoutPageHandler extends AbstractWebPageHandler
     protected String doHandleGet(UserSession us, String link, Map args)
     {
         Client previousClient = us.getClient();
-        us.setClient(new Guest(photoManager, userManager, previousClient));
+        us.setClient(new Guest(userManager, previousClient));
         us.clearSavedArgs();
         return link;
     }

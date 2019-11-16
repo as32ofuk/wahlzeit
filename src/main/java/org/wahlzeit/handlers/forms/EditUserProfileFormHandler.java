@@ -88,7 +88,7 @@ public class EditUserProfileFormHandler extends AbstractWebFormHandler
         {
             if(!nickName.equals(user.getNickName()))
             {
-                user.setNickName(nickName);
+                user.setNickName(nickName, userManager);
             }
         }
         catch(IllegalArgumentException e)

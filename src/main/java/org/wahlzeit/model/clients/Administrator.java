@@ -32,13 +32,13 @@ import org.wahlzeit.services.EmailAddress;
 @Subclass(index = true)
 public class Administrator extends Moderator
 {
-    public Administrator(PhotoManager photoManager, UserManager userManager, String userId, String emailAddress, String nickname, Client previousClient)
+    public Administrator(UserManager userManager, String userId, String emailAddress, String nickname, Client previousClient)
     {
-        super(photoManager, userManager, userId, emailAddress, nickname, previousClient);
+        super(userManager, userId, emailAddress, nickname, previousClient);
     }
 
-    public Administrator(PhotoManager photoManager, UserManager userManager, String userId, String nickname, EmailAddress emailAddress, Client previousClient)
+    public Administrator(UserManager userManager, String userId, String nickname, EmailAddress emailAddress, Client previousClient)
     {
-        super(photoManager, userManager, userId, nickname, emailAddress, previousClient);
+        super(userManager, userId, nickname, emailAddress, previousClient);
     }
 }

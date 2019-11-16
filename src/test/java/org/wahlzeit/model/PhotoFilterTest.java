@@ -20,14 +20,22 @@
 package org.wahlzeit.model;
 
 import org.junit.Before;
+import org.junit.ClassRule;
 import org.junit.Test;
+import org.junit.rules.RuleChain;
 import org.wahlzeit.model.persistence.DatastoreAdapter;
 import org.wahlzeit.model.persistence.ImageStorage;
+import org.wahlzeit.testEnvironmentProvider.LocalDatastoreServiceTestConfigProvider;
+import org.wahlzeit.testEnvironmentProvider.RegisteredOfyEnvironmentProvider;
 
 import static org.junit.Assert.*;
 
 public class PhotoFilterTest
 {
+    @ClassRule
+    public static RuleChain ruleChain = RuleChain.
+            outerRule(new LocalDatastoreServiceTestConfigProvider()).
+            around(new RegisteredOfyEnvironmentProvider());
 
     private PhotoFilter photoFilter;
 

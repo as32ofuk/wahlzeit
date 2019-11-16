@@ -1,6 +1,8 @@
 package org.wahlzeit.testEnvironmentProvider;
 
+import org.junit.ClassRule;
 import org.junit.rules.ExternalResource;
+import org.junit.rules.RuleChain;
 import org.wahlzeit.handlers.PartUtil;
 import org.wahlzeit.handlers.forms.TellFriendFormHandler;
 import org.wahlzeit.handlers.forms.WebFormHandler;
