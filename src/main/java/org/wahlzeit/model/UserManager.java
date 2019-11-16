@@ -89,7 +89,8 @@ public class UserManager extends ClientManager
             }
         });
 
-        log.info(LogBuilder.createSystemMessage().addMessage("loaded all clients").toString());
+        // TODO LogBuilder uses SingletonProvider which is not yet initialized
+        //log.info(LogBuilder.createSystemMessage().addMessage("loaded all clients").toString());
     }
 
     /**

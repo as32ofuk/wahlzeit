@@ -44,6 +44,7 @@ public class Wahlzeit implements ServletContextListener
     {
         try
         {
+            Thread.sleep(2000);
             ServletContext servletContext = servletContextEvent.getServletContext();
 
             // configures logging
@@ -63,8 +64,8 @@ public class Wahlzeit implements ServletContextListener
         catch(Exception ex)
         {
             ex.printStackTrace();
-            log.warning(LogBuilder.createSystemMessage().
-                    addException("Initializing context failed", ex).toString());
+            // TODO LogBuilder uses SingletonProvider which is not yet initialized
+            //log.warning(LogBuilder.createSystemMessage().addException("Initializing context failed", ex).toString());
             throw new RuntimeException("End of story!", ex);
         }
     }

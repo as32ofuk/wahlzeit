@@ -64,13 +64,13 @@ public class DatastoreAdapter extends ImageStorage
                 }
             });
 
-            log.config(LogBuilder.createSystemMessage().addMessage("image successfully written").toString());
+            // TODO LogBuilder uses SingletonProvider which is not yet initialized
+            //log.config(LogBuilder.createSystemMessage().addMessage("image successfully written").toString());
         }
         else
         {
-            log.warning(LogBuilder.createSystemMessage().
-                    addMessage("did not get an Image type to store").
-                    addParameter("image type", image.toString()).toString());
+            // TODO LogBuilder uses SingletonProvider which is not yet initialized
+            //log.warning(LogBuilder.createSystemMessage().addMessage("did not get an Image type to store").addParameter("image type", image.toString()).toString());
         }
     }
 

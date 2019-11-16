@@ -19,9 +19,8 @@ public abstract class ImageStorage
 
     public ImageStorage()
     {
-        log.config(LogBuilder.createSystemMessage().
-                addAction("set ImageStorage instance").
-                addParameter("instance", this).toString());
+        // TODO LogBuilder uses SingletonProvider which is not yet initialized
+        //log.config(LogBuilder.createSystemMessage().addAction("set ImageStorage instance").addParameter("instance", this).toString());
     }
 
     // write-methods ---------------------------------------------------------------------------------------------------

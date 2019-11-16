@@ -34,14 +34,7 @@ public class GlobalsManager extends ObjectManager
     public void loadGlobals()
     {
         initGlobals();
-        Globals globals = ObjectifyService.run(new Work<Globals>()
-        {
-            @Override
-            public Globals run()
-            {
-                return readObject(Globals.class, Globals.DEAULT_ID);
-            }
-        });
+        Globals globals = ObjectifyService.run(() -> readObject(Globals.class, Globals.DEAULT_ID));
         log.info(globals.asString());
 
         userManager.setLastClientId(globals.getLastUserId());
@@ -55,7 +48,7 @@ public class GlobalsManager extends ObjectManager
      */
     private void initGlobals()
     {
-        if(hasGlobals())
+        if(!hasGlobals())
         {
             createDefaultGlobals();
         }
@@ -66,14 +59,9 @@ public class GlobalsManager extends ObjectManager
      */
     private boolean hasGlobals()
     {
-        return ObjectifyService.run(new Work<Boolean>()
-        {
-            @Override
-            public Boolean run()
-            {
-                return ofy().load().type(Globals.class).first().now() != null;
-            }
-        });
+        boolean hasGlobals = ObjectifyService.run(() -> ofy().load().type(Globals.class).first().now() != null);
+        System.out.println("hasGlobals: " + hasGlobals);
+        return hasGlobals;
     }
 
     /**
@@ -81,20 +69,17 @@ public class GlobalsManager extends ObjectManager
      */
     private void createDefaultGlobals()
     {
-        ObjectifyService.run(new Work<Boolean>()
+        ObjectifyService.run((Work<Boolean>) () ->
         {
-            @Override
-            public Boolean run()
-            {
-                Globals globals = new Globals();
-                globals.setLastUserId(Globals.DEAULT_ID);
-                globals.setLastPhotoId(0);
-                globals.setLastCaseId(0);
-                globals.setLastSessionId(0);
-                ofy().save().entity(globals).now();
-                return null;
-            }
+            Globals globals = new Globals();
+            globals.setLastUserId(Globals.DEAULT_ID);
+            globals.setLastPhotoId(0);
+            globals.setLastCaseId(0);
+            globals.setLastSessionId(0);
+            ofy().save().entity(globals).now();
+            return null;
         });
+        System.out.println("created default Globals");
     }
 
     /**

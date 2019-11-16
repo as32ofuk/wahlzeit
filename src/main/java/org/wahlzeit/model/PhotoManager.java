@@ -184,7 +184,8 @@ public class PhotoManager extends ObjectManager
             }
         }
 
-        log.info(LogBuilder.createSystemMessage().addMessage("All photos loaded.").toString());
+        // TODO LogBuilder uses SingletonProvider which is not yet initialized
+        //log.info(LogBuilder.createSystemMessage().addMessage("All photos loaded.").toString());
     }
 
     /**

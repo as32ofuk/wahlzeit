@@ -50,8 +50,8 @@ public abstract class ObjectManager
         assertIsNonNullArgument(type, "type");
         assertIsNonNullArgument(id, "id");
 
-        log.config(LogBuilder.createSystemMessage().
-                addMessage("Load Type " + type.toString() + " with ID " + id + " from datastore.").toString());
+        // TODO LogBuilder uses SingletonProvider which is not yet initialized
+        //log.config(LogBuilder.createSystemMessage().addMessage("Load Type " + type.toString() + " with ID " + id + " from datastore.").toString());
         return OfyService.ofy().load().type(type).id(id).now();
     }
 
@@ -105,11 +105,11 @@ public abstract class ObjectManager
         assertIsNonNullArgument(result, "result");
         assertIsNonNullArgument(type, "type");
 
-        log.config(LogBuilder.createSystemMessage().
-                addParameter("Datastore: load all entities of type", type.getName()).toString());
+        // TODO LogBuilder uses SingletonProvider which is not yet initialized
+        //log.config(LogBuilder.createSystemMessage().addParameter("Datastore: load all entities of type", type.getName()).toString());
         List<E> objects = OfyService.ofy().load().type(type).ancestor(applicationRootKey).list();
-        log.config(LogBuilder.createSystemMessage().
-                addParameter("Datastore: number of loaded objects", objects.size()).toString());
+        // TODO LogBuilder uses SingletonProvider which is not yet initialized
+        //log.config(LogBuilder.createSystemMessage().addParameter("Datastore: number of loaded objects", objects.size()).toString());
         result.addAll(objects);
     }
 
@@ -124,13 +124,12 @@ public abstract class ObjectManager
         assertIsNonNullArgument(propertyName, "propertyName");
         assertIsNonNullArgument(value, "value");
 
-        log.info(LogBuilder.createSystemMessage().
-                addMessage("Datastore: Load all Entities of type " + type.toString() + " where parameter "
-                        + propertyName + " = " + value.toString() + " from datastore.").toString());
+        // TODO LogBuilder uses SingletonProvider which is not yet initialized
+        //log.info(LogBuilder.createSystemMessage().addMessage("Datastore: Load all Entities of type " + type.toString() + " where parameter " + propertyName + " = " + value.toString() + " from datastore.").toString());
         List<E> objects = OfyService.ofy().load().type(type).
                 ancestor(applicationRootKey).filter(propertyName, value).list();
-        log.config(LogBuilder.createSystemMessage().
-                addParameter("Datastore: number of loaded objects", objects.size()).toString());
+        // TODO LogBuilder uses SingletonProvider which is not yet initialized
+        //log.config(LogBuilder.createSystemMessage().addParameter("Datastore: number of loaded objects", objects.size()).toString());
         result.addAll(objects);
     }
 

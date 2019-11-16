@@ -40,11 +40,11 @@ public class PhotoCaseManager extends ObjectManager
      */
     public PhotoCaseManager()
     {
-        Collection<PhotoCase> opc = new LinkedList<>();
-        loadOpenPhotoCases(opc);
-        for(PhotoCase pc : opc)
+        Collection<PhotoCase> openPhotoCases = new LinkedList<>();
+        loadOpenPhotoCases(openPhotoCases);
+        for(PhotoCase photoCase : openPhotoCases)
         {
-            openPhotoCases.put(pc.getId(), pc);
+            this.openPhotoCases.put(photoCase.getId(), photoCase);
         }
     }
 

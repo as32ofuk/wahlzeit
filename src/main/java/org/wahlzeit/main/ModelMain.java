@@ -57,26 +57,30 @@ public abstract class ModelMain extends AbstractMain
         super.startUp(rootDir);
         log.info("AbstractMain.startUp completed");
 
-        log.config(LogBuilder.createSystemMessage().addAction("load image storage").toString());
+        // TODO LogBuilder uses SingletonProvider which is not yet initialized
+        //log.config(LogBuilder.createSystemMessage().addAction("load image storage").toString());
         //GcsAdapter.Builder gcsAdapterBuilder = new GcsAdapter.Builder();
         imageStorage = new DatastoreAdapter();
 
-        log.config(LogBuilder.createSystemMessage().addAction("load user").toString());
+        // TODO LogBuilder uses SingletonProvider which is not yet initialized
+        //log.config(LogBuilder.createSystemMessage().addAction("load user").toString());
         userManager = new UserManager();
 
-        log.config(LogBuilder.createSystemMessage().addAction("load globals").toString());
+        // TODO LogBuilder uses SingletonProvider which is not yet initialized
+        //log.config(LogBuilder.createSystemMessage().addAction("load globals").toString());
         globalsManager = new GlobalsManager(userManager);
         globalsManager.loadGlobals();
 
-        log.config(LogBuilder.createSystemMessage().addAction("init PhotoFactory").toString());
+        // TODO LogBuilder uses SingletonProvider which is not yet initialized
+        //log.config(LogBuilder.createSystemMessage().addAction("init PhotoFactory").toString());
         PhotoFactory photoFactory = new ScreenshotPhotoFactory(userManager);
 
-        log.config(LogBuilder.createSystemMessage().addAction("load Photos").toString());
+        // TODO LogBuilder uses SingletonProvider which is not yet initialized
+        //log.config(LogBuilder.createSystemMessage().addAction("load Photos").toString());
         photoManager = new PhotoManager(photoFactory, userManager, globalsManager, imageStorage);
         photoManager.init();
 
         photoCaseManager = new PhotoCaseManager();
-
     }
 
 
