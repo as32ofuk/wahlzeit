@@ -35,7 +35,7 @@ public class CartesianCoordinate extends AbstractCoordinate
     }
 
     @Override
-    public boolean isEqual(Coordiante other)
+    public boolean isEqual(Coordinate other)
     {
         CartesianCoordinate that = other.asCartesianCoordinate();
         return Double.compare(that.x, x) == 0 &&

@@ -33,7 +33,7 @@ public class SphericCoordinate extends AbstractCoordinate
     }
 
     @Override
-    public boolean isEqual(Coordiante other)
+    public boolean isEqual(Coordinate other)
     {
         SphericCoordinate that = other.asSphericCoordinate();
         return Double.compare(that.phi, phi) == 0 &&

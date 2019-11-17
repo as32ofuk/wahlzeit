@@ -2,10 +2,10 @@ package de.henny022.wahlzeit.screeshots.model;
 
 import static java.lang.Math.*;
 
-public abstract class AbstractCoordinate implements Coordiante
+public abstract class AbstractCoordinate implements Coordinate
 {
     @Override
-    public double getCartesianDistance(Coordiante other)
+    public double getCartesianDistance(Coordinate other)
     {
         CartesianCoordinate thisCartesian = this.asCartesianCoordinate();
         CartesianCoordinate otherCartesian = other.asCartesianCoordinate();
@@ -16,7 +16,7 @@ public abstract class AbstractCoordinate implements Coordiante
     }
 
     @Override
-    public double getCentralAngle(Coordiante other)
+    public double getCentralAngle(Coordinate other)
     {
         SphericCoordinate thisSperical = this.asSphericCoordinate();
         SphericCoordinate otherSperical = other.asSphericCoordinate();
@@ -33,10 +33,10 @@ public abstract class AbstractCoordinate implements Coordiante
         {
             return true;
         }
-        if(!(o instanceof Coordiante))
+        if(!(o instanceof Coordinate))
         {
             return false;
         }
-        return isEqual((Coordiante) o);
+        return isEqual((Coordinate) o);
     }
 }
