@@ -1,5 +1,10 @@
 package de.henny022.wahlzeit.screeshots.model;
 
+import java.util.Objects;
+
+import static java.lang.Math.atan;
+import static java.lang.Math.sqrt;
+
 public class CartesianCoordinate extends AbstractCoordinate
 {
     protected double x;
@@ -23,18 +28,24 @@ public class CartesianCoordinate extends AbstractCoordinate
     @Override
     public SphericCoordinate asSphericCoordinate()
     {
-        return null;
-    }
-
-    @Override
-    public double getCentralAngle(Coordiante other)
-    {
-        return 0;
+        double r = sqrt(x * x + y * y + z * z);
+        double phi = atan(y / x);
+        double theta = atan(z / r);
+        return new SphericCoordinate(phi, theta, r);
     }
 
     @Override
     public boolean isEqual(Coordiante other)
     {
-        return false;
+        CartesianCoordinate that = other.asCartesianCoordinate();
+        return Double.compare(that.x, x) == 0 &&
+                Double.compare(that.y, y) == 0 &&
+                Double.compare(that.z, z) == 0;
+    }
+
+    @Override
+    public int hashCode()
+    {
+        return Objects.hash(x, y, z);
     }
 }
