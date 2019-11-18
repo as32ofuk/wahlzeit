@@ -1,4 +1,4 @@
-package de.henny022.wahlzeit.screeshots.model;
+package de.henny022.wahlzeit.screenshots.model;
 
 public class Location
 {

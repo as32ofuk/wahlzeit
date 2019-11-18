@@ -24,7 +24,7 @@ import com.google.appengine.api.images.Image;
 import com.google.appengine.api.images.ImagesService;
 import com.google.appengine.api.images.ImagesServiceFactory;
 import com.google.appengine.api.images.Transform;
-import de.henny022.wahlzeit.screeshots.model.ScreenshotPhotoFactory;
+import de.henny022.wahlzeit.screenshots.model.ScreenshotPhotoFactory;
 import org.wahlzeit.services.LogBuilder;
 
 import java.util.logging.Logger;

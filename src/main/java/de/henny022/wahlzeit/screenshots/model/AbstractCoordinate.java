@@ -1,4 +1,4 @@
-package de.henny022.wahlzeit.screeshots.model;
+package de.henny022.wahlzeit.screenshots.model;
 
 import static java.lang.Math.*;
 
@@ -24,19 +24,5 @@ public abstract class AbstractCoordinate implements Coordinate
         double phi2 = otherSperical.phi;
         double dTheta = abs(thisSperical.theta - otherSperical.theta);
         return acos(sin(phi1) * sin(phi2) + cos(phi1) * cos(phi2) * cos(dTheta));
-    }
-
-    @Override
-    public boolean equals(Object o)
-    {
-        if(this == o)
-        {
-            return true;
-        }
-        if(!(o instanceof Coordinate))
-        {
-            return false;
-        }
-        return isEqual((Coordinate) o);
     }
 }

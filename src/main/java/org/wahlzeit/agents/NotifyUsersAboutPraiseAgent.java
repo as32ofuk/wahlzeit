@@ -1,7 +1,7 @@
 package org.wahlzeit.agents;
 
 import com.google.apphosting.api.ApiProxy;
-import de.henny022.wahlzeit.screeshots.model.ScreenshotPhotoManager;
+import de.henny022.wahlzeit.screenshots.model.ScreenshotPhotoManager;
 import org.wahlzeit.model.*;
 import org.wahlzeit.services.EmailAddress;
 import org.wahlzeit.services.LogBuilder;

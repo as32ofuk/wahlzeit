@@ -4,7 +4,7 @@ import com.google.appengine.api.images.Image;
 import org.apache.http.HttpStatus;
 import org.wahlzeit.model.Photo;
 import org.wahlzeit.model.PhotoSize;
-import de.henny022.wahlzeit.screeshots.model.ScreenshotPhotoManager;
+import de.henny022.wahlzeit.screenshots.model.ScreenshotPhotoManager;
 import org.wahlzeit.model.persistence.ImageStorage;
 import org.wahlzeit.services.LogBuilder;
 

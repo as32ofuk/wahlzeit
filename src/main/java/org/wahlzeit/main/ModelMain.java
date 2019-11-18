@@ -22,8 +22,8 @@ package org.wahlzeit.main;
 
 import com.google.appengine.api.images.Image;
 import com.google.appengine.api.images.ImagesServiceFactory;
-import de.henny022.wahlzeit.screeshots.model.ScreenshotPhotoFactory;
-import de.henny022.wahlzeit.screeshots.model.ScreenshotPhotoManager;
+import de.henny022.wahlzeit.screenshots.model.ScreenshotPhotoFactory;
+import de.henny022.wahlzeit.screenshots.model.ScreenshotPhotoManager;
 import org.wahlzeit.model.*;
 import org.wahlzeit.model.persistence.DatastoreAdapter;
 import org.wahlzeit.model.persistence.ImageStorage;
