@@ -2,8 +2,7 @@ package de.henny022.wahlzeit.screenshots.model;
 
 import java.util.Objects;
 
-import static java.lang.Math.atan;
-import static java.lang.Math.sqrt;
+import static java.lang.Math.*;
 
 public class CartesianCoordinate extends AbstractCoordinate
 {
@@ -29,8 +28,16 @@ public class CartesianCoordinate extends AbstractCoordinate
     public SphericCoordinate asSphericCoordinate()
     {
         double r = sqrt(x * x + y * y + z * z);
-        double phi = atan(y / x);
-        double theta = atan(z / r);
+        double phi = atan2(y, x);
+        double theta;
+        if(Double.compare(r, 0) == 0)
+        {
+            theta = 0;
+        }
+        else
+        {
+            theta = acos(z / r);
+        }
         return new SphericCoordinate(phi, theta, r);
     }
 
