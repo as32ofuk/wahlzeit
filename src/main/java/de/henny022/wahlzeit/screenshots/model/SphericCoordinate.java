@@ -32,35 +32,4 @@ public class SphericCoordinate extends AbstractCoordinate
         return this;
     }
 
-    @Override
-    public boolean isEqual(Coordinate other)
-    {
-        SphericCoordinate that = other.asSphericCoordinate();
-        return Double.compare(that.phi, phi) == 0 &&
-                Double.compare(that.theta, theta) == 0 &&
-                Double.compare(that.radius, radius) == 0;
-    }
-
-    @Override
-    public boolean equals(Object o)
-    {
-        if(this == o)
-        {
-            return true;
-        }
-        if(o == null || getClass() != o.getClass())
-        {
-            return false;
-        }
-        SphericCoordinate that = (SphericCoordinate) o;
-        return Double.compare(that.phi, phi) == 0 &&
-                Double.compare(that.theta, theta) == 0 &&
-                Double.compare(that.radius, radius) == 0;
-    }
-
-    @Override
-    public int hashCode()
-    {
-        return Objects.hash(phi, theta, radius);
-    }
 }

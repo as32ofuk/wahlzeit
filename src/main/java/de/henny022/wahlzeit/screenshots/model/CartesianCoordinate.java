@@ -40,36 +40,4 @@ public class CartesianCoordinate extends AbstractCoordinate
         }
         return new SphericCoordinate(phi, theta, r);
     }
-
-    @Override
-    public boolean isEqual(Coordinate other)
-    {
-        CartesianCoordinate that = other.asCartesianCoordinate();
-        return Double.compare(that.x, x) == 0 &&
-                Double.compare(that.y, y) == 0 &&
-                Double.compare(that.z, z) == 0;
-    }
-
-    @Override
-    public boolean equals(Object o)
-    {
-        if(this == o)
-        {
-            return true;
-        }
-        if(o == null || getClass() != o.getClass())
-        {
-            return false;
-        }
-        CartesianCoordinate that = (CartesianCoordinate) o;
-        return Double.compare(that.x, x) == 0 &&
-                Double.compare(that.y, y) == 0 &&
-                Double.compare(that.z, z) == 0;
-    }
-
-    @Override
-    public int hashCode()
-    {
-        return Objects.hash(x, y, z);
-    }
 }
