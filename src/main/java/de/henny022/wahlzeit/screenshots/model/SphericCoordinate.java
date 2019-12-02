@@ -34,10 +34,10 @@ public class SphericCoordinate extends AbstractCoordinate
 
     protected void assertClassInvariants()
     {
-        assert phi > 0;
-        assert phi < PI;
-        assert theta > -PI;
-        assert theta < PI;
-        assert radius > 0;
+        assert theta >= 0;
+        assert theta <= PI;
+        assert phi >= -PI;
+        assert phi <= PI;
+        assert radius >= 0;
     }
 }
