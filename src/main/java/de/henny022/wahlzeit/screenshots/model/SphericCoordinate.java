@@ -1,7 +1,5 @@
 package de.henny022.wahlzeit.screenshots.model;
 
-import java.util.Objects;
-
 import static java.lang.Math.*;
 
 public class SphericCoordinate extends AbstractCoordinate
@@ -20,6 +18,7 @@ public class SphericCoordinate extends AbstractCoordinate
     @Override
     public CartesianCoordinate asCartesianCoordinate()
     {
+        assertClassInvariants();
         double x = radius * sin(theta) * cos(phi);
         double y = radius * sin(theta) * sin(phi);
         double z = radius * cos(theta);
@@ -32,4 +31,12 @@ public class SphericCoordinate extends AbstractCoordinate
         return this;
     }
 
+    protected void assertClassInvariants()
+    {
+        assert phi > 0;
+        assert phi < PI;
+        assert theta > -PI;
+        assert theta < PI;
+        assert radius > 0;
+    }
 }
