@@ -11,6 +11,10 @@ public abstract class AbstractCoordinate implements Coordinate
     @Override
     public double getCartesianDistance(Coordinate other)
     {
+        if(other == null)
+        {
+            throw new IllegalArgumentException("other coordinate must not be null");
+        }
         CartesianCoordinate thisCartesian = this.asCartesianCoordinate();
         CartesianCoordinate otherCartesian = other.asCartesianCoordinate();
         double distanceSquared = (thisCartesian.x * thisCartesian.x) - (otherCartesian.x * otherCartesian.x) +
@@ -22,6 +26,10 @@ public abstract class AbstractCoordinate implements Coordinate
     @Override
     public double getCentralAngle(Coordinate other)
     {
+        if(other == null)
+        {
+            throw new IllegalArgumentException("other coordinate must not be null");
+        }
         SphericCoordinate thisSperical = this.asSphericCoordinate();
         SphericCoordinate otherSperical = other.asSphericCoordinate();
         double phi1 = thisSperical.phi;
@@ -33,6 +41,10 @@ public abstract class AbstractCoordinate implements Coordinate
     @Override
     public boolean isEqual(Coordinate other)
     {
+        if(other == null)
+        {
+            throw new IllegalArgumentException("other coordinate must not be null");
+        }
         CartesianCoordinate thisCartesian = this.asCartesianCoordinate();
         CartesianCoordinate otherCartesian = other.asCartesianCoordinate();
         return abs(thisCartesian.x - otherCartesian.x) < COMPARE_EPSILON &&
