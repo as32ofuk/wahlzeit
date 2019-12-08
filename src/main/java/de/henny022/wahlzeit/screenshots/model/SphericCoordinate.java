@@ -29,6 +29,7 @@ public class SphericCoordinate extends AbstractCoordinate
     @Override
     public SphericCoordinate asSphericCoordinate()
     {
+        assertClassInvariants();
         return this;
     }
 
