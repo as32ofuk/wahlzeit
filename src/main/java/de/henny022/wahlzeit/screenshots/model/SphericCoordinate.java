@@ -13,7 +13,14 @@ public class SphericCoordinate extends AbstractCoordinate
         this.phi = phi;
         this.theta = theta;
         this.radius = radius;
-        assertClassInvariants();
+        try
+        {
+            assertClassInvariants();
+        }
+        catch(IllegalStateException e)
+        {
+            throw new IllegalArgumentException(e);
+        }
     }
 
     @Override

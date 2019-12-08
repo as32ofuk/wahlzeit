@@ -16,7 +16,15 @@ public abstract class AbstractCoordinate implements Coordinate
             throw new IllegalArgumentException("other coordinate must not be null");
         }
         CartesianCoordinate thisCartesian = this.asCartesianCoordinate();
-        CartesianCoordinate otherCartesian = other.asCartesianCoordinate();
+        CartesianCoordinate otherCartesian = null;
+        try
+        {
+            otherCartesian = other.asCartesianCoordinate();
+        }
+        catch(Exception e)
+        {
+            throw new IllegalArgumentException("other coordinate is invalid", e);
+        }
         double distanceSquared = (thisCartesian.x * thisCartesian.x) - (otherCartesian.x * otherCartesian.x) +
                 (thisCartesian.y * thisCartesian.y) - (otherCartesian.y * otherCartesian.y) +
                 (thisCartesian.z * thisCartesian.z) - (otherCartesian.z * otherCartesian.z);
@@ -31,7 +39,15 @@ public abstract class AbstractCoordinate implements Coordinate
             throw new IllegalArgumentException("other coordinate must not be null");
         }
         SphericCoordinate thisSperical = this.asSphericCoordinate();
-        SphericCoordinate otherSperical = other.asSphericCoordinate();
+        SphericCoordinate otherSperical = null;
+        try
+        {
+            otherSperical = other.asSphericCoordinate();
+        }
+        catch(Exception e)
+        {
+            throw new IllegalArgumentException("other coordinate is invalid", e);
+        }
         double phi1 = thisSperical.phi;
         double phi2 = otherSperical.phi;
         double dTheta = abs(thisSperical.theta - otherSperical.theta);
@@ -46,7 +62,15 @@ public abstract class AbstractCoordinate implements Coordinate
             throw new IllegalArgumentException("other coordinate must not be null");
         }
         CartesianCoordinate thisCartesian = this.asCartesianCoordinate();
-        CartesianCoordinate otherCartesian = other.asCartesianCoordinate();
+        CartesianCoordinate otherCartesian = null;
+        try
+        {
+            otherCartesian = other.asCartesianCoordinate();
+        }
+        catch(IllegalStateException e)
+        {
+            throw new IllegalArgumentException("other coordinate is invalid", e);
+        }
         return abs(thisCartesian.x - otherCartesian.x) < COMPARE_EPSILON &&
                 abs(thisCartesian.y - otherCartesian.y) < COMPARE_EPSILON &&
                 abs(thisCartesian.y - otherCartesian.y) < COMPARE_EPSILON;

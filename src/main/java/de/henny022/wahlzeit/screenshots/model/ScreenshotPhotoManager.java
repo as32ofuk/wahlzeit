@@ -4,20 +4,14 @@ import org.wahlzeit.model.Photo;
 import org.wahlzeit.model.PhotoId;
 import org.wahlzeit.model.PhotoManager;
 
+import java.util.NoSuchElementException;
+
 public class ScreenshotPhotoManager extends PhotoManager
 {
     /**
      *
      */
     protected static final ScreenshotPhotoManager instance = new ScreenshotPhotoManager();
-
-    /**
-     *
-     */
-    public static final ScreenshotPhotoManager getInstance2()
-    {
-        return instance;
-    }
 
     /**
      * https://youtu.be/-FRm3VPhseI
@@ -27,6 +21,17 @@ public class ScreenshotPhotoManager extends PhotoManager
         photoTagCollector = ScreenshotPhotoFactory.getInstance().createPhotoTagCollector();
     }
 
+    @Override
+    protected Photo doGetPhotoFromId(PhotoId id)
+    {
+        Photo result = super.doGetPhotoFromId(id);
+        if(result != null)
+        {
+            return result;
+        }
+        throw new NoSuchElementException("no photo found for this id");
+    }
+
     /**
      * https://youtu.be/-FRm3VPhseI
      */
@@ -34,18 +39,18 @@ public class ScreenshotPhotoManager extends PhotoManager
     {
         if(id == null)
         {
-            return null;
+            throw new IllegalArgumentException("photo id must not be null");
         }
 
-        Photo result = doGetPhotoFromId(id);
-
-        if(result == null)
+        Photo result;
+        try
+        {
+            result = doGetPhotoFromId(id);
+        }
+        catch(NoSuchElementException e)
         {
             result = ScreenshotPhotoFactory.getInstance().loadPhoto(id);
-            if(result != null)
-            {
-                doAddPhoto(result);
-            }
+            doAddPhoto(result);
         }
 
         return result;

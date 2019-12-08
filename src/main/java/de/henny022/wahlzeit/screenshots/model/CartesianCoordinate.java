@@ -1,7 +1,5 @@
 package de.henny022.wahlzeit.screenshots.model;
 
-import java.util.Objects;
-
 import static java.lang.Math.*;
 
 public class CartesianCoordinate extends AbstractCoordinate
@@ -15,7 +13,14 @@ public class CartesianCoordinate extends AbstractCoordinate
         this.x = x;
         this.y = y;
         this.z = z;
-        assertClassInvariants();
+        try
+        {
+            assertClassInvariants();
+        }
+        catch(IllegalStateException e)
+        {
+            throw new IllegalArgumentException(e);
+        }
     }
 
     @Override
