@@ -34,10 +34,17 @@ public class SphericCoordinate extends AbstractCoordinate
 
     protected void assertClassInvariants()
     {
-        assert theta >= 0;
-        assert theta <= PI;
-        assert phi >= -PI;
-        assert phi <= PI;
-        assert radius >= 0;
+        if(!(theta >= 0 && theta <= PI))
+        {
+            throw new IllegalStateException("theta must be between 0 and pi");
+        }
+        if(!(phi >= -PI && phi <= PI))
+        {
+            throw new IllegalStateException("phi must be between -pi and pi");
+        }
+        if(!(radius >= 0))
+        {
+            throw new IllegalStateException("radius must be bigger than or equal to zero");
+        }
     }
 }
