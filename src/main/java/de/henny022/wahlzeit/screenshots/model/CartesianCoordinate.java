@@ -15,11 +15,13 @@ public class CartesianCoordinate extends AbstractCoordinate
         this.x = x;
         this.y = y;
         this.z = z;
+        assertClassInvariants();
     }
 
     @Override
     public CartesianCoordinate asCartesianCoordinate()
     {
+        assertClassInvariants();
         return this;
     }
 
@@ -27,6 +29,7 @@ public class CartesianCoordinate extends AbstractCoordinate
     @Override
     public SphericCoordinate asSphericCoordinate()
     {
+        assertClassInvariants();
         double r = sqrt(x * x + y * y + z * z);
         double phi = atan2(y, x);
         double theta;
@@ -39,5 +42,13 @@ public class CartesianCoordinate extends AbstractCoordinate
             theta = acos(z / r);
         }
         return new SphericCoordinate(phi, theta, r);
+    }
+
+    protected void assertClassInvariants()
+    {
+        if(!(Double.isFinite(x) && Double.isFinite(y) && Double.isFinite(z)))
+        {
+            throw new IllegalStateException("x, y, z must be finite numbers (not NaN of INF)");
+        }
     }
 }
