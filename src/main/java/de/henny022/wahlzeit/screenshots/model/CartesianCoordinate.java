@@ -30,23 +30,11 @@ public class CartesianCoordinate extends AbstractCoordinate
         return this;
     }
 
-
     @Override
     public SphericCoordinate asSphericCoordinate()
     {
         assertClassInvariants();
-        double r = sqrt(x * x + y * y + z * z);
-        double phi = atan2(y, x);
-        double theta;
-        if(Double.compare(r, 0) == 0)
-        {
-            theta = 0;
-        }
-        else
-        {
-            theta = acos(z / r);
-        }
-        return new SphericCoordinate(phi, theta, r);
+        return CoordinateManager.getSphericCoordinate(this);
     }
 
     protected void assertClassInvariants()

@@ -6,7 +6,7 @@ public class Location
 
     public Location()
     {
-        coordinate = new SphericCoordinate(0, 0, 0);
+        coordinate = CoordinateManager.getCoordinate();
     }
 
     public Location(Coordinate coordinate)

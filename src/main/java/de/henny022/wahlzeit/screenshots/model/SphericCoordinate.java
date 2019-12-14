@@ -27,10 +27,7 @@ public class SphericCoordinate extends AbstractCoordinate
     public CartesianCoordinate asCartesianCoordinate()
     {
         assertClassInvariants();
-        double x = radius * sin(theta) * cos(phi);
-        double y = radius * sin(theta) * sin(phi);
-        double z = radius * cos(theta);
-        return new CartesianCoordinate(x, y, z);
+        return CoordinateManager.getCartesianCoordinate(this);
     }
 
     @Override

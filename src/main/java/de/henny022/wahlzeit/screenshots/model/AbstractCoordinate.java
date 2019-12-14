@@ -77,23 +77,24 @@ public abstract class AbstractCoordinate implements Coordinate
     }
 
     @Override
+    public String toString()
+    {
+        return super.toString() + " " + hashCode();
+    }
+
+    @Override
     public boolean equals(Object o)
     {
-        if(this == o)
+        if(o instanceof Coordinate)
         {
-            return true;
+            return CoordinateManager.equals(this, (Coordinate) o);
         }
-        if(!(o instanceof Coordinate))
-        {
-            return false;
-        }
-        return isEqual((Coordinate) o);
+        return false;
     }
 
     @Override
     public int hashCode()
     {
-        CartesianCoordinate cartesian = asCartesianCoordinate();
-        return Objects.hash(cartesian.x, cartesian.y, cartesian.z);
+        return CoordinateManager.hashCode(this);
     }
 }
