@@ -20,6 +20,12 @@ import java.util.logging.Logger;
                 "Singleton"
         }
 )
+@DesignPattern(
+        name = "Adapter",
+        participants = {
+                "Target"
+        }
+)
 public abstract class ImageStorage
 {
 

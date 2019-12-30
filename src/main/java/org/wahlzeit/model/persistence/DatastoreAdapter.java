@@ -26,6 +26,7 @@ import com.googlecode.objectify.ObjectifyService;
 import com.googlecode.objectify.Work;
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
+import de.henny022.wahlzeit.screenshots.doc.DesignPattern;
 import org.wahlzeit.services.LogBuilder;
 import org.wahlzeit.services.OfyService;
 
@@ -39,6 +40,12 @@ import java.util.logging.Logger;
  *
  * @review
  */
+@DesignPattern(
+        name = "Adapter",
+        participants = {
+                "Adapter"
+        }
+)
 public class DatastoreAdapter extends ImageStorage
 {
 
