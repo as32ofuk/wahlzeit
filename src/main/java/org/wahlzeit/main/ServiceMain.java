@@ -22,6 +22,7 @@ package org.wahlzeit.main;
 
 import com.googlecode.objectify.ObjectifyService;
 import com.googlecode.objectify.VoidWork;
+import de.henny022.wahlzeit.screenshots.doc.DesignPattern;
 import org.wahlzeit.handlers.*;
 import org.wahlzeit.model.AccessRights;
 import org.wahlzeit.model.EnglishModelConfig;
@@ -40,6 +41,12 @@ import java.util.logging.Logger;
 /**
  * A Main class that runs a Wahlzeit web server.
  */
+@DesignPattern(
+        name = "Singleton",
+        participants = {
+                "Singleton"
+        }
+)
 public class ServiceMain extends ModelMain
 {
 

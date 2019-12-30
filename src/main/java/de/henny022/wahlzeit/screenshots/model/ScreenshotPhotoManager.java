@@ -1,11 +1,18 @@
 package de.henny022.wahlzeit.screenshots.model;
 
+import de.henny022.wahlzeit.screenshots.doc.DesignPattern;
 import org.wahlzeit.model.Photo;
 import org.wahlzeit.model.PhotoId;
 import org.wahlzeit.model.PhotoManager;
 
 import java.util.NoSuchElementException;
 
+@DesignPattern(
+        name = "Singleton",
+        participants = {
+                "Singleton"
+        }
+)
 public class ScreenshotPhotoManager extends PhotoManager
 {
     /**

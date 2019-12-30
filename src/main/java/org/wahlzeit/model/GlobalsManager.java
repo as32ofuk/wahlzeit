@@ -2,6 +2,7 @@ package org.wahlzeit.model;
 
 import com.googlecode.objectify.ObjectifyService;
 import com.googlecode.objectify.Work;
+import de.henny022.wahlzeit.screenshots.doc.DesignPattern;
 import org.wahlzeit.services.ObjectManager;
 import org.wahlzeit.servlets.AbstractServlet;
 
@@ -16,6 +17,12 @@ import static org.wahlzeit.services.OfyService.ofy;
  * @see #loadGlobals()
  * @see #saveGlobals()
  */
+@DesignPattern(
+        name = "Singleton",
+        participants = {
+                "Singleton"
+        }
+)
 public class GlobalsManager extends ObjectManager
 {
 

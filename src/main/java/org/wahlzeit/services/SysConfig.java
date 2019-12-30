@@ -20,12 +20,20 @@
 
 package org.wahlzeit.services;
 
+import de.henny022.wahlzeit.screenshots.doc.DesignPattern;
+
 import java.io.File;
 import java.util.logging.Logger;
 
 /**
  * A basic set of system configuration data
  */
+@DesignPattern(
+        name = "Singleton",
+        participants = {
+                "Singleton"
+        }
+)
 public class SysConfig extends AbstractConfig
 {
 

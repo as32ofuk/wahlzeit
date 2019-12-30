@@ -22,6 +22,7 @@ package org.wahlzeit.webparts;
 
 import com.google.common.base.Charsets;
 import com.google.common.io.Files;
+import de.henny022.wahlzeit.screenshots.doc.DesignPattern;
 import org.wahlzeit.services.ConfigDir;
 import org.wahlzeit.services.LogBuilder;
 
@@ -35,6 +36,12 @@ import java.util.logging.Logger;
  * The WebPartTemplateService creates WebPartTemplates upon request by reading them from disk.
  * It requires configuration with a template directory and uses the following naming convention: tmplDir/language/part-type/part-name.html
  */
+@DesignPattern(
+        name = "Singleton",
+        participants = {
+                "Singleton"
+        }
+)
 public class WebPartTemplateService
 {
 

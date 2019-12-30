@@ -20,6 +20,7 @@
 
 package org.wahlzeit.agents;
 
+import de.henny022.wahlzeit.screenshots.doc.DesignPattern;
 import org.wahlzeit.services.LogBuilder;
 
 import java.util.HashMap;
@@ -29,6 +30,12 @@ import java.util.logging.Logger;
 /**
  * The AgentManager singleton manages all Agent instances.
  */
+@DesignPattern(
+        name = "Singleton",
+        participants = {
+                "Singleton"
+        }
+)
 public class AgentManager
 {
 

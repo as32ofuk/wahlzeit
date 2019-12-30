@@ -1,5 +1,6 @@
 package org.wahlzeit.model.persistence;
 
+import de.henny022.wahlzeit.screenshots.doc.DesignPattern;
 import org.wahlzeit.model.PhotoSize;
 import org.wahlzeit.services.LogBuilder;
 
@@ -13,6 +14,12 @@ import java.util.logging.Logger;
  *
  * @review
  */
+@DesignPattern(
+        name = "Singleton",
+        participants = {
+                "Singleton"
+        }
+)
 public abstract class ImageStorage
 {
 

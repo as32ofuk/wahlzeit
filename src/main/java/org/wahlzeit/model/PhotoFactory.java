@@ -20,6 +20,7 @@
 
 package org.wahlzeit.model;
 
+import de.henny022.wahlzeit.screenshots.doc.DesignPattern;
 import org.wahlzeit.services.LogBuilder;
 
 import java.util.logging.Logger;
@@ -27,6 +28,19 @@ import java.util.logging.Logger;
 /**
  * An Abstract Factory for creating photos and related objects.
  */
+@DesignPattern(
+        name = "Abstract Factory",
+        participants = {
+                "AbstractFactory",
+                "ConcreteFactory"
+        }
+)
+@DesignPattern(
+        name = "Singleton",
+        participants = {
+                "Singleton"
+        }
+)
 public class PhotoFactory
 {
 

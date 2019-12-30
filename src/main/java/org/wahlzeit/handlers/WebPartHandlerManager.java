@@ -20,6 +20,7 @@
 
 package org.wahlzeit.handlers;
 
+import de.henny022.wahlzeit.screenshots.doc.DesignPattern;
 import org.wahlzeit.services.LogBuilder;
 
 import java.util.HashMap;
@@ -30,6 +31,12 @@ import java.util.logging.Logger;
 /**
  * A manager class for web parts.
  */
+@DesignPattern(
+        name = "Singleton",
+        participants = {
+                "Singleton"
+        }
+)
 public class WebPartHandlerManager
 {
 
