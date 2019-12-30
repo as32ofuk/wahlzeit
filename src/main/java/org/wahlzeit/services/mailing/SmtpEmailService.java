@@ -20,6 +20,7 @@
 
 package org.wahlzeit.services.mailing;
 
+import de.henny022.wahlzeit.screenshots.doc.DesignPattern;
 import org.wahlzeit.services.EmailAddress;
 import org.wahlzeit.services.LogBuilder;
 
@@ -33,6 +34,12 @@ import java.util.logging.Logger;
 /**
  *
  */
+@DesignPattern(
+        name = "Decorator",
+        participants = {
+                "ConcreteDecorator"
+        }
+)
 public class SmtpEmailService extends AbstractEmailService
 {
 

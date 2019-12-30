@@ -20,6 +20,7 @@
 
 package org.wahlzeit.services.mailing;
 
+import de.henny022.wahlzeit.screenshots.doc.DesignPattern;
 import org.wahlzeit.services.EmailAddress;
 
 import javax.mail.Message;
@@ -27,6 +28,12 @@ import javax.mail.Message;
 /**
  * Abstract superclass for non-trivial EmailServer implementations.
  */
+@DesignPattern(
+        name = "Decorator",
+        participants = {
+                "ConcreteComponent"
+        }
+)
 public class MockEmailService extends AbstractEmailService
 {
 
