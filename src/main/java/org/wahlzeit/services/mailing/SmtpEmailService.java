@@ -37,7 +37,7 @@ import java.util.logging.Logger;
 @DesignPattern(
         name = "Decorator",
         participants = {
-                "ConcreteDecorator"
+                "ConcreteComponent"
         }
 )
 public class SmtpEmailService extends AbstractEmailService
