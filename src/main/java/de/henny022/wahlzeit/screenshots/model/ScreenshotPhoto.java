@@ -12,6 +12,8 @@ import org.wahlzeit.model.PhotoId;
 )
 public class ScreenshotPhoto extends Photo
 {
+    public Screenshot screenshot;
+
     public ScreenshotPhoto()
     {
     }
