@@ -43,6 +43,23 @@ public class ScreenshotType
         this.superType = superType;
     }
 
+    public boolean hasInstance(Screenshot screenshot)
+    {
+        // TODO screenshot not null
+        if(screenshot.getType() == this)
+        {
+            return true;
+        }
+        for(ScreenshotType type : subTypes)
+        {
+            if(screenshot.getType() == type)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public ScreenshotType getSuperType()
     {
         return superType;
