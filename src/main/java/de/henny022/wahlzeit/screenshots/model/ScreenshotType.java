@@ -68,6 +68,31 @@ public class ScreenshotType
         return false;
     }
 
+    public boolean isSubtype(ScreenshotType type)
+    {
+        return type.hasSubtype(this);
+    }
+
+    public boolean hasSubtype(ScreenshotType type)
+    {
+        if(type == null)
+        {
+            return false;
+        }
+        if(subTypes.contains(type))
+        {
+            return true;
+        }
+        for(ScreenshotType type1 : subTypes)
+        {
+            if(type1.hasSubtype(type))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public ScreenshotType getSuperType()
     {
         return superType;
