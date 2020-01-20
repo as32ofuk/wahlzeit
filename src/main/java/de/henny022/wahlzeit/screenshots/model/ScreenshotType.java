@@ -4,6 +4,9 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
+import static de.henny022.wahlzeit.screenshots.Assert.assertNotNull;
+import static de.henny022.wahlzeit.screenshots.Assert.assertNull;
+
 public class ScreenshotType
 {
     protected String name;
@@ -14,6 +17,7 @@ public class ScreenshotType
 
     public ScreenshotType(String name, ScreenshotManager manager)
     {
+        assertNotNull(manager, "manager must not be null");
         this.name = name;
         this.manager = manager;
         this.superType = null;
@@ -22,7 +26,7 @@ public class ScreenshotType
 
     public void addSubType(ScreenshotType type)
     {
-        // TODO precondition type != null
+        assertNotNull(type, "type must not be null");
         type.setSuperType(type);
         subTypes.add(type);
     }
@@ -39,13 +43,17 @@ public class ScreenshotType
 
     private void setSuperType(ScreenshotType superType)
     {
-        // TODO precondition superType not set
+        assertNull(this.superType, "already has a supertype");
+        assertNotNull(superType, "superType must not be null");
         this.superType = superType;
     }
 
     public boolean hasInstance(Screenshot screenshot)
     {
-        // TODO screenshot not null
+        if(screenshot == null)
+        {
+            return false;
+        }
         if(screenshot.getType() == this)
         {
             return true;

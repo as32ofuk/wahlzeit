@@ -6,7 +6,7 @@ public class Assert
     {
     }
 
-    public void assertFalse(boolean condition, String message)
+    public static void assertFalse(boolean condition, String message)
     {
         if(condition)
         {
@@ -14,13 +14,18 @@ public class Assert
         }
     }
 
-    public void assertTrue(boolean condition, String message)
+    public static void assertTrue(boolean condition, String message)
     {
         assertFalse(!condition, message);
     }
 
-    public void assertNotNull(Object object, String message)
+    public static void assertNotNull(Object object, String message)
     {
         assertFalse(object == null, message);
+    }
+
+    public static void assertNull(Object object, String message)
+    {
+        assertTrue(object == null, message);
     }
 }

@@ -3,6 +3,8 @@ package de.henny022.wahlzeit.screenshots.model;
 import java.util.HashMap;
 import java.util.Map;
 
+import static de.henny022.wahlzeit.screenshots.Assert.*;
+
 public class ScreenshotManager
 {
     protected Map<String, ScreenshotType> types;
@@ -14,7 +16,7 @@ public class ScreenshotManager
 
     public Screenshot createScreenshot(String typename)
     {
-        // TODO valid typename
+        assertTrue(types.containsKey(typename), "unknown typename");
         ScreenshotType type = getScreenshotType(typename);
         Screenshot screenshot = type.createInstance();
         return screenshot;
@@ -27,7 +29,7 @@ public class ScreenshotManager
 
     public ScreenshotType createScreenshotType(String typename, ScreenshotType superType)
     {
-        // TODO typename not taken
+        assertFalse(types.containsKey(typename), "typename taken");
         ScreenshotType type = new ScreenshotType(typename, this);
         if(superType != null)
         {
@@ -39,6 +41,7 @@ public class ScreenshotManager
 
     public ScreenshotType getScreenshotType(String typename)
     {
+        assertTrue(types.containsKey(typename), "type does not exist");
         return types.get(typename);
     }
 }
