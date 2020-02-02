@@ -2,12 +2,14 @@ public collaboration TypeObject
 {
 	public role TypeObject
 	{
-		...
+		public BaseObject createInstance();
+		public boolean hasInstance(BaseObject object);
 	}
 	
 	public role BaseObject
 	{
-		...
+		public boolean isInstance(TypeObject type);
+		public TypeObject getType();
 	}
 }
 
@@ -15,12 +17,11 @@ public collaboration Manager
 {
 	public role Manager
 	{
-		...
+		public Element getElement(Identifier identifier);
 	}
 	
 	public role Element
 	{
-		...
 	}
 }
 
@@ -28,12 +29,11 @@ public collaboration Domain
 {
 	public role Service
 	{
-		...
 	}
 	
 	public role Client
 	{
-		...
+		public Service getService();
 	}
 }
 
